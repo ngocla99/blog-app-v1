@@ -1,0 +1,45 @@
+<div class="auth-page" style="margin-left: 25%;">
+  <div class="container page">
+    <div class="row">
+
+      <div class="col-md-6 col-md-offset-3 col-xs-12">
+        <h1 *ngIf="signupForm" class="text-xs-center">Sign up</h1>
+        <h1 *ngIf="loginForm" class="text-xs-center">Sign in</h1>
+        <p *ngIf="signupForm" class="text-xs-center">
+          <a class="link-sign" (click)="toggleTag()">Have an account?</a>
+        </p>
+        <p *ngIf="loginForm" class="text-xs-center">
+          <a class="link-sign" (click)="toggleTag()">Don't have an account?</a>
+        </p>
+
+        <form *ngIf="signupForm">
+          <fieldset class="form-group">
+            <input class="form-control form-control-lg" type="text" placeholder="Your Name">
+          </fieldset>
+          <fieldset class="form-group">
+            <input class="form-control form-control-lg" type="text" placeholder="Email">
+          </fieldset>
+          <fieldset class="form-group">
+            <input class="form-control form-control-lg" type="password" placeholder="Password">
+          </fieldset>
+          <button class="btn btn-lg btn-primary pull-xs-right">
+            Sign up
+          </button>
+        </form>
+
+        <form *ngIf="loginForm">
+          <fieldset class="form-group">
+            <input class="form-control form-control-lg" type="text" placeholder="Email">
+          </fieldset>
+          <fieldset class="form-group">
+            <input class="form-control form-control-lg" type="password" placeholder="Password">
+          </fieldset>
+          <button class="btn btn-lg btn-primary pull-xs-right">
+            Sign in
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

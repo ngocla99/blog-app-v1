@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@media (min-width: 768px) {
+  .col-md-offset-1 {
+    margin-left: 8.33333%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-offset-2 {
+    margin-left: 16.66667%;
+  }
+}
