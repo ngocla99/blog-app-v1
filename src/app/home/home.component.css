@@ -1,0 +1,132 @@
+
+
+.profile-page .user-info {
+  text-align: center;
+  background: #f3f3f3;
+  padding: 2rem 0 1rem 0;
+}
+
+.profile-page .user-info .user-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+
+.profile-page .user-info h4 {
+  font-weight: 700;
+}
+
+.profile-page .user-info p {
+  margin: 0 auto 0.5rem auto;
+  color: #aaa;
+  max-width: 450px;
+  font-weight: 300;
+}
+
+.profile-page .user-info .action-btn {
+  float: right;
+  color: #999;
+  border: 1px solid #999;
+}
+
+.profile-page .posts-toggle {
+  margin: 1.5rem 0 -1px 0;
+}
+
+.post-meta {
+  display: block;
+  position: relative;
+  font-weight: 300;
+}
+
+.post-preview {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 0;
+}
+
+.post-preview .post-meta {
+  margin: 0 0 1rem 0;
+}
+
+.post-preview .preview-link h1 {
+  font-weight: 700 !important;
+  font-size: 2rem !important;
+}
+
+.post-preview .preview-link p {
+  font-family: "Source Serif Pro", serif;
+  margin-bottom: 0;
+}
+
+.post-preview .preview-link span {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: #bbb;
+}
+
+.post-meta img {
+  display: inline-block;
+  vertical-align: middle;
+  height: 32px;
+  width: 32px;
+  border-radius: 30px;
+}
+
+.post-meta .info {
+  margin: 0 1.5rem 0 0.3rem;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1rem;
+}
+
+.post-meta .info .author {
+  display: block;
+  font-weight: 500 !important;
+}
+
+.post-meta .info .date {
+  color: #bbb;
+  font-size: 0.8rem;
+  display: block;
+}
+
+.home-page .sidebar {
+  padding: 5px 10px 10px;
+  background: #f3f3f3;
+  border-radius: 4px;
+}
+.label-default[href]:focus,
+.label-default[href]:hover {
+  background-color: #687077;
+}
+
+
+.label-default {
+  background-color: #818a91;
+}
+
+.label-pill {
+  padding-right: .6em;
+  padding-left: .6em;
+  border-radius: 10rem;
+}
+
+.label {
+  padding: .25em .4em;
+  font-size: 75%;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+  border: none;
+  font-weight: 600;
+  margin: 0 5px 0 0;
+}
+
+
+.page-link {
+  text-decoration: none ;
+}
