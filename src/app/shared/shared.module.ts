@@ -6,6 +6,8 @@ import { ArticleComponent } from './component/articles-list/article/article.comp
 import { ArticlesListComponent } from './component/articles-list/articles-list.component';
 import { ArticleDetailComponent } from './component/article-detail/article-detail.component';
 import { CommentComponent } from './component/article-detail/comment/comment.component';
+import { CommentItemComponent } from './component/article-detail/comment-item/comment-item.component';
+import { CommentListComponent } from './component/article-detail/comment-list/comment-list.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,8 @@ import { CommentComponent } from './component/article-detail/comment/comment.com
     ArticleDetailComponent,
     CommentComponent,
     ArticleComponent,
+    CommentItemComponent,
+    CommentListComponent,
   ],
   imports: [CommonModule, SharedRoutingModule],
   exports: [
