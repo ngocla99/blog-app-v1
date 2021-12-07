@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { User } from '../shared/model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +9,13 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   apiurl = 'https://conduit.productionready.io/api';
+  // currentUser = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient) { }
+
+  // setData(obj: any) {
+  //   this.currentUser.next(obj);
+  // }
 
   loginUser(user: any) {
     return this.http.post(`${ this.apiurl }/users/login`, user);
@@ -18,16 +25,28 @@ export class AuthService {
     return this.http.post(`${ this.apiurl }/users`, user);
   }
 
-  setUser(userData: any): void {
+  setUser(userData: any) {
     const user = {
       username: userData.username,
       token: `Token ${userData.token}`
     };
     window.localStorage.setItem('user', JSON.stringify(user));
+    // this.currentUser.next(userData);
+  }
+
+  autoLoad() {
+    if (localStorage.getItem('user')) {
+      const user = JSON.parse(localStorage.getItem('user') || '');
+      // this.currentUser.next(user);
+    } else {
+      // this.currentUser.next(null);
+    }
+    return;
   }
 
   removeUser() {
     window.localStorage.removeItem('user');
+    // this.currentUser.next(null);
   }
 
   getUserName() {
