@@ -10,12 +10,16 @@ export class CommentsService {
   apiUrl = 'https://conduit.productionready.io/api';
   deleteEvent = new EventEmitter<number>();
 
-  constructor(private http: HttpClient, private auth: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   setAuthorizationHeaders() {
-    const token = this.auth.getUserToken();
+    const token = this.authService.getUserToken();
     const headers = new HttpHeaders({'Authorization': `${token}`});
     return headers;
+  }
+
+  getArticleComments(slug: any) {
+    return this.http.get(`${ this.apiUrl }/articles/${ slug }/comments`);
   }
 
   postArticleComment(slug: any, comment: any) {
