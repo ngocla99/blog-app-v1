@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileModule } from './profile/profile.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent],
@@ -21,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
     ProfileModule,
     SharedModule,
     AuthModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

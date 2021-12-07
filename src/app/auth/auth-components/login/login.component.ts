@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
 import { User } from '../../../shared/model/user.model';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-sign',
-  templateUrl: './sign.component.html',
-  styleUrls: ['./sign.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class SignComponent implements OnInit {
-  loginForm:boolean=false;
-  signupForm:boolean=true;
+export class LoginComponent implements OnInit {
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  onSignup(userSignup: any) {
-    this.authService.signUpUser({ user: userSignup }).subscribe(
+  onLogin(user: any) {
+    this.authService.loginUser({ user: user }).subscribe(
       (data: {user?: User}) => {
         this.authService.setUser(data.user);
         this.router.navigate(['/']);
@@ -35,7 +34,7 @@ export class SignComponent implements OnInit {
           console.log(`403 : Forbidden Access`);
         }
       },
-      () => { console.log('COMPLETED Signup'); }
+      () => { console.log('COMPLETED LOGIN'); }
     );
   }
 }
