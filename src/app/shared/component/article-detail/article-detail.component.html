@@ -35,7 +35,7 @@
           <button *ngIf="article.author.following" class="btn btn-sm btn-outline-primary" (click)="unfollow()">
             <i class="ion-heart">Unfollow</i>
           </button>
-          </ng-template>>
+          </ng-template>
       </div>
     </div>
   </div>
@@ -67,6 +67,8 @@
           <i class="ion-heart">Delete</i>
         </button>
       </div>
+
+      <app-comment [slug] = "article.slug"></app-comment>
 
       <ng-template #other>
         <button *ngIf="!article.favorited" (click)="favourite()" class="btn btn-sm btn-outline-secondary">

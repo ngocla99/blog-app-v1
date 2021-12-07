@@ -1,3 +1,10 @@
+/* 
+  .comment-form .card-block textarea {
+    padding:0;
+    border: 0px;
+    padding: 1.25rem;
+  }
+
 .card .card-footer {
   font-size: 0.8rem;
   font-weight: 300;
@@ -21,4 +28,34 @@
   vertical-align: middle;
   margin-left: 5px;
   color: #bbb;
+} */
+
+.commentsContainer{
+  width: 700px;
+  margin: 50px auto;
+}
+.formContainer{
+  border-radius: 5px;
+  border: 1px solid #ecf0f1;
+  margin-bottom: 20px;
+}
+.formContainer > .action {
+  padding: 8px 12px;
+  background: #ecf0f1;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  text-align: right;
+}
+.formContainer > textarea {
+  height: 140px;
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.greenBack {
+  background: #5cb85c;
+  color: white;
 }

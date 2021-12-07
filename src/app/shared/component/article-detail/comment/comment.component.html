@@ -1,35 +1,23 @@
-<div class="card">
-  <div class="card-block">
-    <p class="card-text">
-      With supporting text below as a natural lead-in to additional content.
-    </p>
+<div *ngIf="!isLoading" class="commentsContainer">
+  <h2>Comments</h2>
+  <div *ngIf="isLoggedIn;else loggedOutMsg" class="commentFormContainer">
+    <div class="formContainer">
+      <textarea placholder="Write your response..." #comment></textarea>
+      <div class="action">
+        <button class="greenBack" (click) = "addComment(comment.value)">Post Comment</button>
+      </div>
+    </div>
   </div>
-  <div class="card-footer">
-    <a href="profile.html" class="comment-author">
-      <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
-    </a>
-    &nbsp;
-    <a href="profile.html" class="comment-author">Jacob Schmidt</a>
-    <span class="date-posted">Dec 29th</span>
-  </div>
+  <hr>
+  <app-comment-list [comments]="comments"></app-comment-list>
 </div>
 
-<div class="card">
-  <div class="card-block">
-    <p class="card-text">
-      With supporting text below as a natural lead-in to additional content.
-    </p>
+<ng-template #loggedOutMsg>
+  <div>
+    <a [routerLink]="['/login']"> Login </a>
+    or
+    <a [routerLink]="['/signup']"> SignUp </a>
+    to post a Comment.
   </div>
-  <div class="card-footer">
-    <a href="profile.html" class="comment-author">
-      <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
-    </a>
-    &nbsp;
-    <a href="profile.html" class="comment-author">Jacob Schmidt</a>
-    <span class="date-posted">Dec 29th</span>
-    <span class="mod-options">
-      <i class="ion-edit"></i>
-      <i class="ion-trash-a"></i>
-    </span>
-  </div>
-</div>
+</ng-template>
+
