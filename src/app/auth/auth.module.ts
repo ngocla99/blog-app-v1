@@ -13,4 +13,4 @@ import { FormsModule } from '@angular/forms';
   imports: [BrowserModule, AuthRoutingModule, HttpClientModule, FormsModule],
   exports: [],
 })
-export class AuthModule {}
+export class AuthModule { }
