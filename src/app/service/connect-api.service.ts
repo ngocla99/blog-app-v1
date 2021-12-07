@@ -9,7 +9,7 @@ export class ConnectApiService {
   // private httpOptions = {
   //   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   // };
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getTags() {
     return this.http.get<any>(this.API_URL + '/tags');

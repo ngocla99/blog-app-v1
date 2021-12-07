@@ -10,4 +10,4 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [BrowserModule, AuthRoutingModule],
   exports: [],
 })
-export class AuthModule {}
+export class AuthModule { }

@@ -1,3 +1,4 @@
+import { HomeModule } from './home/home.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -21,8 +22,9 @@ import { AuthModule } from './auth/auth.module';
     ProfileModule,
     SharedModule,
     AuthModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

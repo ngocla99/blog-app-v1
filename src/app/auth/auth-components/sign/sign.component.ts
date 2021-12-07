@@ -6,15 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign.component.css']
 })
 export class SignComponent implements OnInit {
-  loginForm:boolean=false;
-  signupForm:boolean=true;
+  loginForm: boolean = false;
+  signupForm: boolean = true;
   constructor() { }
 
   ngOnInit() {
   }
 
-  toggleTag(){
-    this.loginForm=!this.loginForm;
-    this.signupForm=!this.signupForm;
+  toggleTag() {
+    this.loginForm = !this.loginForm;
+    this.signupForm = !this.signupForm;
   }
 }
