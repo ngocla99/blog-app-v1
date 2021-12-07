@@ -1,41 +1,74 @@
 <div *ngIf="!isLoading" class="post-page">
   <div class="banner">
     <div class="container">
-      <h1>{{article.title}}</h1>
+      <h1>{{ article.title }}</h1>
 
       <div class="post-meta">
         <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
         <div class="info">
-          <a [routerLink]="['/profile',article.author.username]" class="author">{{ article.author.username }}</a>
-          <span class="date">{{ article.createdAt | date: 'longDate'}}</span>
+          <a
+            [routerLink]="['/profile', article.author.username]"
+            class="author"
+            >{{ article.author.username }}</a
+          >
+          <span class="date">{{ article.createdAt | date: "longDate" }}</span>
         </div>
-        <div *ngIf="isLoggedIn && currentUser === article.author.username; else other">
-        <button class="btn btn-sm btn-outline-secondary" (click)="editArticle(article.slug)">
-          <i class="ion-plus-round">Edit</i>
-        </button>
-        &nbsp;&nbsp;
-        <button class="btn btn-sm btn-outline-primary" (click)="deleteArticle(article.slug)">
-          <i class="ion-heart">Delete</i>
-        </button>
+        <div
+          *ngIf="
+            isLoggedIn && currentUser === article.author.username;
+            else other
+          "
+        >
+          <button
+            class="btn btn-sm btn-outline-secondary"
+            (click)="editArticle(article.slug)"
+          >
+            <i class="ion-plus-round">Edit</i>
+          </button>
+          &nbsp;&nbsp;
+          <button
+            class="btn btn-sm btn-outline-primary"
+            (click)="deleteArticle(article.slug)"
+          >
+            <i class="ion-heart">Delete</i>
+          </button>
         </div>
 
         <ng-template #other>
-          <button *ngIf="!article.favorited" class="btn btn-sm btn-outline-secondary" (click)="favourite()">
-            <i class="ion-plus-round">Favourite({{ article.favoritesCount }})</i>
+          <button
+            *ngIf="!article.favorited"
+            class="btn btn-sm btn-outline-secondary"
+            (click)="favourite()"
+          >
+            <i class="ion-plus-round"
+              >Favourite({{ article.favoritesCount }})</i
+            >
           </button>
           &nbsp;&nbsp;
-          <button *ngIf="article.favorited" class="btn btn-sm btn-outline-primary" (click)="unfavorite()">
+          <button
+            *ngIf="article.favorited"
+            class="btn btn-sm btn-outline-primary"
+            (click)="unfavorite()"
+          >
             <i class="ion-heart">Unfavourite({{ article.favoritesCount }})</i>
           </button>
 
-          <button *ngIf="!article.author.following" class="btn btn-sm btn-outline-secondary" (click)="follow()">
+          <button
+            *ngIf="!article.author.following"
+            class="btn btn-sm btn-outline-secondary"
+            (click)="follow()"
+          >
             <i class="ion-plus-round">Follow</i>
           </button>
           &nbsp;&nbsp;
-          <button *ngIf="article.author.following" class="btn btn-sm btn-outline-primary" (click)="unfollow()">
+          <button
+            *ngIf="article.author.following"
+            class="btn btn-sm btn-outline-primary"
+            (click)="unfollow()"
+          >
             <i class="ion-heart">Unfollow</i>
-          </button>
-          </ng-template>>
+          </button> </ng-template
+        >>
       </div>
     </div>
   </div>
@@ -43,7 +76,7 @@
   <div class="container page">
     <div class="row post-content">
       <div class="col-md-12">
-        {{article.body}}
+        {{ article.body }}
       </div>
     </div>
 
@@ -53,38 +86,71 @@
       <div class="post-meta">
         <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
         <div class="info">
-          <a [routerLink]="['/profile',article.author.username]" class="author">{{ article.author.username }}</a>
-          <span class="date">{{ article.createdAt | date: 'longDate'}}</span>
+          <a
+            [routerLink]="['/profile', article.author.username]"
+            class="author"
+            >{{ article.author.username }}</a
+          >
+          <span class="date">{{ article.createdAt | date: "longDate" }}</span>
         </div>
 
-        <div *ngIf="isLoggedIn && currentUser === article.author.username; else other" class="">
+        <div
+          *ngIf="
+            isLoggedIn && currentUser === article.author.username;
+            else other
+          "
+          class=""
+        >
+          <button
+            (click)="editArticle(article.slug)"
+            class="btn btn-sm btn-outline-secondary"
+          >
+            <i class="ion-plus-round">Edit</i>
+          </button>
+          &nbsp;
+          <button
+            (click)="deleteArticle(article.slug)"
+            class="btn btn-sm btn-outline-primary"
+          >
+            <i class="ion-heart">Delete</i>
+          </button>
+        </div>
 
-        <button (click)="editArticle(article.slug)" class="btn btn-sm btn-outline-secondary">
-          <i class="ion-plus-round">Edit</i>
-        </button>
-        &nbsp;
-        <button (click)="deleteArticle(article.slug)" class="btn btn-sm btn-outline-primary">
-          <i class="ion-heart">Delete</i>
-        </button>
-      </div>
+        <ng-template #other>
+          <button
+            *ngIf="!article.favorited"
+            (click)="favourite()"
+            class="btn btn-sm btn-outline-secondary"
+          >
+            <i class="ion-plus-round"
+              >Favourite({{ article.favoritesCount }})</i
+            >
+          </button>
+          &nbsp;
+          <button
+            *ngIf="article.favorited"
+            (click)="unfavorite()"
+            class="btn btn-sm btn-outline-primary"
+          >
+            <i class="ion-heart">Unfavourite({{ article.favoritesCount }})</i>
+          </button>
 
-      <ng-template #other>
-        <button *ngIf="!article.favorited" (click)="favourite()" class="btn btn-sm btn-outline-secondary">
-          <i class="ion-plus-round">Favourite({{ article.favoritesCount }})</i>
-        </button>
-        &nbsp;
-        <button *ngIf="article.favorited" (click) = "unfavorite()" class="btn btn-sm btn-outline-primary">
-          <i class="ion-heart">Unfavourite({{ article.favoritesCount }})</i>
-        </button>
-
-        <button *ngIf="!article.author.following" class="btn btn-sm btn-outline-secondary" (click)="follow()">
-          <i class="ion-plus-round">Follow</i>
-        </button>
-        &nbsp;&nbsp;
-        <button *ngIf="article.author.following" class="btn btn-sm btn-outline-primary" (click)="unfollow()">
-          <i class="ion-heart">Unfollow</i>
-        </button>
-      </ng-template>
+          <button
+            *ngIf="!article.author.following"
+            class="btn btn-sm btn-outline-secondary"
+            (click)="follow()"
+          >
+            <i class="ion-plus-round">Follow</i>
+          </button>
+          &nbsp;&nbsp;
+          <button
+            *ngIf="article.author.following"
+            class="btn btn-sm btn-outline-primary"
+            (click)="unfollow()"
+          >
+            <i class="ion-heart">Unfollow</i>
+          </button>
+        </ng-template>
       </div>
     </div>
   </div>
