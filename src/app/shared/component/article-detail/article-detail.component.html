@@ -67,8 +67,8 @@
             (click)="unfollow()"
           >
             <i class="ion-heart">Unfollow</i>
-          </button> </ng-template
-        >>
+          </button>
+        </ng-template>
       </div>
     </div>
   </div>
@@ -115,6 +115,8 @@
             <i class="ion-heart">Delete</i>
           </button>
         </div>
+
+        <app-comment [slug]="article.slug"></app-comment>
 
         <ng-template #other>
           <button

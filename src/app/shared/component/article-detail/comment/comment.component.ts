@@ -53,7 +53,7 @@ export class CommentComponent implements OnInit {
         body: commentValue
       };
       this.commentService.postArticleComment(this.slug, {comment: comment}).subscribe(
-        (data: {comment?: Comment}) => {this.comments.unshift(data.comment!);},
+        (data: {comment?: Comment}) => {this.comments.unshift(data.comment!); },
         (err) => {console.log(err);},
         () => {}
       );
