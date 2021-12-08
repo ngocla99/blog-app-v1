@@ -1,34 +1,33 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../shared/model/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   apiurl = 'https://conduit.productionready.io/api';
   // currentUser = new BehaviorSubject<User | null>(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // setData(obj: any) {
   //   this.currentUser.next(obj);
   // }
 
   loginUser(user: any) {
-    return this.http.post(`${ this.apiurl }/users/login`, user);
+    return this.http.post(`${this.apiurl}/users/login`, user);
   }
 
   signUpUser(user: any) {
-    return this.http.post(`${ this.apiurl }/users`, user);
+    return this.http.post(`${this.apiurl}/users`, user);
   }
 
   setUser(userData: any) {
     const user = {
       username: userData.username,
-      token: `Token ${userData.token}`
+      token: `Token ${userData.token}`,
     };
     window.localStorage.setItem('user', JSON.stringify(user));
     // this.currentUser.next(userData);
@@ -63,5 +62,11 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  setAuthorizationHeaders() {
+    const token = this.getUserToken();
+    const headers = new HttpHeaders({ Authorization: `${token}` });
+    return headers;
   }
 }
