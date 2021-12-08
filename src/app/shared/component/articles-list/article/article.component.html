@@ -1,39 +1,71 @@
 <div class="wrapper">
-  <div class="blog-entry gradient-border" *ngFor="let article of listArticle">
+  <div class="blog-entry gradient-border">
     <div class="text text-2 pt-2 mt-3">
       <span class="category mb-3 d-block">
-        <a href="#">{{article.tagList}}</a>
+        <a>{{ article.tagList }}</a>
       </span>
       <h3 class="mb-4">
-        <a routerLink="/article/1" class="preview-link">{{article.title}}</a>
+        <a routerLink="/article/1" class="preview-link">{{ article.title }}</a>
       </h3>
-      <p class="mb-4" routerLink="/article/1" class="preview-link">{{article.body}}</p>
+      <p class="mb-4" routerLink="/article/1" class="preview-link">
+        {{ article.body }}
+      </p>
       <div class="author mb-4 align-items-center" style="display: flex">
-        <a href="#" class="img" style="background-image: url({{article.author.image}});"></a>
-        <div class="ml-3 info" style="margin-left: 20px;">
+        <a
+          routerLink="/profile/{{ article.author.username }}"
+          class="img"
+          style="background-image: url('{{ article.author.image }}')"
+        ></a>
+        <div class="ml-3 info" style="margin-left: 20px">
           <span>Written by</span>
           <h3>
-            <a style="color: white;text-decoration: none;">{{article.author.username}}</a>,
-            <span style="color: white;">{{article.createdAt | date}}</span>
+            <a
+              routerLink="/profile/{{ article.author.username }}"
+              style="color: white; text-decoration: none"
+              >{{ article.author.username }}</a
+            >,
+            <span style="color: white">{{ article.createdAt | date }}</span>
           </h3>
         </div>
       </div>
-      <div class="meta-wrap align-items-center" style="margin-top:20px">
+      <div class="meta-wrap align-items-center" style="margin-top: 20px">
         <div class="half order-md-last">
           <p class="meta center">
-            <span>
-              <i class="far fa-heart" (click)="onLike(article.favoritesCount)"></i>{{article.favoritesCount}}
+            <span *ngIf="favorited == false">
+              <i
+                class="{{
+                  article.favorited ? 'fas fa-heart' : 'far fa-heart'
+                }}"
+                (click)="onLike(article.slug)"
+              ></i
+              >{{ article.favoritesCount }}
+            </span>
+
+            <span *ngIf="favorited == true">
+              <i
+                class="{{
+                  article.favorited ? 'fas fa-heart' : 'far fa-heart'
+                }}"
+                (click)="onUnLike(article.slug)"
+              ></i
+              >{{ article.favoritesCount }}
             </span>
             <span>
-              <i class="far fa-eye"></i>{{article.comments.length * 2}} </span>
+              <i class="far fa-eye"></i>{{ article.comments.length * 2 }}
+            </span>
             <span>
-              <i class="fas fa-comment"></i>{{article.comments.length}}
+              <i class="fas fa-comment"></i>{{ article.comments.length }}
             </span>
           </p>
         </div>
         <div class="half">
           <p>
-            <a style="letter-spacing: 0;" [routerLink]="['/article',article.slug]" class="preview-link" class="btn py-2">Continue Reading
+            <a
+              style="letter-spacing: 0"
+              [routerLink]="['/article', article.slug]"
+              class="preview-link"
+              class="btn py-2"
+              >Continue Reading
               <span class="fas fa-arrow-right"></span>
             </a>
           </p>
@@ -41,5 +73,4 @@
       </div>
     </div>
   </div>
-
 </div>

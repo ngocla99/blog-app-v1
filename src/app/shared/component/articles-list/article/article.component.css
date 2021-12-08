@@ -209,11 +209,7 @@ dl {
   padding: 0 !important;
 }
 
-.wrapper {
-  display: grid;
-  grid-template-columns: 50% 50%;
 
-}
 
 
 .gradient-border {

@@ -1,2 +1,6 @@
-<app-article [listArticle]="listArticles"></app-article>
-
+<div class="wrapper">
+  <app-article
+    *ngFor="let article of listArticles"
+    [article]="article"
+  ></app-article>
+</div>
