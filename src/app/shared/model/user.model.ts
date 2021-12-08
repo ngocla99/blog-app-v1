@@ -1,9 +1,16 @@
-export interface User {
-  username: string;
-  email: string;
-  token: string;
-  bio: string;
-  image: string;
+export interface User extends UserInfo {
   favorites: string;
   following: string;
+}
+
+export interface UserInfo {
+  bio: string;
+  email: string;
+  image: string;
+  token: string;
+  username: string;
+}
+
+export interface UserData {
+  user: UserInfo;
 }
