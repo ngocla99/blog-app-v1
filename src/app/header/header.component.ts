@@ -10,15 +10,9 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  get isLogin(){
+  get isLogin() {
     return this.authService.isLoggedIn();
-  }
-
-  logout(){
-    this.authService.removeUser();
-    this.router.navigateByUrl('/login');
   }
 }

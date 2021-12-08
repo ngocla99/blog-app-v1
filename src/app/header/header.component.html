@@ -13,18 +13,21 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/sign-up" *ngIf="!isLogin">Sign up</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" *ngIf="isLogin" routerLink="/setting">
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="isLogin" routerLink="/setting">
           Settings
         </a>
-        <ul class="dropdown-menu">
+        <!-- <a class="nav-link dropdown-toggle" *ngIf="isLogin" routerLink="/setting">
+          Settings
+        </a> -->
+        <!-- <ul class="dropdown-menu">
           <li><a class="dropdown-item" routerLink="/setting">Settings</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" *ngIf="isLogin" (click)="logout()">Logout</a></li>
-        </ul>
+        </ul> -->
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" routerLink="/">Home</a>
       </li>
     </ul>
   </div>
