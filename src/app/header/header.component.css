@@ -1,11 +1,25 @@
 .dropdown {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .dropdown-menu {
-    display: none;
-    position: absolute;
+  display: none;
+  position: absolute;
 }
 
-.dropdown:hover .dropdown-menu {display: block;}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.navbar-light .nav-item .nav-link {
+  padding: 5px;
+}
+
+.navbar-light .nav-item .nav-link.active,
+.navbar-light .nav-item .nav-link:focus,
+.navbar-light .nav-item .nav-link:hover {
+  background-color: #5cb85c;
+  color: white;
+  border-radius: 5px;
+}
