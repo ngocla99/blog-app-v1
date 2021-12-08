@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +8,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  activeLink = '';
+  constructor(
+    private authService: AuthService
+  ) // private route: ActivatedRoute,
+  // private router: Router
+  {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.route.data.subscribe((data) => {
+    //   console.log(data.name);
+    // });
+  }
 
   get isLogin() {
     return this.authService.isLoggedIn();
   }
+
+  // onClick(link: string) {
+  //   this.activeLink = link;
+  //   this.router.navigateByUrl('/' + link);
+  // }
 }
