@@ -2,26 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../service/auth.service';
 import { User } from '../../../shared/model/user.model';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor(private authService: AuthService, private router: Router) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onLogin(user: any) {
     this.authService.loginUser({ user: user }).subscribe(
-      (data: {user?: User}) => {
+      (data: { user?: User }) => {
         this.authService.setUser(data.user);
+        Swal.fire('My Blog', 'Login success!!!', 'success');
         this.router.navigate(['/']);
       },
-      err => {
+      (err) => {
+        Swal.fire('My Blog', 'Login fail!!!', 'error');
         const errorMsg = err.error.errors;
         const statusCode = err.status;
         if (statusCode === 422) {
@@ -34,7 +35,9 @@ export class LoginComponent implements OnInit {
           console.log(`403 : Forbidden Access`);
         }
       },
-      () => { console.log('COMPLETED LOGIN'); }
+      () => {
+        console.log('COMPLETED LOGIN');
+      }
     );
   }
 }

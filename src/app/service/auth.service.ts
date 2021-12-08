@@ -1,27 +1,40 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { User } from '../shared/model/user.model';
+import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   apiurl = 'https://conduit.productionready.io/api';
+  private timeLogout = 1000 * 60 * 10;
   // currentUser = new BehaviorSubject<User | null>(null);
 
-  constructor(private http: HttpClient) {}
-
-  // setData(obj: any) {
-  //   this.currentUser.next(obj);
-  // }
+  constructor(private http: HttpClient, private router: Router) {}
 
   loginUser(user: any) {
-    return this.http.post(`${this.apiurl}/users/login`, user);
+    return this.http.post(`${this.apiurl}/users/login`, user).pipe(
+      tap(() => {
+        this.autoLogout();
+      })
+    );
   }
 
   signUpUser(user: any) {
-    return this.http.post(`${this.apiurl}/users`, user);
+    return this.http.post(`${this.apiurl}/users`, user).pipe(
+      tap(() => {
+        this.autoLogout();
+      })
+    );
+  }
+
+  autoLogout() {
+    setTimeout(() => {
+      this.logout();
+      Swal.fire('My Blog', 'The login session has expired', 'warning');
+    }, this.timeLogout);
   }
 
   setUser(userData: any) {
@@ -30,22 +43,24 @@ export class AuthService {
       token: `Token ${userData.token}`,
     };
     window.localStorage.setItem('user', JSON.stringify(user));
-    // this.currentUser.next(userData);
   }
 
   autoLoad() {
     if (localStorage.getItem('user')) {
       const user = JSON.parse(localStorage.getItem('user') || '');
-      // this.currentUser.next(user);
+      this.autoLogout();
     } else {
-      // this.currentUser.next(null);
     }
     return;
   }
 
+  logout() {
+    this.removeUser();
+    this.router.navigateByUrl('/login');
+  }
+
   removeUser() {
     window.localStorage.removeItem('user');
-    // this.currentUser.next(null);
   }
 
   getUserName() {

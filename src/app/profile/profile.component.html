@@ -3,17 +3,30 @@
     <div class="container">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          <img [src]="profile?.image" class="user-img" />
+          <img
+            [src]="
+              profile?.image ||
+              'https://static.productionready.io/images/smiley-cyrus.jpg'
+            "
+            class="user-img"
+          />
           <h4>{{ profile?.username }}</h4>
           <p>
-            {{ profile?.bio }}
+            {{ profile?.bio || "No Bio Provided!" }}
           </p>
           <button
+            *ngIf="isUser && isLoggedIn"
+            class="btn btn-sm btn-outline-secondary action-btn"
+          >
+            <a [routerLink]="['/setting']"> Edit Profile Settings </a>
+          </button>
+          <button
+            *ngIf="!isUser"
             (click)="onFollow()"
             class="btn btn-sm btn-outline-secondary action-btn"
           >
             <i class="ion-plus-round"></i>
-            &nbsp; {{ profile?.following ? "Unfollow" : "Follow" }}
+            {{ profile?.following ? "Unfollow" : "Follow" }}
             {{ profile?.username }}
           </button>
         </div>
@@ -21,22 +34,5 @@
     </div>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="posts-toggle">
-          <ul class="nav nav-pills outline-active">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">My Posts</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Favorited Posts</a>
-            </li>
-          </ul>
-        </div>
-
-        <app-articles-list></app-articles-list>
-      </div>
-    </div>
-  </div>
+  <app-profile-article></app-profile-article>
 </div>

@@ -1,32 +1,68 @@
 <div class="settings-page">
   <div class="container page">
     <div class="row">
-      <div class="col-md-3 col-xs-12"></div>
-      <div class="col-md-6 col-md-offset-3 col-xs-12">
+      <div class="col-md-2 col-xs-12"></div>
+      <div class="col-md-8 col-md-offset-3 col-xs-12">
         <h1 class="text-xs-center">User Information</h1>
 
-        <form>
+        <form #settingForm="ngForm" (submit)="onSubmit(settingForm.value)">
           <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="text" placeholder="Email">
+            <input
+              class="form-control form-control-lg"
+              type="text"
+              placeholder="Your Name"
+              name="username"
+              disabled
+              [ngModel]="user?.username"
+              (ngModelChange)="user.username = $event"
+            />
           </fieldset>
           <fieldset class="form-group">
-            <textarea class="form-control form-control-lg" rows="8" placeholder="Short bio about you"></textarea>
+            <input
+              class="form-control form-control-lg"
+              type="text"
+              placeholder="Email"
+              name="email"
+              [ngModel]="user?.email"
+              (ngModelChange)="user.email = $event"
+            />
           </fieldset>
           <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="text" placeholder="URL of profile picture">
+            <textarea
+              class="form-control form-control-lg"
+              rows="8"
+              placeholder="Short bio about you"
+              name="bio"
+              [ngModel]="user?.bio"
+              (ngModelChange)="user.bio = $event"
+            ></textarea>
           </fieldset>
-          <!-- <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="text" placeholder="Your Name">
-          </fieldset> -->
+          <fieldset class="form-group">
+            <input
+              class="form-control form-control-lg"
+              type="text"
+              placeholder="URL of profile picture"
+              name="image"
+              [ngModel]="user?.image"
+              (ngModelChange)="user.image = $event"
+            />
+          </fieldset>
           <!-- <fieldset class="form-group">
             <input class="form-control form-control-lg" type="password" placeholder="Password">
           </fieldset> -->
-          <button class="btn btn-lg btn-primary pull-xs-right">
-            Update User Information
+          <button
+            class="btn btn-lg btn-primary pull-xs-right"
+            type="submit"
+            [disabled]="settingForm.invalid"
+          >
+            Update User
+          </button>
+          <button class="btn btn-lg btn-danger pull-xs-left" (click)="logout()">
+            Log out
           </button>
         </form>
       </div>
-      <div class="col-md-3 col-xs-12"></div>
+      <div class="col-md-2 col-xs-12"></div>
     </div>
   </div>
 </div>

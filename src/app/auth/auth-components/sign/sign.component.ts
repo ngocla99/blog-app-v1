@@ -2,27 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
 import { User } from '../../../shared/model/user.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign',
   templateUrl: './sign.component.html',
-  styleUrls: ['./sign.component.css']
+  styleUrls: ['./sign.component.css'],
 })
 export class SignComponent implements OnInit {
-  loginForm:boolean=false;
-  signupForm:boolean=true;
-  constructor(private authService: AuthService, private router: Router) { }
+  loginForm: boolean = false;
+  signupForm: boolean = true;
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onSignup(userSignup: any) {
     this.authService.signUpUser({ user: userSignup }).subscribe(
-      (data: {user?: User}) => {
+      (data: { user?: User }) => {
         this.authService.setUser(data.user);
         this.router.navigate(['/']);
+        Swal.fire('My Blog', 'Sign-up success!!!', 'success');
       },
-      err => {
+      (err) => {
+        Swal.fire('My Blog', 'Sign-up fail!!!', 'error');
         const errorMsg = err.error.errors;
         const statusCode = err.status;
         if (statusCode === 422) {
@@ -35,7 +37,9 @@ export class SignComponent implements OnInit {
           console.log(`403 : Forbidden Access`);
         }
       },
-      () => { console.log('COMPLETED Signup'); }
+      () => {
+        console.log('COMPLETED Signup');
+      }
     );
   }
 }
