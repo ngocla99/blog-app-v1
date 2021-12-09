@@ -4,7 +4,7 @@
       <h1>{{ article.title }}</h1>
 
       <div class="post-meta">
-        <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+        <a href="profile.html"><img [src]="article.author.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'" /></a>
         <div class="info">
           <a
             [routerLink]="['/profile', article.author.username]"
@@ -84,7 +84,7 @@
 
     <div class="post-actions">
       <div class="post-meta">
-        <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+        <a href="profile.html"><img [src]="article.author.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'" /></a>
         <div class="info">
           <a
             [routerLink]="['/profile', article.author.username]"

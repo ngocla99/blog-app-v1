@@ -34,6 +34,11 @@ export class ArticleService {
     });
   }
 
+  editArticle(article: any, articleSlug: any) {
+    const headers = this.setAuthorizationHeaders();
+    return this.http.put(`${ this.apiUrl }/articles/${ articleSlug }`, article, {headers: headers});
+  }
+
   deleteArticle(articleSlug: any) {
     const headers = this.setAuthorizationHeaders();
     return this.http.delete(`${this.apiUrl}/articles/${articleSlug}`, {
