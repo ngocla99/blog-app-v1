@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/service/auth.service';
 import { Article } from './../../shared/model/article.model';
 import { HomeArticleService } from './../../service/home-article.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -17,11 +18,17 @@ export class TagsComponent implements OnInit {
 
   pageNumbers: number[] = [];
 
-  constructor(private getArticle: HomeArticleService) {}
+  constructor(
+    private getArticle: HomeArticleService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
 
   ngOnChanges(): void {
+    this.limit = this.authService.getPage();
+    console.log(this.limit);
+
     this.getArticle
       .getTagFeedCount(this.tags, this.offset)
       .subscribe((data: any) => {
@@ -29,7 +36,7 @@ export class TagsComponent implements OnInit {
         if (this.totalPages <= 1) {
           this.pages = 0;
         } else {
-          this.pages = Math.ceil(this.totalPages / 1);
+          this.pages = Math.ceil(this.totalPages / this.limit);
           for (let i = 1; i <= this.pages; i++) {
             this.pageNumbers.push(i);
           }
