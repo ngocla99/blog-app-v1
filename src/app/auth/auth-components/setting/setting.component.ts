@@ -13,6 +13,7 @@ import { User, UserInfo } from '../../../shared/model/user.model';
 })
 export class SettingComponent implements OnInit {
   user!: UserInfo;
+  resultsPerPage = '0';
   // isLoading!: boolean;
 
   constructor(
@@ -23,6 +24,8 @@ export class SettingComponent implements OnInit {
 
   ngOnInit() {
     this.getProfile();
+    // this.resultsPerPage = this.authService.getPage();
+    // console.log(this.resultsPerPage);
   }
 
   getProfile() {
@@ -65,6 +68,14 @@ export class SettingComponent implements OnInit {
       },
       () => {}
     );
+  }
+
+  onPageChoose() {
+    if (this.resultsPerPage && this.resultsPerPage !== '0') {
+      localStorage.setItem('itemsPerPage', this.resultsPerPage);
+      this.router.navigateByUrl('/');
+    }
+    console.log(this.resultsPerPage);
   }
 
   logout() {
