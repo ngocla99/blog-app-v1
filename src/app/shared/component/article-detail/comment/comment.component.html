@@ -1,23 +1,22 @@
+
+<app-comment-list [comments]="comments"></app-comment-list>
 <div *ngIf="!isLoading" class="commentsContainer">
-  <h2>Comments</h2>
-  <div *ngIf="isLoggedIn;else loggedOutMsg" class="commentFormContainer">
-    <div class="formContainer">
-      <textarea placholder="Write your response..." #comment></textarea>
-      <div class="action">
-        <button class="greenBack" (click) = "addComment(comment.value)">Post Comment</button>
-      </div>
-    </div>
-  </div>
-  <hr>
-  <app-comment-list [comments]="comments"></app-comment-list>
+<div *ngIf="isLoggedIn;else loggedOutMsg" class="commentFormContainer">
+   <div class="formContainer">
+     <textarea placholder="Write your response..." #comment></textarea>
+     <div class="action">
+       <button class="greenBack" (click) = "addComment(comment.value)">Post Comment</button>
+     </div>
+   </div>
+ </div>
 </div>
 
 <ng-template #loggedOutMsg>
-  <div>
-    <a [routerLink]="['/login']"> Login </a>
-    or
-    <a [routerLink]="['/signup']"> SignUp </a>
-    to post a Comment.
-  </div>
+ <div>
+   <a [routerLink]="['/login']"> Login </a>
+   or
+   <a [routerLink]="['/signup']"> SignUp </a>
+   to post a Comment.
+ </div>
 </ng-template>
 

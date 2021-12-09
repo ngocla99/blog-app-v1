@@ -1,0 +1,12 @@
+<div *ngIf="isLoading; else form">
+    Loading Form ...
+  </div>
+  
+  <ng-template #form>
+      <div class="formContainer">
+          <h2>
+            Edit Article
+          </h2>
+          <app-editor [article] = "article"></app-editor>
+        </div>
+  </ng-template>

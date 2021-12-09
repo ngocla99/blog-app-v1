@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form>label {
+    width: 200px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: bolder;
+    margin-top: 8px;
+    padding: 4px 0;
+    color: #5cb85c;
+  }
+  
+  form>input {
+    height: 40px;
+    margin-top: 8px;
+    font-size: 16px;
+    padding-left: 12px;
+    border: 1px solid #5cb85c;
+    border-radius: 5px;
+  }
+  
+  form > textarea {
+    padding: 12px;
+    height: 440px;
+    margin-top: 8px;
+    font-size: 16px;
+    padding-left: 12px;
+    border: 1px solid #5cb85c;
+    border-radius: 5px;
+  }
+  
+  form>input[type="submit"] {
+    width: 20%;
+    padding: 0;
+    background: #5cb85c;
+    color: white;
+    border-radius: 5px;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    font-size: 12px;
+    height: 28px;
+  }
+  .alert {
+    padding: 8px;
+    font-weight: bolder;
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+  
+  .alert-danger {
+    color: #c0392b;
+  }
+  

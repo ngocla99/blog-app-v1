@@ -25,8 +25,8 @@
     &nbsp;
     <a [routerLink]="['/profile', comment.author.username]" class="comment-author">{{comment.author.username}}</a>
     <span class="date-posted">Dec 29th</span>
-    <span class="mod-options">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+   
       <i class="ion-edit"></i>
-     <button *ngIf="isLoggedIn && comment.author.username === currentUser" (click)="deleteComment()"> <i class="fas fa-trash"></i></button>
-    </span>
+     <button style="width: 30px; height: 30px" *ngIf="isLoggedIn && comment.author.username === currentUser" (click)="deleteComment()"> <i class="fas fa-trash"></i></button>
   </div>
