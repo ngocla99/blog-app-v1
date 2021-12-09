@@ -8,6 +8,7 @@ import { ArticleDetailComponent } from './component/article-detail/article-detai
 import { CommentComponent } from './component/article-detail/comment/comment.component';
 import { CommentItemComponent } from './component/article-detail/comment-item/comment-item.component';
 import { CommentListComponent } from './component/article-detail/comment-list/comment-list.component';
+import { ArticleTagComponent } from './component/articles-list/article/article-tag/article-tag.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CommentListComponent } from './component/article-detail/comment-list/co
     ArticleComponent,
     CommentItemComponent,
     CommentListComponent,
+    ArticleTagComponent,
   ],
   imports: [CommonModule, SharedRoutingModule],
   exports: [
