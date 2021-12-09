@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileModule } from './profile/profile.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
+import { EditorModule } from './editor/editor.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AuthModule } from './auth/auth.module';
     ProfileModule,
     SharedModule,
     AuthModule,
-    HomeModule
+    HomeModule,
+    EditorModule
   ],
   providers: [],
   bootstrap: [AppComponent],

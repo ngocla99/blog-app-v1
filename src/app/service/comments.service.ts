@@ -19,7 +19,11 @@ export class CommentsService {
   }
 
   getArticleComments(slug: any) {
-    return this.http.get(`${ this.apiUrl }/articles/${ slug }/comments`);
+    if(this.authService.isLoggedIn()) {
+      const headers = this.setAuthorizationHeaders();
+     return this.http.get(`${ this.apiUrl }/articles/${ slug }/comments`, {headers: headers});
+    }
+     return this.http.get(`${ this.apiUrl }/articles/${ slug }/comments`);
   }
 
   postArticleComment(slug: any, comment: any) {

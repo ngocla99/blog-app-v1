@@ -3,7 +3,7 @@
     <a class="navbar-brand">conduit</a>
     <ul class="nav navbar-nav pull-xs-right">
       <li class="nav-item">
-        <a class="nav-link" *ngIf="isLogin" routerLinkActive="active">
+        <a class="nav-link" *ngIf="isLogin" [routerLink]="['editor']" routerLinkActive="active">
           <i class="ion-compose"></i>New Post
         </a>
       </li>
