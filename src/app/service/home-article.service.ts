@@ -59,20 +59,25 @@ export class HomeArticleService {
       );
     }
     return this.http.get<ArticleData>(
-      `${this.apiUrl}/articles/?author=${username}&limit=10&offset=${offset}`
+      `${this.apiUrl}/articles/?author=${username}&limit=${limit}&offset=${offset}`
     );
   }
 
-  getAuthorFavArticles(username: any, offset: any) {
+  getAuthorFavArticles(
+    username: string,
+    offset: number = 0,
+    limit: number = 20
+  ) {
     if (this.auth.isLoggedIn()) {
       const headers = this.auth.setAuthorizationHeaders();
-      return this.http.get(
-        `${this.apiUrl}/articles/?favorited=${username}&limit=10&offset=${offset}`,
+      return this.http.get<ArticleData>(
+        `${this.apiUrl}/articles/?favorited=${username}&limit=${limit}&offset=${offset}`,
         { headers: headers }
       );
     }
-    return this.http.get(
-      `${this.apiUrl}/articles/?favorited=${username}&limit=10&offset=${offset}`
+
+    return this.http.get<ArticleData>(
+      `${this.apiUrl}/articles/?favorited=${username}&limit=${limit}&offset=${offset}`
     );
   }
 

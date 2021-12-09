@@ -27,6 +27,7 @@ export class ArticleComponent implements OnInit {
       this.articleService.favoriteArticle(value).subscribe((data: any) => {
         this.article = data.article!;
         this.favorited = true;
+        this.articleService.likeSub.next();
       });
     } else {
       this.router.navigateByUrl('login');
@@ -38,6 +39,7 @@ export class ArticleComponent implements OnInit {
       this.articleService.unfavoriteArticle(value).subscribe((data: any) => {
         this.article = data.article!;
         this.favorited = false;
+        this.articleService.likeSub.next();
       });
     } else {
       this.router.navigateByUrl('login');

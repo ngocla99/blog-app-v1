@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 export class ArticleService {
   apiUrl = 'https://conduit.productionready.io/api';
   pageIndexSub = new Subject<number>();
+  likeSub = new Subject();
   constructor(private http: HttpClient, private auth: AuthService) {}
 
   setAuthorizationHeaders() {
@@ -36,7 +37,9 @@ export class ArticleService {
 
   editArticle(article: any, articleSlug: any) {
     const headers = this.setAuthorizationHeaders();
-    return this.http.put(`${ this.apiUrl }/articles/${ articleSlug }`, article, {headers: headers});
+    return this.http.put(`${this.apiUrl}/articles/${articleSlug}`, article, {
+      headers: headers,
+    });
   }
 
   deleteArticle(articleSlug: any) {

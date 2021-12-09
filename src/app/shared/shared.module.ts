@@ -9,6 +9,7 @@ import { CommentComponent } from './component/article-detail/comment/comment.com
 import { CommentItemComponent } from './component/article-detail/comment-item/comment-item.component';
 import { CommentListComponent } from './component/article-detail/comment-list/comment-list.component';
 import { PaginationComponent } from './component/pagination/pagination.component';
+import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { PaginationComponent } from './component/pagination/pagination.component
     CommentItemComponent,
     CommentListComponent,
     PaginationComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [CommonModule, SharedRoutingModule],
   exports: [
@@ -27,6 +29,7 @@ import { PaginationComponent } from './component/pagination/pagination.component
     ArticlesListComponent,
     ArticleDetailComponent,
     ArticleComponent,
+    LoadingSpinnerComponent,
     PaginationComponent,
   ],
 })

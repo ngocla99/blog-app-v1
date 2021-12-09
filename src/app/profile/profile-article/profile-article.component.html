@@ -4,7 +4,11 @@
       <div class="posts-toggle">
         <ul class="nav nav-pills outline-active">
           <li class="nav-item">
-            <a class="nav-link active"
+            <a
+              class="nav-link"
+              [routerLink]="['/profile', authorName]"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLinkActive="active"
               >{{
                 username === authorName ? "My" : (authorName || "Author") + "'s"
               }}
@@ -12,13 +16,16 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link">Favorited Posts</a>
+            <a
+              class="nav-link"
+              [routerLink]="['/profile', authorName, 'favorite']"
+              routerLinkActive="active"
+              >Favorited Posts</a
+            >
           </li>
         </ul>
       </div>
-
-      <app-articles-list [listArticles]="articles"></app-articles-list>
-      <app-pagination [totalPages]="totalPages"></app-pagination>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
