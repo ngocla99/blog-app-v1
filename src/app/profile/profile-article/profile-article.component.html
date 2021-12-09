@@ -4,7 +4,12 @@
       <div class="posts-toggle">
         <ul class="nav nav-pills outline-active">
           <li class="nav-item">
-            <a class="nav-link active">My Posts</a>
+            <a class="nav-link active"
+              >{{
+                username === authorName ? "My" : (authorName || "Author") + "'s"
+              }}
+              Posts</a
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link">Favorited Posts</a>
@@ -12,7 +17,8 @@
         </ul>
       </div>
 
-      <app-articles-list></app-articles-list>
+      <app-articles-list [listArticles]="articles"></app-articles-list>
+      <app-pagination [totalPages]="totalPages"></app-pagination>
     </div>
   </div>
 </div>

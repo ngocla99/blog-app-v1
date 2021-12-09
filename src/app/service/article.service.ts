@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class ArticleService {
   apiUrl = 'https://conduit.productionready.io/api';
-
+  pageIndexSub = new Subject<number>();
   constructor(private http: HttpClient, private auth: AuthService) {}
 
   setAuthorizationHeaders() {

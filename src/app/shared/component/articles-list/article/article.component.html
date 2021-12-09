@@ -5,11 +5,15 @@
         <a>{{ article.tagList }}</a>
       </span>
       <h3 class="mb-4">
-        <a routerLink="/article/1" class="preview-link">{{ article.title }}</a>
+        <a [routerLink]="['/article', article.slug]" class="preview-link">{{
+          article.title
+        }}</a>
       </h3>
-      <p class="mb-4" routerLink="/article/1" class="preview-link">
-        {{ article.body }}
-      </p>
+      <a [routerLink]="['/article', article.slug]">
+        <p class="mb-4" class="preview-link">
+          {{ article.body }}
+        </p>
+      </a>
       <div class="author mb-4 align-items-center" style="display: flex">
         <a
           routerLink="/profile/{{ article.author.username }}"

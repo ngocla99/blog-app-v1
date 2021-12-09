@@ -8,6 +8,7 @@ import { ArticleDetailComponent } from './component/article-detail/article-detai
 import { CommentComponent } from './component/article-detail/comment/comment.component';
 import { CommentItemComponent } from './component/article-detail/comment-item/comment-item.component';
 import { CommentListComponent } from './component/article-detail/comment-list/comment-list.component';
+import { PaginationComponent } from './component/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +18,16 @@ import { CommentListComponent } from './component/article-detail/comment-list/co
     ArticleComponent,
     CommentItemComponent,
     CommentListComponent,
+    PaginationComponent,
   ],
   imports: [CommonModule, SharedRoutingModule],
   exports: [
     CommonModule,
+    CommentComponent,
     ArticlesListComponent,
     ArticleDetailComponent,
-    CommentComponent,
     ArticleComponent,
+    PaginationComponent,
   ],
 })
 export class SharedModule {}

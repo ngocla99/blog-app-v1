@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ArticleData } from '../shared/model/article.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -10,57 +11,61 @@ export class HomeArticleService {
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  setAuthoriztionHeaders() {
-    const token = this.auth.getUserToken();
-    const headers = new HttpHeaders({ Authorization: `${token}` });
-    return headers;
-  }
+  // setAuthoriztionHeaders() {
+  //   const token = this.auth.getUserToken();
+  //   const headers = new HttpHeaders({ Authorization: `${token}` });
+  //   return headers;
+  // }
 
-  getGlobalFeed(offset: any, limit: any) {
+  getGlobalFeed(offset: number = 0, limit: number = 20) {
     if (this.auth.isLoggedIn()) {
-      const headers = this.setAuthoriztionHeaders();
-      return this.http.get(
+      const headers = this.auth.setAuthorizationHeaders();
+      return this.http.get<ArticleData>(
         `${this.apiUrl}/articles/?limit=${limit}&offset=${offset}`,
         { headers: headers }
       );
     }
-    return this.http.get(
+    return this.http.get<ArticleData>(
       `${this.apiUrl}/articles/?limit=${limit}&offset=${offset}`
     );
   }
 
   getArticle() {
     if (this.auth.isLoggedIn()) {
-      const headers = this.setAuthoriztionHeaders();
+      const headers = this.auth.setAuthorizationHeaders();
       return this.http.get(`${this.apiUrl}/articles`, { headers: headers });
     }
     return this.http.get(`${this.apiUrl}/articles`);
   }
 
   getUserFeed(offset: any) {
-    const headers = this.setAuthoriztionHeaders();
+    const headers = this.auth.setAuthorizationHeaders();
     return this.http.get(
       `${this.apiUrl}/articles/feed/?limit=10&offset=${offset}`,
       { headers: headers }
     );
   }
 
-  getAuthorArticles(username: any, offset: any) {
+  getAuthorArticles(
+    username: string | undefined,
+    offset: number = 0,
+    limit: number = 20
+  ) {
     if (this.auth.isLoggedIn()) {
-      const headers = this.setAuthoriztionHeaders();
-      return this.http.get(
-        `${this.apiUrl}/articles/?author=${username}&limit=10&offset=${offset}`,
+      const headers = this.auth.setAuthorizationHeaders();
+      return this.http.get<ArticleData>(
+        `${this.apiUrl}/articles/?author=${username}&limit=${limit}&offset=${offset}`,
         { headers: headers }
       );
     }
-    return this.http.get(
+    return this.http.get<ArticleData>(
       `${this.apiUrl}/articles/?author=${username}&limit=10&offset=${offset}`
     );
   }
 
   getAuthorFavArticles(username: any, offset: any) {
     if (this.auth.isLoggedIn()) {
-      const headers = this.setAuthoriztionHeaders();
+      const headers = this.auth.setAuthorizationHeaders();
       return this.http.get(
         `${this.apiUrl}/articles/?favorited=${username}&limit=10&offset=${offset}`,
         { headers: headers }
@@ -73,7 +78,7 @@ export class HomeArticleService {
 
   getTagFeed(tag: any, offset: any) {
     if (this.auth.isLoggedIn()) {
-      const headers = this.setAuthoriztionHeaders();
+      const headers = this.auth.setAuthorizationHeaders();
       return this.http.get(
         `${this.apiUrl}/articles/?tag=${tag}&limit=10&offset=${offset}`,
         { headers: headers }

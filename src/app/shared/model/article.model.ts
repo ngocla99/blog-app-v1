@@ -13,7 +13,7 @@ export interface Article {
   author: Profile;
 }
 
-export interface article {
-  articles: Article;
+export interface ArticleData {
+  articles: Article[];
   articlesCount: number;
 }
