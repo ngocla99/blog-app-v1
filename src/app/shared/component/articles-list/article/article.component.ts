@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ArticleComponent implements OnInit {
   @Input() article: any;
+  tagLists: string[] = [];
   favorited!: boolean;
   constructor(
     private auth: AuthService,
@@ -20,6 +21,7 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit(): void {
     this.favorited = this.article.favorited;
+    this.tagLists = this.article.tagList;
   }
 
   onLike(value: any) {

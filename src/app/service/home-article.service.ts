@@ -71,7 +71,7 @@ export class HomeArticleService {
     );
   }
 
-  getTagFeed(tag: any, offset: any) {
+  getTagFeedCount(tag: any, offset: any) {
     if (this.auth.isLoggedIn()) {
       const headers = this.setAuthoriztionHeaders();
       return this.http.get(
@@ -81,6 +81,19 @@ export class HomeArticleService {
     }
     return this.http.get(
       `${this.apiUrl}/articles/?tag=${tag}&limit=10&offset=${offset}`
+    );
+  }
+
+  getTagFeed(tag: any, offset: any, limit: any) {
+    if (this.auth.isLoggedIn()) {
+      const headers = this.setAuthoriztionHeaders();
+      return this.http.get(
+        `${this.apiUrl}/articles/?tag=${tag}&limit=${limit}&offset=${offset}`,
+        { headers: headers }
+      );
+    }
+    return this.http.get(
+      `${this.apiUrl}/articles/?tag=${tag}&limit=${limit}&offset=${offset}`
     );
   }
 

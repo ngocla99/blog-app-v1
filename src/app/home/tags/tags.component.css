@@ -100,32 +100,50 @@
   background-color: #687077;
 }
 
-
 .label-default {
   background-color: #818a91;
 }
 
 .label-pill {
-  padding-right: .6em;
-  padding-left: .6em;
+  padding-right: 0.6em;
+  padding-left: 0.6em;
   border-radius: 10rem;
 }
 
 .label {
-  padding: .25em .4em;
+  padding: 0.25em 0.4em;
   font-size: 75%;
   line-height: 1;
   color: #fff;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   border: none;
   font-weight: 600;
   margin: 0 5px 0 0;
 }
 
-
 .page-link {
   text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+li {
+  height: 30px;
+  width: 30px;
+  font-size: 12px;
+  font-weight: bolder;
+  color: #5cb85c;
+  margin-right: 8px;
+  margin-top: 8px;
+  border-radius: 5px;
+  border: 2px solid;
+  cursor: pointer;
 }

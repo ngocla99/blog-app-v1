@@ -9,14 +9,55 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TagsComponent implements OnInit {
   @Input() tags: any;
+  limit: number = 1;
+  offset: number = 0;
+  totalPages: any;
+  pages!: number;
   list: Article[] = [];
+
+  pageNumbers: number[] = [];
+
   constructor(private getArticle: HomeArticleService) {}
 
   ngOnInit(): void {}
 
   ngOnChanges(): void {
-    this.getArticle.getTagFeed(this.tags, 0).subscribe((data: any) => {
-      this.list = data.articles;
-    });
+    this.getArticle
+      .getTagFeedCount(this.tags, this.offset)
+      .subscribe((data: any) => {
+        this.totalPages = data.articlesCount;
+        if (this.totalPages <= 1) {
+          this.pages = 0;
+        } else {
+          this.pages = Math.ceil(this.totalPages / 1);
+          for (let i = 1; i <= this.pages; i++) {
+            this.pageNumbers.push(i);
+          }
+        }
+      });
+
+    this.getArticle
+      .getTagFeed(this.tags, this.offset, this.limit)
+      .subscribe((data: any) => {
+        this.list = data.articles;
+      });
+  }
+
+  changePage(value: number) {
+    if (value == 1) {
+      this.getArticle
+        .getTagFeed(this.tags, this.offset, this.limit)
+        .subscribe((data: any) => {
+          this.list = data.articles;
+          console.log(this.list);
+        });
+    } else {
+      this.getArticle
+        .getTagFeed(this.tags, this.limit * (value - 1), this.limit)
+        .subscribe((data: any) => {
+          this.list = data.articles;
+          console.log(data);
+        });
+    }
   }
 }

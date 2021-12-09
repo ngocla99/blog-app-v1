@@ -1,4 +1,6 @@
+import { AuthService } from './../service/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   tagMode = false;
-  ViewMode: 'global' | 'tags' = 'global';
+  ViewMode: 'global' | 'tags' | 'feed' = 'global';
   tags = ['welcome', 'introduction', 'codebaseShow', 'implementations'];
   tagsValue = '';
-  constructor() {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -23,5 +25,14 @@ export class HomeComponent implements OnInit {
     this.tagsValue = value;
     this.tagMode = true;
     this.ViewMode = 'tags';
+  }
+
+  changeFeedMode() {
+    if (this.auth.isLoggedIn()) {
+      this.tagMode = false;
+      this.ViewMode = 'feed';
+    } else {
+      this.router.navigateByUrl('login');
+    }
   }
 }
