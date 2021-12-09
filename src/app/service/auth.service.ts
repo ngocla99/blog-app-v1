@@ -19,6 +19,7 @@ export class AuthService {
     return this.http.post(`${this.apiurl}/users/login`, user).pipe(
       tap(() => {
         this.autoLogout();
+        localStorage.setItem('itemsPerPage', '1');
       })
     );
   }
@@ -27,6 +28,7 @@ export class AuthService {
     return this.http.post(`${this.apiurl}/users`, user).pipe(
       tap(() => {
         this.autoLogout();
+        localStorage.setItem('itemsPerPage', '1');
       })
     );
   }
@@ -58,6 +60,7 @@ export class AuthService {
   logout() {
     this.removeUser();
     this.router.navigateByUrl('/login');
+    window.localStorage.removeItem('itemsPerPage');
   }
 
   removeUser() {
@@ -78,5 +81,9 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  getPage() {
+    return JSON.parse(localStorage.getItem('itemsPerPage') || '{}');
   }
 }
