@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -10,7 +10,6 @@ import Swal from 'sweetalert2';
 export class AuthService {
   apiurl = 'https://conduit.productionready.io/api';
   private timeLogout = 1000 * 60 * 10;
-  // currentUser = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -82,11 +81,6 @@ export class AuthService {
     return false;
   }
 
-  setAuthorizationHeaders() {
-    const token = this.getUserToken();
-    const headers = new HttpHeaders({ Authorization: `${token}` });
-    return headers;
-  }
   getPage() {
     return JSON.parse(localStorage.getItem('itemsPerPage') || '{}');
   }

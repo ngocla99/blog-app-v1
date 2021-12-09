@@ -1,6 +1,12 @@
 <nav class="navbar navbar-light">
   <div class="container">
-    <a class="navbar-brand">conduit</a>
+    <a
+      [routerLink]="['/']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="navbar-brand"
+      >conduit</a
+    >
     <ul class="nav navbar-nav pull-xs-right">
       <li class="nav-item">
         <a
@@ -49,7 +55,10 @@
             style="border-radius: 50%"
             width="28px"
             height="28px"
-            src="{{ user?.image }}"
+            src="{{
+              user?.image ||
+                'https://static.productionready.io/images/smiley-cyrus.jpg'
+            }}"
             class="user-img"
           />&nbsp;{{ currentUser }}</a
         >

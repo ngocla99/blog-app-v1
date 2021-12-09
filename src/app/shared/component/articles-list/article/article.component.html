@@ -2,7 +2,7 @@
   <div class="blog-entry gradient-border">
     <div class="text text-2 pt-2 mt-3">
       <span class="category mb-3 d-block">
-        <a>{{ article.tagList }}</a>
+        <app-article-tag [item]="tagLists"></app-article-tag>
       </span>
       <h3 class="mb-4">
         <a [routerLink]="['/article', article.slug]" class="preview-link">{{

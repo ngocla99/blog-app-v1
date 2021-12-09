@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserProfile } from '../shared/model/profile.model';
-import { User, UserData } from '../shared/model/user.model';
-import { AuthService } from './auth.service';
+import { UserData } from '../shared/model/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,44 +9,30 @@ import { AuthService } from './auth.service';
 export class UserService {
   apiUrl = 'https://conduit.productionready.io/api';
 
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   followUser(username: string) {
-    const headers = this.auth.setAuthorizationHeaders();
     return this.http.post<UserProfile>(
       `${this.apiUrl}/profiles/${username}/follow`,
-      {},
-      { headers: headers }
+      {}
     );
   }
 
   unfollowUser(username: string) {
-    const headers = this.auth.setAuthorizationHeaders();
     return this.http.delete<UserProfile>(
-      `${this.apiUrl}/profiles/${username}/follow`,
-      {
-        headers: headers,
-      }
+      `${this.apiUrl}/profiles/${username}/follow`
     );
   }
 
   getUser() {
-    const headers = this.auth.setAuthorizationHeaders();
-    return this.http.get<UserData>(`${this.apiUrl}/user`, { headers: headers });
+    return this.http.get<UserData>(`${this.apiUrl}/user`);
   }
 
   editUser(user: any) {
-    const headers = this.auth.setAuthorizationHeaders();
-    return this.http.put(`${this.apiUrl}/user`, user, { headers: headers });
+    return this.http.put(`${this.apiUrl}/user`, user);
   }
 
   getUserProfile(username: string) {
-    if (this.auth.isLoggedIn()) {
-      const headers = this.auth.setAuthorizationHeaders();
-      return this.http.get<UserProfile>(`${this.apiUrl}/profiles/${username}`, {
-        headers: headers,
-      });
-    }
     return this.http.get<UserProfile>(`${this.apiUrl}/profiles/${username}`);
   }
 }

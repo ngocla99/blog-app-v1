@@ -1,7 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,58 +9,32 @@ export class ArticleService {
   apiUrl = 'https://conduit.productionready.io/api';
   pageIndexSub = new Subject<number>();
   likeSub = new Subject();
-  constructor(private http: HttpClient, private auth: AuthService) {}
-
-  setAuthorizationHeaders() {
-    const token = this.auth.getUserToken();
-    const headers = new HttpHeaders({ Authorization: `${token}` });
-    return headers;
-  }
+  constructor(private http: HttpClient) {}
 
   getArticleBySlug(slug: any) {
-    if (this.auth.isLoggedIn()) {
-      const headers = this.setAuthorizationHeaders();
-      return this.http.get(`${this.apiUrl}/articles/${slug}`, {
-        headers: headers,
-      });
-    }
     return this.http.get(`${this.apiUrl}/articles/${slug}`);
   }
 
   postNewArticle(article: any) {
-    const headers = this.setAuthorizationHeaders();
-    return this.http.post(`${this.apiUrl}/articles`, article, {
-      headers: headers,
-    });
+    return this.http.post(`${this.apiUrl}/articles`, article);
   }
 
   editArticle(article: any, articleSlug: any) {
-    const headers = this.setAuthorizationHeaders();
-    return this.http.put(`${this.apiUrl}/articles/${articleSlug}`, article, {
-      headers: headers,
-    });
+    return this.http.put(`${this.apiUrl}/articles/${articleSlug}`, article);
   }
 
   deleteArticle(articleSlug: any) {
-    const headers = this.setAuthorizationHeaders();
-    return this.http.delete(`${this.apiUrl}/articles/${articleSlug}`, {
-      headers: headers,
-    });
+    return this.http.delete(`${this.apiUrl}/articles/${articleSlug}`);
   }
 
   favoriteArticle(articleSlug: any) {
-    const headers = this.setAuthorizationHeaders();
     return this.http.post(
       `${this.apiUrl}/articles/${articleSlug}/favorite`,
-      {},
-      { headers: headers }
+      {}
     );
   }
 
   unfavoriteArticle(articleSlug: any) {
-    const headers = this.setAuthorizationHeaders();
-    return this.http.delete(`${this.apiUrl}/articles/${articleSlug}/favorite`, {
-      headers: headers,
-    });
+    return this.http.delete(`${this.apiUrl}/articles/${articleSlug}/favorite`);
   }
 }

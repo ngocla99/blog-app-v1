@@ -2,7 +2,13 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-3 col-xs-12"></div>
-      <div class="col-md-6 col-md-offset-3 col-xs-12">
+      <div *ngIf="isLoading" class="col-xs-12">
+        <div class="row" style="justify-content: center">
+          <app-loading-spinner></app-loading-spinner>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoading" class="col-md-6 col-md-offset-3 col-xs-12">
         <h1 class="text-xs-center">Sign up</h1>
         <p class="text-xs-center">
           <a class="link-sign" routerLink="/login">Have an account?</a>
@@ -10,21 +16,44 @@
 
         <form #formSignup="ngForm" (submit)="onSignup(formSignup.value)">
           <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="text" placeholder="Your Name" name="username" ngModel required>
+            <input
+              class="form-control form-control-lg"
+              type="text"
+              placeholder="Your Name"
+              name="username"
+              ngModel
+              required
+            />
           </fieldset>
           <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="text" placeholder="Email" name="email" ngModel required
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <input
+              class="form-control form-control-lg"
+              type="text"
+              placeholder="Email"
+              name="email"
+              ngModel
+              required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            />
           </fieldset>
           <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="password" placeholder="Password" name="password" ngModel required>
+            <input
+              class="form-control form-control-lg"
+              type="password"
+              placeholder="Password"
+              name="password"
+              ngModel
+              required
+            />
           </fieldset>
-          <button class="btn btn-lg btn-primary pull-xs-right" type="submit"
-          [disabled]="formSignup.invalid">
+          <button
+            class="btn btn-lg btn-primary pull-xs-right"
+            type="submit"
+            [disabled]="formSignup.invalid"
+          >
             Sign up
           </button>
         </form>
-
       </div>
       <div class="col-md-3 col-xs-12"></div>
     </div>

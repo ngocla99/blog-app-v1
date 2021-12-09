@@ -15,6 +15,7 @@ export class GlobalComponent implements OnInit {
   totalPages: any;
   pages!: number;
   pageNumbers: number[] = [];
+  isLoading: boolean = false;
   constructor(
     private getArticle: HomeArticleService,
     private authService: AuthService
@@ -22,7 +23,7 @@ export class GlobalComponent implements OnInit {
 
   ngOnInit(): void {
     this.limit = this.authService.getPage();
-    console.log(this.limit);
+    this.isLoading = true;
 
     this.getArticle.getArticle().subscribe((data: any) => {
       this.totalPages = data.articlesCount;
@@ -39,21 +40,25 @@ export class GlobalComponent implements OnInit {
     this.getArticle
       .getGlobalFeed(this.offset, this.limit)
       .subscribe((data: any) => {
+        this.isLoading = false;
         this.list = data.articles;
       });
   }
 
   changePage(value: number) {
-    if (value == 1) {
+    this.isLoading = true;
+    if (value === 1) {
       this.getArticle
         .getGlobalFeed(this.offset, this.limit)
         .subscribe((data: any) => {
+          this.isLoading = false;
           this.list = data.articles;
         });
     } else {
       this.getArticle
         .getGlobalFeed(this.limit * (value - 1), this.limit)
         .subscribe((data: any) => {
+          this.isLoading = false;
           this.list = data.articles;
         });
     }

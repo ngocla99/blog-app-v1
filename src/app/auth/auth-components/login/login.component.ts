@@ -10,13 +10,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  isLoading: boolean = false;
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
   onLogin(user: any) {
+    this.isLoading = true;
     this.authService.loginUser({ user: user }).subscribe(
       (data: { user?: User }) => {
+        this.isLoading = false;
         this.authService.setUser(data.user);
         Swal.fire('My Blog', 'Login success!!!', 'success');
         this.router.navigate(['/']);

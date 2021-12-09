@@ -2,7 +2,14 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-2 col-xs-12"></div>
-      <div class="col-md-8 col-md-offset-3 col-xs-12">
+
+      <div *ngIf="isLoading" class="col-md-8 col-md-offset-3 col-xs-12">
+        <div class="row" style="justify-content: center">
+          <app-loading-spinner></app-loading-spinner>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoading" class="col-md-8 col-md-offset-3 col-xs-12">
         <h1 class="text-xs-center">User Information</h1>
 
         <form #settingForm="ngForm" (submit)="onSubmit(settingForm.value)">
@@ -63,7 +70,7 @@
       </div>
       <div class="col-md-2 col-xs-12"></div>
     </div>
-    <div class="row">
+    <div *ngIf="!isLoading" class="row">
       <div class="col-md-2 col-xs-12"></div>
       <div class="col-md-8 col-md-offset-3 col-xs-12">
         <h5 class="text-xs-left" style="margin-top: 20px">Number per page:</h5>

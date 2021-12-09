@@ -9,18 +9,22 @@ import { Profile } from '../../model/profile.model';
 @Component({
   selector: 'app-article-detail',
   templateUrl: './article-detail.component.html',
-  styleUrls: ['./article-detail.component.css']
+  styleUrls: ['./article-detail.component.css'],
 })
 export class ArticleDetailComponent implements OnInit {
-
   articleSlug!: string;
   article!: Article;
   isLoading!: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, private articleService: ArticleService,
-    private auth: AuthService, private userService: UserService, private router: Router) {
-      this.articleSlug = this.activatedRoute.snapshot.params?.['slug'];
-     }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private articleService: ArticleService,
+    private auth: AuthService,
+    private userService: UserService,
+    private router: Router
+  ) {
+    this.articleSlug = this.activatedRoute.snapshot.params?.['slug'];
+  }
 
   ngOnInit(): void {
     this.getArticle();
@@ -31,6 +35,7 @@ export class ArticleDetailComponent implements OnInit {
     this.articleService.getArticleBySlug(this.articleSlug).subscribe(
       (data: any) => {
         this.article = data.article;
+        console.log(this.article);
       },
       (err) => {
         console.log(err);
@@ -68,14 +73,20 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   favourite() {
-    if(!this.auth.isLoggedIn()) {
+    if (!this.auth.isLoggedIn()) {
       this.router.navigate(['/login']);
       return;
     }
     this.articleService.favoriteArticle(this.article.slug).subscribe(
-      (data: {article?: Article}) => { this.article = data.article!; },
-      (err) => { console.log(err); },
-      () => { console.log('completed'); }
+      (data: { article?: Article }) => {
+        this.article = data.article!;
+      },
+      (err) => {
+        console.log(err);
+      },
+      () => {
+        console.log('completed');
+      }
     );
   }
 
@@ -85,26 +96,32 @@ export class ArticleDetailComponent implements OnInit {
       return;
     }
     this.articleService.unfavoriteArticle(this.article.slug).subscribe(
-      (data: {article?: Article}) => { this.article = data.article!; },
-      (err) => { console.log(err); },
-      () => { console.log('completed'); }
+      (data: { article?: Article }) => {
+        this.article = data.article!;
+      },
+      (err) => {
+        console.log(err);
+      },
+      () => {
+        console.log('completed');
+      }
     );
   }
 
   follow() {
-    if(!this.auth.isLoggedIn()) {
+    if (!this.auth.isLoggedIn()) {
       this.router.navigate(['/login']);
       return;
     }
     this.userService.followUser(this.article.author.username).subscribe(
-      (data: {profile?: Profile}) => {
+      (data: { profile?: Profile }) => {
         this.article.author = data.profile!;
       },
       (err) => {
         console.log(err);
       },
       () => {}
-      );
+    );
   }
 
   unfollow() {
@@ -113,14 +130,13 @@ export class ArticleDetailComponent implements OnInit {
       return;
     }
     this.userService.unfollowUser(this.article.author.username).subscribe(
-      (data: {profile?: Profile}) => {
+      (data: { profile?: Profile }) => {
         this.article.author = data.profile!;
       },
       (err) => {
         console.log(err);
       },
-      () => {
-      }
+      () => {}
     );
   }
 }

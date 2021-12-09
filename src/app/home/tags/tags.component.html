@@ -1,1 +1,13 @@
-<app-articles-list [listArticles]="list"></app-articles-list>
+<div class="row" style="justify-content: center">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</div>
+
+<app-articles-list *ngIf="!isLoading" [listArticles]="list"></app-articles-list>
+
+<nav *ngIf="pageNumbers.length > 1 && !isLoading">
+  <ul class="pagination">
+    <li class="page-item" *ngFor="let page of pageNumbers">
+      <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+    </li>
+  </ul>
+</nav>

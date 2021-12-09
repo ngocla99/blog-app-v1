@@ -7,10 +7,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LoginComponent } from './auth-components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [AuthComponent, SignComponent, SettingComponent, LoginComponent],
-  imports: [BrowserModule, AuthRoutingModule, HttpClientModule, FormsModule],
+  declarations: [
+    AuthComponent,
+    SignComponent,
+    SettingComponent,
+    LoginComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AuthRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    SharedModule,
+  ],
   exports: [],
 })
-export class AuthModule { }
+export class AuthModule {}

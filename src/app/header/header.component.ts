@@ -23,15 +23,10 @@ export class HeaderComponent implements OnInit {
   getProfile() {
     this.userService.getUser().subscribe(
       (data) => {
-        console.log(data);
-
         this.user = data.user;
       },
       (err) => {
         console.log(err);
-      },
-      () => {
-        // this.isLoading = false;
       }
     );
   }

@@ -12,13 +12,16 @@ import Swal from 'sweetalert2';
 export class SignComponent implements OnInit {
   loginForm: boolean = false;
   signupForm: boolean = true;
+  isLoading: boolean = false;
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
   onSignup(userSignup: any) {
+    this.isLoading = true;
     this.authService.signUpUser({ user: userSignup }).subscribe(
       (data: { user?: User }) => {
+        this.isLoading = false;
         this.authService.setUser(data.user);
         this.router.navigate(['/']);
         Swal.fire('My Blog', 'Sign-up success!!!', 'success');

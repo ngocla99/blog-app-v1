@@ -20,13 +20,17 @@ export class ProfileAuthorComponent implements OnInit {
   totalPages: number[] = [];
   pageIndexSub$!: Subscription;
   pageIndex!: number;
+  isLoading: boolean = false;
   constructor(
     private homeArticleService: HomeArticleService,
     private articleService: ArticleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.limit = this.authService.getPage();
+    this.isLoading = true;
     this.route.params
       .pipe(
         switchMap((data) => {
@@ -39,8 +43,10 @@ export class ProfileAuthorComponent implements OnInit {
         })
       )
       .subscribe((data) => {
+        this.isLoading = false;
         this.articles = data.articles;
         const articlesCount = data.articlesCount;
+        this.totalPages = [];
         const numberPages = Math.ceil(articlesCount / this.limit);
         for (let i = 1; i <= numberPages; i++) {
           this.totalPages.push(i);
@@ -50,6 +56,7 @@ export class ProfileAuthorComponent implements OnInit {
     this.pageIndexSub$ = this.articleService.pageIndexSub
       .pipe(
         switchMap((pageIndex) => {
+          this.isLoading = true;
           return this.homeArticleService.getAuthorArticles(
             this.userName,
             pageIndex * this.limit,
@@ -58,6 +65,7 @@ export class ProfileAuthorComponent implements OnInit {
         })
       )
       .subscribe((data) => {
+        this.isLoading = false;
         this.articles = data.articles;
       });
   }

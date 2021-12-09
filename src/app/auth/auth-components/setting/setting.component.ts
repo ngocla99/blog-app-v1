@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../service/auth.service';
 import { UserService } from '../../../service/user.service';
@@ -14,7 +13,7 @@ import { User, UserInfo } from '../../../shared/model/user.model';
 export class SettingComponent implements OnInit {
   user!: UserInfo;
   resultsPerPage = '0';
-  // isLoading!: boolean;
+  isLoading: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -24,28 +23,25 @@ export class SettingComponent implements OnInit {
 
   ngOnInit() {
     this.getProfile();
-    // this.resultsPerPage = this.authService.getPage();
-    // console.log(this.resultsPerPage);
   }
 
   getProfile() {
     this.userService.getUser().subscribe(
       (data) => {
         this.user = data.user;
+        console.log(this.user);
       },
       (err) => {
         console.log(err);
-      },
-      () => {
-        // this.isLoading = false;
       }
     );
   }
 
   onSubmit(userFormValue: any) {
-    //this.authService.settingUser(this.updateEmailLogin);
+    this.isLoading = true;
     this.userService.editUser({ user: userFormValue }).subscribe(
       (data: { user?: User }) => {
+        this.isLoading = false;
         this.authService.setUser(data.user);
         this.router.navigate(['/profile', data.user!.username]);
         Swal.fire('My Blog', 'Update user success!!!', 'success');
@@ -73,7 +69,6 @@ export class SettingComponent implements OnInit {
       localStorage.setItem('itemsPerPage', this.resultsPerPage);
       this.router.navigateByUrl('/');
     }
-    console.log(this.resultsPerPage);
   }
 
   logout() {

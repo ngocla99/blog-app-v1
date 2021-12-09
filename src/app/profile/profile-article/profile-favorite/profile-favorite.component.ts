@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ArticleService } from 'src/app/service/article.service';
+import { AuthService } from 'src/app/service/auth.service';
 import { HomeArticleService } from 'src/app/service/home-article.service';
 import { Article } from 'src/app/shared/model/article.model';
 
@@ -18,38 +19,46 @@ export class ProfileFavoriteComponent implements OnInit {
   offset = 0;
   totalPages: number[] = [];
   pageIndexSub$!: Subscription;
+  likeSub$!: Subscription;
   pageIndex!: number;
+  isLoading: boolean = false;
   constructor(
     private homeArticleService: HomeArticleService,
     private articleService: ArticleService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.limit = this.authService.getPage();
     this.userName = this.router.url.split('/')[2];
-    console.log(this.userName);
+    this.isLoading = true;
     this.homeArticleService
       .getAuthorFavArticles(this.userName, this.offset, this.limit)
       .subscribe((data) => {
+        this.isLoading = false;
         this.articles = data.articles;
         const articlesCount = data.articlesCount;
+        this.totalPages = [];
         const numberPages = Math.ceil(articlesCount / this.limit);
         for (let i = 1; i <= numberPages; i++) {
           this.totalPages.push(i);
         }
       });
 
-    this.articleService.likeSub
+    this.likeSub$ = this.articleService.likeSub
       .pipe(
-        switchMap(() =>
-          this.homeArticleService.getAuthorFavArticles(
+        switchMap(() => {
+          this.isLoading = true;
+          return this.homeArticleService.getAuthorFavArticles(
             this.userName,
             this.offset,
             this.limit
-          )
-        )
+          );
+        })
       )
       .subscribe((data) => {
+        this.isLoading = false;
         this.articles = data.articles;
         const articlesCount = data.articlesCount;
         this.totalPages = [];
@@ -62,6 +71,7 @@ export class ProfileFavoriteComponent implements OnInit {
     this.pageIndexSub$ = this.articleService.pageIndexSub
       .pipe(
         switchMap((pageIndex) => {
+          this.isLoading = true;
           return this.homeArticleService.getAuthorFavArticles(
             this.userName,
             pageIndex * this.limit,
@@ -70,11 +80,13 @@ export class ProfileFavoriteComponent implements OnInit {
         })
       )
       .subscribe((data) => {
+        this.isLoading = false;
         this.articles = data.articles;
       });
   }
 
   ngOnDestroy(): void {
+    this.likeSub$.unsubscribe();
     this.pageIndexSub$.unsubscribe();
   }
 }
