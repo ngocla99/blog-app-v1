@@ -1,10 +1,38 @@
-.tag {
-  font-size: 12px;
-  font-weight: bolder;
-  color: #f05d23;
-  padding: 4px 8px;
-  background: #ecf0f1;
-  margin-right: 8px;
-  margin-bottom: 8px;
-  letter-spacing: 2px;
+.category-badge:hover {
+  background-position: right center;
+}
+.category-badge {
+  color: #fff;
+  font-size: 13px;
+  border-radius: 25px;
+  display: inline-block;
+  padding: 6px 11px;
+  line-height: 1;
+  left: 20px;
+  top: 20px;
+  z-index: 1;
+  background: #fe4f70;
+  background: -webkit-linear-gradient(
+    left,
+    #fe4f70 0%,
+    #ffa387 51%,
+    #fe4f70 100%
+  );
+  background: linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%);
+  background-size: 200% auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.position-absolute {
+  position: absolute !important;
+}
+
+.move {
+  margin-left: 32%;
+}
+
+.move2 {
+  margin-left: 23%;
 }
