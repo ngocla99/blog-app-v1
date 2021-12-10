@@ -9,13 +9,13 @@ const routes: Routes = [
     path: 'editor',
     component: NewArticleComponent,
     canActivate: [AuthGuard],
-    // canDeactivate: [CanDeactivateGuard],
+    // canDeactivate: [CandeactiveService],
   },
   {
     path: 'editor/:slug',
     component: EditArticleComponent,
     canActivate: [AuthGuard],
-    // canDeactivate: [CanDeactivateGuard],
+    // canDeactivate: [CandeactiveService],
   },
 ];
 

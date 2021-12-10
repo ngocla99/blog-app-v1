@@ -1,32 +1,40 @@
-<!-- <div class="commentContainer">
-    <div class="commentBody">
-        {{comment.body}}
-    </div>
+<!-- <div class="comments bordered padding-30 rounded">
 
-    <div class="commentMeta vcenter">
-        <div class="authorInfo vcenter">
-            <img [src]="comment.author.image" alt="">
-            <a [routerLink]="['/profile', comment.author.username]">
-                <h4>{{comment.author.username}}</h4>
-            </a>
-            <p>{{comment.createdAt | date}}</p>
-        </div>
-        <button *ngIf="isLoggedIn && comment.author.username === currentUser" (click)="deleteComment()"><i class="fas fa-trash"></i></button>
-    </div>
+    <ul class="comments">
+        
+        <li style="list-style: none;" class="comment rounded">
+            <div class="thumb">
+                <img style="width:50px; height:50px; border-radius: 40px" [src]="comment.author.image" alt="" />
+            </div>
+            <div class="details">
+                <h4 class="name"><a href="#">{{comment.author.username}}</a></h4>
+                <span class="date">{{comment.createdAt | date}}</span>
+                <p>{{comment.body}}</p>
+                <button *ngIf="isLoggedIn && comment.author.username === currentUser" (click)="deleteComment()" class="btn btn-default btn-sm"><i class="fas fa-trash"></i></button>
+            </div>
+        </li>
+        
+    </ul>
 </div> -->
 
-<div class="card-block">
-    <p class="card-text">{{comment.body}}</p>
-  </div>
-  <div class="card-footer">
-    <a [routerLink]="['/profile', comment.author.username]" class="comment-author">
-      <img [src]="comment.author.image" class="comment-author-img" />
-    </a>
-    &nbsp;
-    <a [routerLink]="['/profile', comment.author.username]" class="comment-author">{{comment.author.username}}</a>
-    <span class="date-posted">Dec 29th</span>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-   
-      <i class="ion-edit"></i>
-     <button style="width: 30px; height: 30px" *ngIf="isLoggedIn && comment.author.username === currentUser" (click)="deleteComment()"> <i class="fas fa-trash"></i></button>
-  </div>
+<div class="comments bordered padding-30 rounded">
+
+    <ul class="comments">
+        <!-- comment item -->
+        <li class="comment rounded">
+            <div class="thumb">
+                <img style="width:50px; height:50px; border-radius: 40px" [src]="comment.author.image" alt="" />
+            </div>
+            <div class="details">
+                <h4 class="name"><a href="#">{{comment.author.username}}</a></h4>
+                <span class="date">{{comment.createdAt | date}}</span>
+                <p>{{comment.body}}</p>
+                <a href="#" class="btn btn-default btn-sm">Reply</a>
+            </div>
+        </li>
+        <!-- comment item -->
+     
+        <!-- comment item -->
+       
+    </ul>
+</div>

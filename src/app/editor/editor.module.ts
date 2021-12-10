@@ -20,6 +20,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  exports: [],
+  providers: []
 })
 export class EditorModule {}

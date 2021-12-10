@@ -42,6 +42,7 @@ export class EditorComponent implements OnInit {
     });
   }
 
+
   get form() {
     return this.articleEditorForm.controls;
   }
