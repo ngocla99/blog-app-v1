@@ -18,13 +18,15 @@ export class LoginComponent implements OnInit {
   onLogin(user: any) {
     this.isLoading = true;
     this.authService.loginUser({ user: user }).subscribe(
-      (data: { user?: User }) => {
+      (data) => {
         this.isLoading = false;
         this.authService.setUser(data.user);
         Swal.fire('My Blog', 'Login success!!!', 'success');
         this.router.navigate(['/']);
       },
       (err) => {
+        this.isLoading = false;
+        this.router.navigateByUrl('/auth/login');
         Swal.fire('My Blog', 'Login fail!!!', 'error');
         const errorMsg = err.error.errors;
         const statusCode = err.status;
@@ -37,9 +39,6 @@ export class LoginComponent implements OnInit {
         } else if (statusCode === 403) {
           console.log(`403 : Forbidden Access`);
         }
-      },
-      () => {
-        console.log('COMPLETED LOGIN');
       }
     );
   }

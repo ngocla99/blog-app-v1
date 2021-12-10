@@ -21,7 +21,7 @@
       <li class="nav-item">
         <a
           class="nav-link"
-          routerLink="/login"
+          routerLink="/auth/login"
           *ngIf="!isLogin"
           routerLinkActive="active"
           >Sign in</a
@@ -30,7 +30,7 @@
       <li class="nav-item">
         <a
           class="nav-link"
-          routerLink="/sign-up"
+          routerLink="/auth/sign-up"
           *ngIf="!isLogin"
           routerLinkActive="active"
           >Sign up</a
@@ -67,7 +67,7 @@
         <a
           class="nav-link"
           *ngIf="isLogin"
-          routerLink="/setting"
+          routerLink="/auth/setting"
           routerLinkActive="active"
         >
           <i class="fas fa-cog"></i>
