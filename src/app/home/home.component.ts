@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getArticle.getArticle().subscribe((data: any) => {
+    this.getArticle.getGlobalFeed().subscribe((data: any) => {
       this.mostLike = data.articles
         .sort((a: any, b: any) => {
           return a.favoritesCount - b.favoritesCount;
