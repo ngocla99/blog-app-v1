@@ -36,6 +36,7 @@ export class TagsComponent implements OnInit {
         if (this.totalPages <= 1) {
           this.pages = 0;
         } else {
+          this.pageNumbers = [];
           this.pages = Math.ceil(this.totalPages / this.limit);
           for (let i = 1; i <= this.pages; i++) {
             this.pageNumbers.push(i);

@@ -11,7 +11,7 @@ import { CommentListComponent } from './component/article-detail/comment-list/co
 import { PaginationComponent } from './component/pagination/pagination.component';
 import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spinner.component';
 import { ArticleTagComponent } from './component/articles-list/article/article-tag/article-tag.component';
-
+import { TruncatePipe } from './pipe/truncate.pipe';
 @NgModule({
   declarations: [
     ArticlesListComponent,
@@ -23,6 +23,7 @@ import { ArticleTagComponent } from './component/articles-list/article/article-t
     PaginationComponent,
     LoadingSpinnerComponent,
     ArticleTagComponent,
+    TruncatePipe,
   ],
   imports: [CommonModule, SharedRoutingModule],
   exports: [

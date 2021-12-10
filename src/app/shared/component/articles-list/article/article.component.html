@@ -1,78 +1,81 @@
-<div class="wrapper">
-  <div class="blog-entry gradient-border">
-    <div class="text text-2 pt-2 mt-3">
-      <span class="category mb-3 d-block">
-        <app-article-tag [item]="tagLists"></app-article-tag>
-      </span>
-      <h3 class="mb-4">
-        <a [routerLink]="['/article', article.slug]" class="preview-link">{{
-          article.title
-        }}</a>
-      </h3>
-      <a [routerLink]="['/article', article.slug]">
-        <p class="mb-4" class="preview-link">
-          {{ article.body }}
-        </p>
-      </a>
-      <div class="author mb-4 align-items-center" style="display: flex">
-        <a
-          routerLink="/profile/{{ article.author.username }}"
-          class="img"
-          style="background-image: url('{{ article.author.image }}')"
-        ></a>
-        <div class="ml-3 info" style="margin-left: 20px">
-          <span>Written by</span>
-          <h3>
-            <a
-              routerLink="/profile/{{ article.author.username }}"
-              style="color: white; text-decoration: none"
-              >{{ article.author.username }}</a
-            >,
-            <span style="color: white">{{ article.createdAt | date }}</span>
-          </h3>
+<div class="container">
+  <div class="row">
+    <div>
+      <div class="post post-grid rounded bordered">
+        <div class="thumb top-rounded">
+          <app-article-tag [item]="tagLists"></app-article-tag>
+          <span class="post-format">
+            <i class="fab fa-readme"></i>
+          </span>
+          <a>
+            <div class="inner">
+              <img
+                src="https://themeger.shop/html/katen/html/images/posts/post-md-1.jpg"
+                alt="post-title"
+              />
+            </div>
+          </a>
         </div>
-      </div>
-      <div class="meta-wrap align-items-center" style="margin-top: 20px">
-        <div class="half order-md-last">
-          <p class="meta center">
-            <span *ngIf="favorited == false">
-              <i
-                class="{{
-                  article.favorited ? 'fas fa-heart' : 'far fa-heart'
-                }}"
-                (click)="onLike(article.slug)"
-              ></i
-              >{{ article.favoritesCount }}
-            </span>
+        <div class="details">
+          <ul class="meta list-inline mb-0">
+            <li class="list-inline-item">
+              <a routerLink="/profile/{{ article.author.username }}"
+                ><img
+                  style="width: 50px; height: 50px; border-radius: 50%"
+                  src="{{ article.author.image }}"
+                  class="author"
+                  alt="author"
+                />{{ article.author.username }}</a
+              >
+            </li>
+            <li class="list-inline-item">{{ article.createdAt | date }}</li>
+          </ul>
+          <h5 class="post-title mb-3 mt-3">
+            <a [routerLink]="['/article', article.slug]">{{ article.title }}</a>
+          </h5>
+          <p class="excerpt mb-0" style="height: 48px">
+            {{ article.body | truncate: 80 }}
+          </p>
+        </div>
+        <div class="post-bottom clearfix d-flex align-items-center">
+          <div class="social-share me-auto">
+            <div class="float-start">
+              <span *ngIf="favorited == false" style="margin-right: 8px">
+                <i
+                  class="{{
+                    article.favorited ? 'fas fa-heart' : 'far fa-heart'
+                  }}"
+                  style="margin-right: 5px"
+                  (click)="onLike(article.slug)"
+                ></i
+                >{{ article.favoritesCount }}
+              </span>
 
-            <span *ngIf="favorited == true">
-              <i
-                class="{{
-                  article.favorited ? 'fas fa-heart' : 'far fa-heart'
-                }}"
-                (click)="onUnLike(article.slug)"
-              ></i
-              >{{ article.favoritesCount }}
-            </span>
-            <span>
-              <i class="far fa-eye"></i>{{ article.comments.length * 2 }}
-            </span>
-            <span>
-              <i class="fas fa-comment"></i>{{ article.comments.length }}
-            </span>
-          </p>
-        </div>
-        <div class="half">
-          <p>
-            <a
-              style="letter-spacing: 0"
-              [routerLink]="['/article', article.slug]"
-              class="preview-link"
-              class="btn py-2"
-              >Continue Reading
-              <span class="fas fa-arrow-right"></span>
-            </a>
-          </p>
+              <span *ngIf="favorited == true" style="margin-right: 8px">
+                <i
+                  class="{{
+                    article.favorited ? 'fas fa-heart' : 'far fa-heart'
+                  }}"
+                  style="margin-right: 5px"
+                  (click)="onUnLike(article.slug)"
+                ></i
+                >{{ article.favoritesCount }}
+              </span>
+              <span style="margin-right: 8px">
+                <i class="far fa-eye" style="margin-right: 5px"></i
+                >{{ article.comments.length * 2 }}
+              </span>
+              <span>
+                <i class="fas fa-comment" style="margin-right: 5px"></i
+                >{{ article.comments.length }}
+              </span>
+            </div>
+          </div>
+          <div class="more-button float-end" style="margin-right: 8px">
+            <a [routerLink]="['/article', article.slug]"
+              ><i class="fas fa-ellipsis-h"></i
+            ></a>
+          </div>
         </div>
       </div>
     </div>

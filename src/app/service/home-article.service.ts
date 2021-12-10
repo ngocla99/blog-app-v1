@@ -20,9 +20,9 @@ export class HomeArticleService {
     return this.http.get(`${this.apiUrl}/articles`);
   }
 
-  getUserFeed(offset: any) {
+  getUserFeed(offset: number = 0, limit: number = 20) {
     return this.http.get(
-      `${this.apiUrl}/articles/feed/?limit=10&offset=${offset}`
+      `${this.apiUrl}/articles/feed/?limit=${limit}&offset=${offset}`
     );
   }
   /**

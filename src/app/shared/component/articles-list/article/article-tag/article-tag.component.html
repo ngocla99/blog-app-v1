@@ -1,1 +1,7 @@
-<div class="tag" *ngFor="let i of item">{{ i }}</div>
+<a
+  class="category-badge position-absolute {{ z == 1 ? 'move' : '' }} {{
+    i == 'introduction' ? 'move2' : ''
+  }}"
+  *ngFor="let i of item; let z = index"
+  >{{ i }}
+</a>
