@@ -28,13 +28,12 @@ export class CommentComponent implements OnInit {
 
   getArticleComments() {
     this.commentService.getArticleComments(this.slug).subscribe(
-      (data: { comments?: Comment[] }) => {
-        this.comments = data.comments!;
+      (data) => {
+        this.comments = data.comments;
       },
       (err) => {
         console.log(err);
-      },
-      () => {}
+      }
     );
   }
 
@@ -46,7 +45,7 @@ export class CommentComponent implements OnInit {
     return this.comments.map((comment) => comment.id).indexOf(commentId);
   }
 
-  addComment(commentValue: any) {
+  addComment(commentValue: string) {
     commentValue = commentValue.trim();
     if (commentValue.length !== 0) {
       const comment = {
@@ -55,26 +54,24 @@ export class CommentComponent implements OnInit {
       this.commentService
         .postArticleComment(this.slug, { comment: comment })
         .subscribe(
-          (data: { comment?: Comment }) => {
-            this.comments.unshift(data.comment!);
+          (data) => {
+            this.comments.unshift(data.comment);
           },
           (err) => {
             console.log(err);
-          },
-          () => {}
+          }
         );
     }
   }
 
   deleteComment(commentId: number) {
     this.commentService.deleteArticleComment(this.slug, commentId).subscribe(
-      (data) => {
+      () => {
         this.comments.splice(this.findComment(commentId), 1);
       },
       (err) => {
         console.log(err);
-      },
-      () => {}
+      }
     );
   }
 }

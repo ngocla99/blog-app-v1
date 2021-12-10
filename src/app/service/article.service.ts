@@ -1,40 +1,52 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ArticleObj, ArticlePost } from '../shared/model/article.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticleService {
-  apiUrl = 'https://conduit.productionready.io/api';
+  private readonly API_URL = 'https://conduit.productionready.io/api';
   pageIndexSub = new Subject<number>();
   likeSub = new Subject();
   constructor(private http: HttpClient) {}
 
-  getArticleBySlug(slug: any) {
-    return this.http.get(`${this.apiUrl}/articles/${slug}`);
+  // Get single article by slug
+  getArticleBySlug(slug: string) {
+    return this.http.get<ArticleObj>(`${this.API_URL}/articles/${slug}`);
   }
 
-  postNewArticle(article: any) {
-    return this.http.post(`${this.apiUrl}/articles`, article);
+  // Creat the new article
+  postNewArticle(article: { article: ArticlePost }) {
+    return this.http.post<ArticleObj>(`${this.API_URL}/articles`, article);
   }
 
-  editArticle(article: any, articleSlug: any) {
-    return this.http.put(`${this.apiUrl}/articles/${articleSlug}`, article);
+  // Update the article
+  editArticle(article: { article: ArticlePost }, slug: string) {
+    return this.http.put<ArticleObj>(
+      `${this.API_URL}/articles/${slug}`,
+      article
+    );
   }
 
-  deleteArticle(articleSlug: any) {
-    return this.http.delete(`${this.apiUrl}/articles/${articleSlug}`);
+  // Delete the article
+  deleteArticle(slug: string) {
+    return this.http.delete<ArticleObj>(`${this.API_URL}/articles/${slug}`);
   }
 
-  favoriteArticle(articleSlug: any) {
-    return this.http.post(
-      `${this.apiUrl}/articles/${articleSlug}/favorite`,
+  // Like the article
+  favoriteArticle(slug: string) {
+    return this.http.post<ArticleObj>(
+      `${this.API_URL}/articles/${slug}/favorite`,
       {}
     );
   }
 
-  unfavoriteArticle(articleSlug: any) {
-    return this.http.delete(`${this.apiUrl}/articles/${articleSlug}/favorite`);
+  // Unlike the article
+  unfavoriteArticle(slug: string) {
+    return this.http.delete<ArticleObj>(
+      `${this.API_URL}/articles/${slug}/favorite`
+    );
   }
 }

@@ -9,19 +9,25 @@ import { LoggedInGuard } from '../shared/guards/logged-in.guard';
 
 const routes: Routes = [
   {
-    path: 'sign-up',
-    component: SignComponent,
-    canActivate: [LoggedInGuard],
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [LoggedInGuard],
-  },
-  {
-    path: 'setting',
-    component: SettingComponent,
-    canActivate: [AuthGuard],
+    path: '',
+    component: AuthComponent,
+    children: [
+      {
+        path: 'sign-up',
+        component: SignComponent,
+        canActivate: [LoggedInGuard],
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [LoggedInGuard],
+      },
+      {
+        path: 'setting',
+        component: SettingComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
   },
 ];
 
