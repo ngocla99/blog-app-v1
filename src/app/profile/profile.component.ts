@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     if (this.profile.following) {
-      this.userService.unfollowUser(this.profile.username).subscribe((data) => {
+      this.userService.unFollowUser(this.profile.username).subscribe((data) => {
         this.profile = data.profile;
       });
     }

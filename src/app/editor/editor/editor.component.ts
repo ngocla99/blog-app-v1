@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { ArticleService } from 'src/app/service/article.service';
+import { ArticlePost } from 'src/app/shared/model/article.model';
 
 @Component({
   selector: 'app-editor',
@@ -62,30 +62,26 @@ export class EditorComponent implements OnInit {
     }
   }
 
-  postArticle(article: any) {
+  postArticle(article: ArticlePost) {
     this.articleService.postNewArticle({ article: article }).subscribe(
       (data: any) => {
         this.router.navigate(['/article', data.article.slug]);
       },
       (err) => {
         console.error(err);
-      },
-      () => {}
+      }
     );
   }
 
-  editArticle(article: any, articleSlug: any) {
+  editArticle(article: ArticlePost, articleSlug: string) {
     this.articleService
       .editArticle({ article: article }, articleSlug)
       .subscribe(
-        (data: any) => {
+        (data) => {
           this.router.navigate(['/article', data.article.slug]);
         },
         (err) => {
           console.log(err);
-        },
-        () => {
-          console.log('EDIT COMPLETED');
         }
       );
   }

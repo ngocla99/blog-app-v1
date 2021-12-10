@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
-import { User } from '../../../shared/model/user.model';
+import { User, UserSignUp } from '../../../shared/model/user.model';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,19 +17,21 @@ export class SignComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSignup(userSignup: any) {
+  onSignup(userSignup: UserSignUp) {
     this.isLoading = true;
     this.authService.signUpUser({ user: userSignup }).subscribe(
-      (data: { user?: User }) => {
+      (data) => {
         this.isLoading = false;
         this.authService.setUser(data.user);
         this.router.navigate(['/']);
         Swal.fire('My Blog', 'Sign-up success!!!', 'success');
       },
       (err) => {
+        this.isLoading = false;
         Swal.fire('My Blog', 'Sign-up fail!!!', 'error');
         const errorMsg = err.error.errors;
         const statusCode = err.status;
+        this.router.navigateByUrl('/auth/sign-up');
         if (statusCode === 422) {
           console.log(`422 : `);
         } else if (statusCode === 404) {
@@ -39,9 +41,6 @@ export class SignComponent implements OnInit {
         } else if (statusCode === 403) {
           console.log(`403 : Forbidden Access`);
         }
-      },
-      () => {
-        console.log('COMPLETED Signup');
       }
     );
   }

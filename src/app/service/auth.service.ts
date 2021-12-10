@@ -3,34 +3,44 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import {
+  UserData,
+  UserInfo,
+  UserSignIn,
+  UserSignUp,
+} from '../shared/model/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  apiurl = 'https://conduit.productionready.io/api';
+  private readonly API_URL = 'https://conduit.productionready.io/api';
   private timeLogout = 1000 * 60 * 10;
+  private defaultNumPerPage = 3;
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  loginUser(user: any) {
-    return this.http.post(`${this.apiurl}/users/login`, user).pipe(
+  // Sign in the account
+  loginUser(user: { user: UserSignIn }) {
+    return this.http.post<UserData>(`${this.API_URL}/users/login`, user).pipe(
       tap(() => {
         this.autoLogout();
-        localStorage.setItem('itemsPerPage', '1');
+        this.setDefaultPage();
       })
     );
   }
 
-  signUpUser(user: any) {
-    return this.http.post(`${this.apiurl}/users`, user).pipe(
+  // Sign up the account
+  signUpUser(user: { user: UserSignUp }) {
+    return this.http.post<UserData>(`${this.API_URL}/users`, user).pipe(
       tap(() => {
         this.autoLogout();
-        localStorage.setItem('itemsPerPage', '1');
+        this.setDefaultPage();
       })
     );
   }
 
+  // Set auto Logout after 10 minutes when user is logged in.
   autoLogout() {
     setTimeout(() => {
       this.logout();
@@ -38,7 +48,8 @@ export class AuthService {
     }, this.timeLogout);
   }
 
-  setUser(userData: any) {
+  // Store info user into local storage to get Token
+  setUser(userData: UserInfo) {
     const user = {
       username: userData.username,
       token: `Token ${userData.token}`,
@@ -46,6 +57,7 @@ export class AuthService {
     window.localStorage.setItem('user', JSON.stringify(user));
   }
 
+  // Auto login when reload page if user is logged in
   autoLoad() {
     if (localStorage.getItem('user')) {
       const user = JSON.parse(localStorage.getItem('user') || '');
@@ -55,24 +67,29 @@ export class AuthService {
     return;
   }
 
+  // Logout the account
   logout() {
     this.removeUser();
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/auth/login');
     window.localStorage.removeItem('itemsPerPage');
   }
 
+  // Delete user data from local storage
   removeUser() {
     window.localStorage.removeItem('user');
   }
 
+  // Get username from local storage
   getUserName() {
     return JSON.parse(localStorage.getItem('user') || '{}').username;
   }
 
+  // Get token from local storage
   getUserToken() {
     return JSON.parse(localStorage.getItem('user') || '{}').token;
   }
 
+  // Check whether user is logged in
   isLoggedIn(): boolean {
     const currentUser = JSON.parse(window.localStorage.getItem('user') || '{}');
     if (currentUser && currentUser.token) {
@@ -81,6 +98,12 @@ export class AuthService {
     return false;
   }
 
+  // Set the default number articles per page to local storage
+  setDefaultPage() {
+    localStorage.setItem('itemsPerPage', this.defaultNumPerPage + '');
+  }
+
+  // Get the number of articles per page from local storage
   getPage() {
     return JSON.parse(localStorage.getItem('itemsPerPage') || '{}');
   }
