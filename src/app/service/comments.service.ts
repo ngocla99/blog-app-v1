@@ -1,26 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import {
+  CommentPost,
+  CommentsData,
+  CommentSingle,
+} from '../shared/model/comment.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommentsService {
-  apiUrl = 'https://conduit.productionready.io/api';
+  private readonly API_URL = 'https://conduit.productionready.io/api';
   deleteEvent = new EventEmitter<number>();
 
   constructor(private http: HttpClient) {}
 
-  getArticleComments(slug: any) {
-    return this.http.get(`${this.apiUrl}/articles/${slug}/comments`);
+  // Get comments from an article
+  getArticleComments(slug: string) {
+    return this.http.get<CommentsData>(
+      `${this.API_URL}/articles/${slug}/comments`
+    );
   }
 
-  postArticleComment(slug: any, comment: any) {
-    return this.http.post(`${this.apiUrl}/articles/${slug}/comments`, comment);
+  // Add comment to an article
+  postArticleComment(slug: string, comment: CommentPost) {
+    return this.http.post<CommentSingle>(
+      `${this.API_URL}/articles/${slug}/comments`,
+      comment
+    );
   }
 
-  deleteArticleComment(slug: any, commentId: any) {
-    return this.http.delete(
-      `${this.apiUrl}/articles/${slug}/comments/${commentId}`
+  // Delete comment from an article
+  deleteArticleComment(slug: string, commentId: number) {
+    return this.http.delete<CommentSingle>(
+      `${this.API_URL}/articles/${slug}/comments/${commentId}`
     );
   }
 }

@@ -29,8 +29,8 @@ export class TagsComponent implements OnInit {
     this.limit = this.authService.getPage();
     this.isLoading = true;
     this.getArticle
-      .getTagFeedCount(this.tags, this.offset)
-      .subscribe((data: any) => {
+      .getTagFeed(this.tags, this.offset, this.limit)
+      .subscribe((data) => {
         this.isLoading = false;
         this.totalPages = data.articlesCount;
         if (this.totalPages <= 1) {
@@ -42,28 +42,23 @@ export class TagsComponent implements OnInit {
             this.pageNumbers.push(i);
           }
         }
-      });
-
-    this.getArticle
-      .getTagFeed(this.tags, this.offset, this.limit)
-      .subscribe((data: any) => {
         this.list = data.articles;
       });
   }
 
   changePage(value: number) {
     this.isLoading = true;
-    if (value == 1) {
+    if (value === 1) {
       this.getArticle
         .getTagFeed(this.tags, this.offset, this.limit)
-        .subscribe((data: any) => {
+        .subscribe((data) => {
           this.isLoading = false;
           this.list = data.articles;
         });
     } else {
       this.getArticle
         .getTagFeed(this.tags, this.limit * (value - 1), this.limit)
-        .subscribe((data: any) => {
+        .subscribe((data) => {
           this.isLoading = false;
           this.list = data.articles;
         });

@@ -33,9 +33,8 @@ export class ArticleDetailComponent implements OnInit {
   getArticle() {
     this.isLoading = true;
     this.articleService.getArticleBySlug(this.articleSlug).subscribe(
-      (data: any) => {
+      (data) => {
         this.article = data.article;
-        console.log(this.article);
       },
       (err) => {
         console.log(err);
@@ -54,20 +53,17 @@ export class ArticleDetailComponent implements OnInit {
     return this.auth.getUserName();
   }
 
-  editArticle(slug: any) {
+  editArticle(slug: string) {
     this.router.navigate(['editor', slug]);
   }
 
-  deleteArticle(slug: any) {
+  deleteArticle(slug: string) {
     this.articleService.deleteArticle(slug).subscribe(
-      (data) => {
+      () => {
         this.router.navigate(['/profile', this.currentUser]);
       },
       (err) => {
         console.log(err);
-      },
-      () => {
-        console.log('DELETE COMPLETED');
       }
     );
   }
@@ -78,14 +74,11 @@ export class ArticleDetailComponent implements OnInit {
       return;
     }
     this.articleService.favoriteArticle(this.article.slug).subscribe(
-      (data: { article?: Article }) => {
-        this.article = data.article!;
+      (data) => {
+        this.article = data.article;
       },
       (err) => {
         console.log(err);
-      },
-      () => {
-        console.log('completed');
       }
     );
   }
@@ -96,14 +89,11 @@ export class ArticleDetailComponent implements OnInit {
       return;
     }
     this.articleService.unfavoriteArticle(this.article.slug).subscribe(
-      (data: { article?: Article }) => {
-        this.article = data.article!;
+      (data) => {
+        this.article = data.article;
       },
       (err) => {
         console.log(err);
-      },
-      () => {
-        console.log('completed');
       }
     );
   }
@@ -129,14 +119,13 @@ export class ArticleDetailComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-    this.userService.unfollowUser(this.article.author.username).subscribe(
-      (data: { profile?: Profile }) => {
-        this.article.author = data.profile!;
+    this.userService.unFollowUser(this.article.author.username).subscribe(
+      (data) => {
+        this.article.author = data.profile;
       },
       (err) => {
         console.log(err);
-      },
-      () => {}
+      }
     );
   }
 }

@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
       this.tagMode = false;
       this.ViewMode = 'feed';
     } else {
-      this.router.navigateByUrl('login');
+      this.router.navigateByUrl('/auth/login');
     }
   }
 }
