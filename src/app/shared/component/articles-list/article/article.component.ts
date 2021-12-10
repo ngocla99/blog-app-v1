@@ -26,8 +26,8 @@ export class ArticleComponent implements OnInit {
 
   onLike(value: any) {
     if (this.auth.isLoggedIn()) {
-      this.articleService.favoriteArticle(value).subscribe((data: any) => {
-        this.article = data.article!;
+      this.articleService.favoriteArticle(value).subscribe((data) => {
+        this.article = data.article;
         this.favorited = true;
         this.articleService.likeSub.next();
       });
@@ -38,8 +38,8 @@ export class ArticleComponent implements OnInit {
 
   onUnLike(value: any) {
     if (this.auth.isLoggedIn()) {
-      this.articleService.unfavoriteArticle(value).subscribe((data: any) => {
-        this.article = data.article!;
+      this.articleService.unfavoriteArticle(value).subscribe((data) => {
+        this.article = data.article;
         this.favorited = false;
         this.articleService.likeSub.next();
       });

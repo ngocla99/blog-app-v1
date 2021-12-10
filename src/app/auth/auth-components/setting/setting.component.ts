@@ -26,10 +26,11 @@ export class SettingComponent implements OnInit {
   }
 
   getProfile() {
+    this.isLoading = true;
     this.userService.getUser().subscribe(
       (data) => {
+        this.isLoading = false;
         this.user = data.user;
-        console.log(this.user);
       },
       (err) => {
         console.log(err);
@@ -37,13 +38,13 @@ export class SettingComponent implements OnInit {
     );
   }
 
-  onSubmit(userFormValue: any) {
+  onSubmit(userFormValue: UserInfo) {
     this.isLoading = true;
     this.userService.editUser({ user: userFormValue }).subscribe(
-      (data: { user?: User }) => {
+      (data) => {
         this.isLoading = false;
         this.authService.setUser(data.user);
-        this.router.navigate(['/profile', data.user!.username]);
+        this.router.navigate(['/profile', data.user.username]);
         Swal.fire('My Blog', 'Update user success!!!', 'success');
       },
       (err) => {

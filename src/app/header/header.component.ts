@@ -17,7 +17,9 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProfile();
+    if (this.authService.isLoggedIn()) {
+      this.getProfile();
+    }
   }
 
   getProfile() {
