@@ -1,4 +1,4 @@
-<header class="header-default">
+<header class="header-default" style="border-bottom: 1px #ff416c solid">
   <nav class="navbar navbar-expand-lg">
     <div class="container-xl">
       <!-- site logo -->
@@ -10,38 +10,33 @@
         ><b>UTOD</b></a
       >
 
-      <div class="collapse navbar-collapse"></div>
-
       <!-- header right section -->
-      <div class="header-right">
-        <ul class="navbar-nav list-unstyled list-inline mb-0">
+      <div class="justify-content-center centered-nav">
+        <ul class="navbar-nav mb-0">
           <div class="collapse navbar-collapse">
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="!isLogin">
               <a
                 class="nav-link"
                 routerLink="/auth/login"
-                *ngIf="!isLogin"
                 routerLinkActive="active"
                 >Sign in</a
               >
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="!isLogin">
               <a
                 class="nav-link"
                 routerLink="/auth/sign-up"
-                *ngIf="!isLogin"
                 routerLinkActive="active"
                 >Sign up</a
               >
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="isLogin">
               <a
                 class="nav-link"
-                *ngIf="isLogin"
                 [routerLink]="['editor']"
                 routerLinkActive="active"
               >
-                <i class="ion-compose"></i>New Post
+                New Post
               </a>
             </li>
             <li class="nav-item">
@@ -53,16 +48,29 @@
                 >Home</a
               >
             </li>
-            <li class="nav-item font-italic">
+            <li class="nav-item" *ngIf="isLogin">
               <a
                 class="nav-link"
-                *ngIf="isLogin"
+                routerLink="/auth/setting"
+                routerLinkActive="active"
+              >
+                Setting
+              </a>
+            </li>
+          </div>
+        </ul>
+      </div>
+
+      <div class="header-right">
+        <ul class="navbar-nav list-unstyled list-inline mb-0">
+          <div class="collapse navbar-collapse">
+            <li class="nav-item font-italic" *ngIf="isLogin">
+              <a
+                class="nav-link"
                 [routerLink]="['/profile', currentUser]"
                 routerLinkActive="active"
                 ><img
-                  style="border-radius: 50%"
-                  width="28px"
-                  height="28px"
+                  style="border-radius: 50%; width: 28px; height: 28px"
                   src="{{
                     user?.image ||
                       'https://static.productionready.io/images/smiley-cyrus.jpg'
@@ -71,29 +79,17 @@
                 />&nbsp;{{ currentUser }}</a
               >
             </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                *ngIf="isLogin"
-                routerLink="/auth/setting"
-                routerLinkActive="active"
-              >
-                <i class="fas fa-cog"></i>
-              </a>
-            </li>
           </div>
-          <div class="header-buttons">
-            <button class="burger-menu icon-button">
-              <span class="burger-icon"></span>
-            </button>
-          </div>
+          <button class="burger-menu icon-button navbar-toggler">
+            <span class="burger-icon"></span>
+          </button>
         </ul>
       </div>
     </div>
   </nav>
 </header>
 
-<header class="header-default clone">
+<header class="header-default clone" style="border-bottom: 1px #ff416c solid">
   <nav class="navbar navbar-expand-lg">
     <div class="container-xl">
       <!-- site logo -->
@@ -105,38 +101,33 @@
         ><b>UTOD</b></a
       >
 
-      <div class="collapse navbar-collapse"></div>
-
       <!-- header right section -->
-      <div class="header-right">
-        <ul class="navbar-nav list-unstyled list-inline mb-0">
+      <div class="justify-content-center centered-nav">
+        <ul class="navbar-nav mb-0">
           <div class="collapse navbar-collapse">
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="!isLogin">
               <a
                 class="nav-link"
                 routerLink="/auth/login"
-                *ngIf="!isLogin"
                 routerLinkActive="active"
                 >Sign in</a
               >
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="!isLogin">
               <a
                 class="nav-link"
                 routerLink="/auth/sign-up"
-                *ngIf="!isLogin"
                 routerLinkActive="active"
                 >Sign up</a
               >
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="isLogin">
               <a
                 class="nav-link"
-                *ngIf="isLogin"
                 [routerLink]="['editor']"
                 routerLinkActive="active"
               >
-                <i class="ion-compose"></i>New Post
+                New Post
               </a>
             </li>
             <li class="nav-item">
@@ -148,16 +139,29 @@
                 >Home</a
               >
             </li>
-            <li class="nav-item font-italic">
+            <li class="nav-item" *ngIf="isLogin">
               <a
                 class="nav-link"
-                *ngIf="isLogin"
+                routerLink="/auth/setting"
+                routerLinkActive="active"
+              >
+                Setting
+              </a>
+            </li>
+          </div>
+        </ul>
+      </div>
+
+      <div class="header-right">
+        <ul class="navbar-nav list-unstyled list-inline mb-0">
+          <div class="collapse navbar-collapse">
+            <li class="nav-item font-italic" *ngIf="isLogin">
+              <a
+                class="nav-link"
                 [routerLink]="['/profile', currentUser]"
                 routerLinkActive="active"
                 ><img
-                  style="border-radius: 50%"
-                  width="28px"
-                  height="28px"
+                  style="border-radius: 50%; width: 28px; height: 28px"
                   src="{{
                     user?.image ||
                       'https://static.productionready.io/images/smiley-cyrus.jpg'
@@ -166,29 +170,20 @@
                 />&nbsp;{{ currentUser }}</a
               >
             </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                *ngIf="isLogin"
-                routerLink="/auth/setting"
-                routerLinkActive="active"
-              >
-                <i class="fas fa-cog"></i>
-              </a>
-            </li>
           </div>
-          <div class="header-buttons">
-            <button class="burger-menu icon-button">
-              <span class="burger-icon"></span>
-            </button>
-          </div>
+          <button class="burger-menu icon-button navbar-toggler">
+            <span class="burger-icon"></span>
+          </button>
         </ul>
       </div>
     </div>
   </nav>
 </header>
 
-<div class="canvas-menu d-flex align-items-end flex-column">
+<div
+  class="canvas-menu d-flex align-items-end flex-column"
+  style="border-left: 1px #ff416c solid"
+>
   <!-- close button -->
   <button type="button" class="btn-close" aria-label="Close"></button>
 
@@ -206,31 +201,33 @@
   <!-- menu -->
   <nav>
     <ul class="vertical-menu">
-      <li class="nav-item">
+      <li class="nav-item font-italic" *ngIf="isLogin">
         <a
           class="nav-link"
-          *ngIf="isLogin"
-          [routerLink]="['editor']"
+          [routerLink]="['/profile', currentUser]"
           routerLinkActive="active"
+          ><img
+            style="border-radius: 50%; width: 28px; height: 28px"
+            src="{{
+              user?.image ||
+                'https://static.productionready.io/images/smiley-cyrus.jpg'
+            }}"
+            class="user-img"
+          />&nbsp;{{ currentUser }}</a
         >
-          <i class="ion-compose"></i>New Post
+      </li>
+      <li class="nav-item" *ngIf="isLogin">
+        <a class="nav-link" [routerLink]="['editor']" routerLinkActive="active">
+          <i class="ion-compose"></i> New Post
         </a>
       </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/auth/login"
-          *ngIf="!isLogin"
-          routerLinkActive="active"
+      <li class="nav-item" *ngIf="!isLogin">
+        <a class="nav-link" routerLink="/auth/login" routerLinkActive="active"
           >Sign in</a
         >
       </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/auth/sign-up"
-          *ngIf="!isLogin"
-          routerLinkActive="active"
+      <li class="nav-item" *ngIf="!isLogin">
+        <a class="nav-link" routerLink="/auth/sign-up" routerLinkActive="active"
           >Sign up</a
         >
       </li>
@@ -240,35 +237,16 @@
           [routerLink]="['/']"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          >Home</a
+          ><i class="fas fa-home"></i> Home</a
         >
       </li>
-      <li class="nav-item font-italic">
+      <li class="nav-item" *ngIf="isLogin">
         <a
           class="nav-link"
-          *ngIf="isLogin"
-          [routerLink]="['/profile', currentUser]"
-          routerLinkActive="active"
-          ><img
-            style="border-radius: 50%"
-            width="28px"
-            height="28px"
-            src="{{
-              user?.image ||
-                'https://static.productionready.io/images/smiley-cyrus.jpg'
-            }}"
-            class="user-img"
-          />&nbsp;{{ currentUser }}</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          *ngIf="isLogin"
           routerLink="/auth/setting"
           routerLinkActive="active"
         >
-          <i class="fas fa-cog"></i>Setting
+          <i class="fas fa-cog"></i> Setting
         </a>
       </li>
     </ul>
