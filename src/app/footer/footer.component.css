@@ -1,15 +1,5 @@
-footer {
-  background: #f3f3f3;
-  margin-top: 3rem;
-  padding: 1rem 0;
-  bottom: 0;
-  width: 100%;
-}
-
-.attribution {
-  vertical-align: top;
-  margin-left: 10px;
-  font-size: 0.8rem;
-  color: #bbb;
-  font-weight: 300;
+.home-icon {
+  color: #ff416c !important;
+  border-radius: 10px;
+  padding: 10px;
 }

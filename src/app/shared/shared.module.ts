@@ -13,6 +13,7 @@ import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spi
 import { ArticleTagComponent } from './component/articles-list/article/article-tag/article-tag.component';
 import { TruncatePipe } from './pipe/truncate.pipe';
 import { PreloaderComponent } from './component/preloader/preloader.component';
+import { AlertComponent } from './component/alert/alert.component';
 @NgModule({
   declarations: [
     ArticlesListComponent,
@@ -26,6 +27,7 @@ import { PreloaderComponent } from './component/preloader/preloader.component';
     ArticleTagComponent,
     TruncatePipe,
     PreloaderComponent,
+    AlertComponent,
   ],
   imports: [CommonModule, SharedRoutingModule],
   exports: [
@@ -37,6 +39,7 @@ import { PreloaderComponent } from './component/preloader/preloader.component';
     LoadingSpinnerComponent,
     PaginationComponent,
     PreloaderComponent,
+    AlertComponent,
   ],
 })
 export class SharedModule {}
