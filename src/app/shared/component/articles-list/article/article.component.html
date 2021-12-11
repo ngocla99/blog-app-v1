@@ -1,4 +1,4 @@
-<div class="row">
+<div>
   <div>
     <div class="post post-grid rounded bordered">
       <div class="thumb top-rounded">
@@ -8,16 +8,24 @@
         </span>
         <a>
           <div class="inner">
-            <img src="https://themeger.shop/html/katen/html/images/posts/post-md-1.jpg" alt="post-title" />
+            <img
+              src="https://themeger.shop/html/katen/html/images/posts/post-md-1.jpg"
+              alt="post-title"
+            />
           </div>
         </a>
       </div>
       <div class="details">
         <ul class="meta list-inline mb-0">
           <li class="list-inline-item">
-            <a routerLink="/profile/{{ article.author.username }}"><img
-                style="width: 50px; height: 50px; border-radius: 50%" src="{{ article.author.image }}" class="author"
-                alt="author" />{{ article.author.username }}</a>
+            <a routerLink="/profile/{{ article.author.username }}"
+              ><img
+                style="width: 50px; height: 50px; border-radius: 50%"
+                src="{{ article.author.image }}"
+                class="author"
+                alt="author"
+              />{{ article.author.username }}</a
+            >
           </li>
           <li class="list-inline-item">{{ article.createdAt | date }}</li>
         </ul>
@@ -32,26 +40,40 @@
         <div class="social-share me-auto">
           <div class="float-start">
             <span *ngIf="favorited == false" style="margin-right: 8px">
-              <i class="{{
-                    article.favorited ? 'fas fa-heart' : 'far fa-heart'
-                  }}" style="margin-right: 5px" (click)="onLike(article.slug)"></i>{{ article.favoritesCount }}
+              <i
+                class="{{
+                  article.favorited ? 'fas fa-heart' : 'far fa-heart'
+                }}"
+                style="margin-right: 5px"
+                (click)="onLike(article.slug)"
+              ></i
+              >{{ article.favoritesCount }}
             </span>
 
             <span *ngIf="favorited == true" style="margin-right: 8px">
-              <i class="{{
-                    article.favorited ? 'fas fa-heart' : 'far fa-heart'
-                  }}" style="margin-right: 5px" (click)="onUnLike(article.slug)"></i>{{ article.favoritesCount }}
+              <i
+                class="{{
+                  article.favorited ? 'fas fa-heart' : 'far fa-heart'
+                }}"
+                style="margin-right: 5px"
+                (click)="onUnLike(article.slug)"
+              ></i
+              >{{ article.favoritesCount }}
             </span>
             <span style="margin-right: 8px">
-              <i class="far fa-eye" style="margin-right: 5px"></i>{{ article.comments.length * 2 }}
+              <i class="far fa-eye" style="margin-right: 5px"></i
+              >{{ article.comments.length * 2 }}
             </span>
             <span>
-              <i class="fas fa-comment" style="margin-right: 5px"></i>{{ article.comments.length }}
+              <i class="fas fa-comment" style="margin-right: 5px"></i
+              >{{ article.comments.length }}
             </span>
           </div>
         </div>
         <div class="more-button float-end" style="margin-right: 8px">
-          <a [routerLink]="['/article', article.slug]"><i class="fas fa-ellipsis-h"></i></a>
+          <a [routerLink]="['/article', article.slug]"
+            ><i class="fas fa-ellipsis-h"></i
+          ></a>
         </div>
       </div>
     </div>

@@ -2,13 +2,21 @@
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 </div>
 
-<app-articles-list *ngIf="!isLoading" class="row gy-4" [listArticles]="list"></app-articles-list>
-
+<app-articles-list *ngIf="!isLoading" [listArticles]="list"></app-articles-list>
 
 <nav *ngIf="pageNumbers.length > 1 && !isLoading" style="text-align: center">
   <ul class="pagination justify-content-center">
-    <li class="page-item " *ngFor="let page of pageNumbers;let i = index" aria-current="page">
-      <span style="margin-right: 10px; cursor: pointer" class="page-link" (click)="changePage(page)">{{ page }}</span>
+    <li
+      class="page-item"
+      *ngFor="let page of pageNumbers; let i = index"
+      aria-current="page"
+    >
+      <span
+        style="margin-right: 10px; cursor: pointer"
+        class="page-link"
+        (click)="changePage(page)"
+        >{{ page }}</span
+      >
     </li>
   </ul>
 </nav>

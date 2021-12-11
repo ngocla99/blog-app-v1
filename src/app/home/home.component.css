@@ -72,10 +72,6 @@ a {
   transition: all 0.2s ease-in-out;
 }
 
-.tag-list {
-  margin-top: 67px;
-}
-
 .post.post-list-sm {
   clear: both;
 }
@@ -143,7 +139,6 @@ h6 {
   margin-bottom: 10px;
 }
 
-
 .nav-hover:hover {
   cursor: pointer;
 }
@@ -155,7 +150,6 @@ h6 {
   background: linear-gradient(to top, #fe4f70 0%, #ffa387 100%);
 }
 
-
 .home-icon {
   color: #ff416c !important;
   border-radius: 10px;
@@ -166,4 +160,57 @@ h6 {
 .li-hover:hover {
   cursor: pointer;
   color: #ff416c;
+}
+
+/* Nav bar tab */
+.tab-head {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.nav-item a {
+  cursor: pointer;
+}
+
+.nav-item a:focus {
+  outline: unset;
+}
+
+.nav-item a:hover {
+  border: none !important;
+}
+
+.nav-tabs .nav-link {
+  border: none !important;
+}
+
+.nav-item a {
+  color: black !important;
+  font-weight: 400;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.nav-item .active {
+  color: #ff416c !important;
+  border: none !important;
+  border-bottom: 3px solid #ff416c !important;
+  font-weight: 500;
+}
+
+.nav-item .active:hover {
+  border: none !important;
+  border-bottom: 3px solid #ff416c !important;
+}
+
+.tab-pane h5 {
+  border-left: 4px solid #ff416c;
+}
+
+.tab-pane p {
+  border-top: 1px solid #c1c1c1;
+}
+
+.outline {
+  border-bottom: 1px solid #c1c1c1 !important;
 }
