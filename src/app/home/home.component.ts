@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   ViewMode: 'global' | 'tags' | 'feed' = 'global';
   tags = ['welcome', 'introduction', 'codebaseShow', 'implementations'];
   tagsValue = '';
-  mostLike: any;
+  mostLike: any[] = [];
   constructor(
     private auth: AuthService,
     private router: Router,

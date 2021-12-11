@@ -1,22 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@media (min-width: 768px) {
-  .col-md-offset-1 {
-    margin-left: 8.33333%;
-  }
-}
-
-@media (min-width: 768px) {
-  .col-md-offset-2 {
-    margin-left: 16.66667%;
-  }
-}
-
-
-
-/* You can add global styles to this file, and also import other style files */
-* {
-  /* margin: 0;
-    padding: 0; */
+/* * {
+  margin: 0;
+    padding: 0;
   box-sizing: border-box;
   font-family: 'IBM Plex Mono', monospace;
 }
@@ -42,7 +27,7 @@ a {
 }
 
 a:hover {
-  /* text-decoration: underline; */
+  text-decoration: underline;
   color: #5cb85c;
 }
 
@@ -90,4 +75,4 @@ button {
 
 input[type="submit"]:disabled {
   background: #dddddd;
-}
+}  */

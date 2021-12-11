@@ -1,3 +1,4 @@
+<app-preloader></app-preloader>
 <div class="home-page">
   <div class="banner">
     <div class="container">
@@ -79,7 +80,7 @@
                 <a>
                   <div class="inner">
                     <img
-                      src="{{ mostLike[0].author.image }}"
+                      src="{{ mostLike[0]?.author.image }}"
                       alt="post-title"
                     />
                   </div>
@@ -87,14 +88,14 @@
               </div>
               <div class="details clearfix">
                 <h6 class="post-title my-0">
-                  <a [routerLink]="['/article', mostLike[0].slug]"
-                    >{{ mostLike[0].author.username }} -
-                    {{ mostLike[0].favoritesCount }} Like</a
+                  <a [routerLink]="['/article', mostLike[0]?.slug]"
+                    >{{ mostLike[0]?.author.username }} -
+                    {{ mostLike[0]?.favoritesCount }} Like</a
                   >
                 </h6>
                 <ul class="meta list-inline mt-1 mb-0">
                   <li class="list-inline-item">
-                    {{ mostLike[0].createdAt | date }}
+                    {{ mostLike[0]?.createdAt | date }}
                   </li>
                 </ul>
               </div>
@@ -106,7 +107,7 @@
                 <a>
                   <div class="inner">
                     <img
-                      src="{{ mostLike[1].author.image }}"
+                      src="{{ mostLike[1]?.author.image }}"
                       alt="post-title"
                     />
                   </div>
@@ -114,14 +115,14 @@
               </div>
               <div class="details clearfix">
                 <h6 class="post-title my-0">
-                  <a [routerLink]="['/article', mostLike[1].slug]"
-                    >{{ mostLike[1].author.username }} -
-                    {{ mostLike[1].favoritesCount }} Like</a
+                  <a [routerLink]="['/article', mostLike[1]?.slug]"
+                    >{{ mostLike[1]?.author.username }} -
+                    {{ mostLike[1]?.favoritesCount }} Like</a
                   >
                 </h6>
                 <ul class="meta list-inline mt-1 mb-0">
                   <li class="list-inline-item">
-                    {{ mostLike[1].createdAt | date }}
+                    {{ mostLike[1]?.createdAt | date }}
                   </li>
                 </ul>
               </div>
@@ -133,7 +134,7 @@
                 <a>
                   <div class="inner">
                     <img
-                      src="{{ mostLike[2].author.image }}"
+                      src="{{ mostLike[2]?.author.image }}"
                       alt="post-title"
                       style="height: 60px; width: 60px"
                     />
@@ -142,14 +143,14 @@
               </div>
               <div class="details clearfix">
                 <h6 class="post-title my-0">
-                  <a [routerLink]="['/article', mostLike[2].slug]"
-                    >{{ mostLike[2].author.username }} -
-                    {{ mostLike[2].favoritesCount }} Like</a
+                  <a [routerLink]="['/article', mostLike[2]?.slug]"
+                    >{{ mostLike[2]?.author.username }} -
+                    {{ mostLike[2]?.favoritesCount }} Like</a
                   >
                 </h6>
                 <ul class="meta list-inline mt-1 mb-0">
                   <li class="list-inline-item">
-                    {{ mostLike[2].createdAt | date }}
+                    {{ mostLike[2]?.createdAt | date }}
                   </li>
                 </ul>
               </div>
