@@ -16,10 +16,11 @@ export class GlobalComponent implements OnInit {
   pages!: number;
   pageNumbers: number[] = [];
   isLoading: boolean = false;
+  actived: boolean = false;
   constructor(
     private getArticle: HomeArticleService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.limit = this.authService.getPage();
