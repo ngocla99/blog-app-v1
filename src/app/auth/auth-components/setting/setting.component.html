@@ -1,11 +1,9 @@
+<app-preloader></app-preloader>
 <section class="main-content" style="margin-bottom: 100px">
   <div class="container-xl">
     <!-- section header -->
-    <div
-      class="section-header"
-      style="width: 80%; margin-left: 10%; padding-bottom: 50px"
-    >
-      <div class="pull-xs-left">
+    <div class="section-header row form-setting" style="padding-bottom: 10px">
+      <div class="col-6">
         <h2 class="section-title">Update User</h2>
         <img
           src="https://themeger.shop/html/katen/html/images/wave.svg"
@@ -13,18 +11,20 @@
           alt="wave"
         />
       </div>
-      <button class="btn btn-md btn-danger pull-xs-right" (click)="logout()">
-        Logout
-      </button>
+      <div class="col-6">
+        <button class="btn btn-md btn-danger float-end" (click)="logout()">
+          Logout
+        </button>
+      </div>
     </div>
 
-    <div *ngIf="isLoading" class="row" style="width: 80%; margin-left: 10%">
-      <div class="row" style="justify-content: center">
+    <div *ngIf="isLoading" class="row form-setting">
+      <div class="text-center">
         <app-loading-spinner></app-loading-spinner>
       </div>
     </div>
 
-    <div *ngIf="!isLoading" class="row" style="width: 80%; margin-left: 10%">
+    <div *ngIf="!isLoading" class="row form-setting">
       <!-- Contact Form -->
       <form
         id="contact-form"
@@ -37,53 +37,100 @@
         <div class="row">
           <div class="column col-md-12">
             <div class="form-group">
+              <label>Username</label>
               <input
                 type="text"
                 class="form-control"
                 placeholder="Your Name"
+                #username="ngModel"
                 name="username"
                 [ngModel]="user?.username"
                 (ngModelChange)="user.username = $event"
+                required
               />
+              <div
+                class="col alert"
+                role="alert"
+                *ngIf="username?.errors?.['required'] && username?.touched"
+              >
+                <i style="color: red">Username is required!!!</i>
+              </div>
             </div>
           </div>
 
           <div class="column col-md-12">
             <div class="form-group">
+              <label>Email</label>
               <input
                 type="text"
                 class="form-control"
                 placeholder="Email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                #email="ngModel"
                 name="email"
                 [ngModel]="user?.email"
                 (ngModelChange)="user.email = $event"
+                required
               />
+              <div
+                class="col alert"
+                role="alert"
+                *ngIf="email?.errors?.['required'] && email?.touched"
+              >
+                <i style="color: red">Email is required!!!</i>
+              </div>
+              <div
+                class="col alert"
+                role="alert"
+                *ngIf="email?.errors?.['pattern'] && email?.touched"
+              >
+                <i style="color: red">Email is invalid!!!</i>
+              </div>
             </div>
           </div>
 
           <div class="column col-md-12">
             <div class="form-group">
+              <label>Short bio about you</label>
               <textarea
                 class="form-control"
                 rows="8"
                 placeholder="Short bio about you"
+                #bio="ngModel"
                 name="bio"
                 [ngModel]="user?.bio"
                 (ngModelChange)="user.bio = $event"
+                required
               ></textarea>
+              <div
+                class="col alert"
+                role="alert"
+                *ngIf="bio?.errors?.['required'] && bio?.touched"
+              >
+                <i style="color: red">Bio is required!!!</i>
+              </div>
             </div>
           </div>
-
           <div class="column col-md-12">
             <div class="form-group">
+              <label>URL of profile picture</label>
               <input
                 type="text"
                 class="form-control"
                 placeholder="URL of profile picture"
+                #image="ngModel"
                 name="image"
                 [ngModel]="user?.image"
                 (ngModelChange)="user.image = $event"
+                required
               />
+              <div
+                class="col alert"
+                role="alert"
+                *ngIf="image?.errors?.['required'] && image?.touched"
+              >
+                <i style="color: red">Image is required!!!</i>
+              </div>
             </div>
           </div>
         </div>
@@ -98,7 +145,7 @@
       </form>
     </div>
 
-    <div *ngIf="!isLoading" class="row" style="width: 80%; margin-left: 10%">
+    <div *ngIf="!isLoading" class="row form-setting">
       <div class="col-12">
         <h5 class="text-xs-left" style="margin-top: 20px">Number per page:</h5>
 
