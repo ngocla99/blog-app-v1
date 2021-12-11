@@ -1,78 +1,105 @@
-<div class="settings-page">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-2 col-xs-12"></div>
-
-      <div *ngIf="isLoading" class="col-md-8 col-md-offset-3 col-xs-12">
-        <div class="row" style="justify-content: center">
-          <app-loading-spinner></app-loading-spinner>
-        </div>
+<section class="main-content" style="margin-bottom: 100px">
+  <div class="container-xl">
+    <!-- section header -->
+    <div
+      class="section-header"
+      style="width: 80%; margin-left: 10%; padding-bottom: 50px"
+    >
+      <div class="pull-xs-left">
+        <h2 class="section-title">Update User</h2>
+        <img
+          src="https://themeger.shop/html/katen/html/images/wave.svg"
+          class="wave"
+          alt="wave"
+        />
       </div>
-
-      <div *ngIf="!isLoading" class="col-md-8 col-md-offset-3 col-xs-12">
-        <h1 class="text-xs-center">User Information</h1>
-
-        <form #settingForm="ngForm" (submit)="onSubmit(settingForm.value)">
-          <fieldset class="form-group">
-            <input
-              class="form-control form-control-lg"
-              type="text"
-              placeholder="Your Name"
-              name="username"
-              [ngModel]="user?.username"
-              (ngModelChange)="user.username = $event"
-            />
-          </fieldset>
-          <fieldset class="form-group">
-            <input
-              class="form-control form-control-lg"
-              type="text"
-              placeholder="Email"
-              name="email"
-              [ngModel]="user?.email"
-              (ngModelChange)="user.email = $event"
-            />
-          </fieldset>
-          <fieldset class="form-group">
-            <textarea
-              class="form-control form-control-lg"
-              rows="8"
-              placeholder="Short bio about you"
-              name="bio"
-              [ngModel]="user?.bio"
-              (ngModelChange)="user.bio = $event"
-            ></textarea>
-          </fieldset>
-          <fieldset class="form-group">
-            <input
-              class="form-control form-control-lg"
-              type="text"
-              placeholder="URL of profile picture"
-              name="image"
-              [ngModel]="user?.image"
-              (ngModelChange)="user.image = $event"
-            />
-          </fieldset>
-          <!-- <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="password" placeholder="Password">
-          </fieldset> -->
-          <button
-            class="btn btn-md btn-primary pull-xs-right"
-            type="submit"
-            [disabled]="settingForm.invalid"
-          >
-            Update User
-          </button>
-          <button class="btn btn-md btn-danger pull-xs-left" (click)="logout()">
-            Logout
-          </button>
-        </form>
-      </div>
-      <div class="col-md-2 col-xs-12"></div>
+      <button class="btn btn-md btn-danger pull-xs-right" (click)="logout()">
+        Logout
+      </button>
     </div>
-    <div *ngIf="!isLoading" class="row">
-      <div class="col-md-2 col-xs-12"></div>
-      <div class="col-md-8 col-md-offset-3 col-xs-12">
+
+    <div *ngIf="isLoading" class="row" style="width: 80%; margin-left: 10%">
+      <div class="row" style="justify-content: center">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading" class="row" style="width: 80%; margin-left: 10%">
+      <!-- Contact Form -->
+      <form
+        id="contact-form"
+        class="contact-form"
+        #settingForm="ngForm"
+        (submit)="onSubmit(settingForm.value)"
+      >
+        <div class="messages"></div>
+
+        <div class="row">
+          <div class="column col-md-12">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Your Name"
+                name="username"
+                [ngModel]="user?.username"
+                (ngModelChange)="user.username = $event"
+              />
+            </div>
+          </div>
+
+          <div class="column col-md-12">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Email"
+                name="email"
+                [ngModel]="user?.email"
+                (ngModelChange)="user.email = $event"
+              />
+            </div>
+          </div>
+
+          <div class="column col-md-12">
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                rows="8"
+                placeholder="Short bio about you"
+                name="bio"
+                [ngModel]="user?.bio"
+                (ngModelChange)="user.bio = $event"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="column col-md-12">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="URL of profile picture"
+                name="image"
+                [ngModel]="user?.image"
+                (ngModelChange)="user.image = $event"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="settingForm.invalid"
+          class="btn btn-default pull-xs-right"
+        >
+          Update User
+        </button>
+      </form>
+    </div>
+
+    <div *ngIf="!isLoading" class="row" style="width: 80%; margin-left: 10%">
+      <div class="col-12">
         <h5 class="text-xs-left" style="margin-top: 20px">Number per page:</h5>
 
         <div class="form-group input-group">
@@ -83,14 +110,25 @@
             <option [value]="3">3 Pages per Page</option>
           </select>
           <button
-            class="btn btn-md btn-primary pull-xs-right"
+            class="btn btn-default pull-xs-right"
             (click)="onPageChoose()"
           >
             Save
           </button>
         </div>
       </div>
-      <div class="col-md-2 col-xs-12"></div>
     </div>
   </div>
-</div>
+</section>
+<app-alert
+  [message]="updateUser"
+  *ngIf="updateUser"
+  (yes)="onHandleUpdate()"
+  (close)="onHandleClose()"
+></app-alert>
+<app-alert
+  [message]="logoutUser"
+  *ngIf="logoutUser"
+  (yes)="onHandleLogout()"
+  (close)="onHandleClose()"
+></app-alert>

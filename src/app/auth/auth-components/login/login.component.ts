@@ -27,8 +27,12 @@ export class LoginComponent implements OnInit {
       (err) => {
         this.isLoading = false;
         this.router.navigateByUrl('/auth/login');
-        Swal.fire('My Blog', 'Login fail!!!', 'error');
         const errorMsg = err.error.errors;
+        const swalError = Object.keys(errorMsg)
+          .map((errItem) => errItem)
+          .join(' & ');
+        console.log(swalError);
+        Swal.fire('My Blog', swalError + ' is invalid', 'error');
         const statusCode = err.status;
         if (statusCode === 422) {
           console.log(`422 : `);

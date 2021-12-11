@@ -14,7 +14,9 @@ export class SettingComponent implements OnInit {
   user!: UserInfo;
   resultsPerPage = '0';
   isLoading: boolean = false;
-
+  updateUser!: string | null;
+  logoutUser!: string | null;
+  userForm: any;
   constructor(
     private authService: AuthService,
     private userService: UserService,
@@ -39,8 +41,25 @@ export class SettingComponent implements OnInit {
   }
 
   onSubmit(userFormValue: UserInfo) {
-    this.isLoading = true;
-    this.userService.editUser({ user: userFormValue }).subscribe(
+    // this.isLoading = true;
+    this.updateUser = 'Are you sure update your information?';
+    this.userForm = userFormValue;
+  }
+
+  onPageChoose() {
+    if (this.resultsPerPage && this.resultsPerPage !== '0') {
+      localStorage.setItem('itemsPerPage', this.resultsPerPage);
+      this.router.navigateByUrl('/');
+    }
+  }
+
+  logout() {
+    this.logoutUser = 'Are you sure logout?';
+  }
+
+  onHandleUpdate() {
+    // this.isLoading = true;
+    this.userService.editUser({ user: this.userForm }).subscribe(
       (data) => {
         this.isLoading = false;
         this.authService.setUser(data.user);
@@ -48,8 +67,8 @@ export class SettingComponent implements OnInit {
         Swal.fire('My Blog', 'Update user success!!!', 'success');
       },
       (err) => {
-        Swal.fire('My Blog', 'Update user fail!!!', 'error');
-        const errorMsg = err.error.errors;
+        const errorMsg = err.error.slice(42, err.error.length - 2);
+        Swal.fire('My Blog', errorMsg + ' has already been taken', 'error');
         const statusCode = err.status;
         if (statusCode === 422) {
           console.log(`422`);
@@ -65,14 +84,12 @@ export class SettingComponent implements OnInit {
     );
   }
 
-  onPageChoose() {
-    if (this.resultsPerPage && this.resultsPerPage !== '0') {
-      localStorage.setItem('itemsPerPage', this.resultsPerPage);
-      this.router.navigateByUrl('/');
-    }
+  onHandleLogout() {
+    this.authService.logout();
   }
 
-  logout() {
-    this.authService.logout();
+  onHandleClose() {
+    this.updateUser = null;
+    this.logoutUser = null;
   }
 }

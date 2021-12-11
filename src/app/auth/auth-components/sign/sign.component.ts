@@ -28,8 +28,12 @@ export class SignComponent implements OnInit {
       },
       (err) => {
         this.isLoading = false;
-        Swal.fire('My Blog', 'Sign-up fail!!!', 'error');
         const errorMsg = err.error.errors;
+        const swalError = Object.keys(errorMsg)
+          .map((errItem) => errItem)
+          .join(' & ');
+        console.log(swalError);
+        Swal.fire('My Blog', swalError + ' has already been taken', 'error');
         const statusCode = err.status;
         this.router.navigateByUrl('/auth/sign-up');
         if (statusCode === 422) {
