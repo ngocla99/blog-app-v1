@@ -3,3 +3,9 @@
   border-radius: 10px;
   padding: 10px;
 }
+
+
+.li-hover:hover {
+  cursor: pointer;
+  color: #ff416c;
+}
