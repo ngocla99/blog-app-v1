@@ -1,41 +1,4 @@
-<!-- <div class="profile-page">
-  <div class="user-info">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <img
-            [src]="
-              profile?.image ||
-              'https://static.productionready.io/images/smiley-cyrus.jpg'
-            "
-            class="user-img"
-          />
-          <h4>{{ profile?.username }}</h4>
-          <p>
-            {{ profile?.bio || "No Bio Provided!" }}
-          </p>
-          <button
-            *ngIf="isUser && isLoggedIn"
-            class="btn btn-sm btn-outline-secondary action-btn"
-          >
-            <a [routerLink]="['/setting']"> Edit Profile Settings </a>
-          </button>
-          <button
-            *ngIf="!isUser"
-            (click)="onFollow()"
-            class="btn btn-sm btn-outline-secondary action-btn"
-          >
-            <i class="ion-plus-round"></i>
-            {{ profile?.following ? "Unfollow" : "Follow" }}
-            {{ profile?.username }}
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <app-profile-article [authorName]="profile?.username"></app-profile-article>
-</div> -->
+<app-preloader></app-preloader>
 <header class="header-personal">
   <div class="container-xl header-top">
     <div class="row align-items-center">
@@ -86,19 +49,29 @@
         <div class="float-md-end mt-4 mt-md-0">
           <!-- CASE: another author profile, not user profile -->
           <div *ngIf="!isUser && profile?.following" class="post mt-3">
-            <a class="category-badge" (click)="onFollow()">
+            <a
+              style="cursor: pointer"
+              class="category-badge"
+              (click)="onFollow()"
+            >
               Unfollow {{ profile?.username }}</a
             >
           </div>
 
           <div *ngIf="!isUser && !profile?.following" class="post mt-3">
-            <a class="tag" (click)="onFollow()"
+            <a
+              style="cursor: pointer"
+              class="category-badge-f"
+              (click)="onFollow()"
               >Follow {{ profile?.username }}</a
             >
           </div>
           <!-- CASE: User profile -->
           <div *ngIf="isUser && isLoggedIn" class="post mt-3">
-            <a [routerLink]="['/auth/setting']" class="category-badge"
+            <a
+              style="cursor: pointer"
+              [routerLink]="['/auth/setting']"
+              class="category-badge"
               >Edit profile</a
             >
           </div>
@@ -107,63 +80,5 @@
     </div>
   </div>
 </header>
-<section section class="hero-carousel">
-  <div class="container-xl">
-    <div class="post-carousel-lg">
-      <!-- post -->
-      <div class="post featured-post-xl">
-        <div class="details clearfix">
-          <a
-            href="category.html"
-            class="
-              category-badge
-              lg
-              slick-initialized slick-slider slick-dotted
-            "
-            >Lifestyle</a
-          >
-          <h4 class="post-title">
-            <a href="blog-single.html"
-              >9 Most Awesome Blue Lake With Snow Mountain</a
-            >
-          </h4>
-          <ul class="meta list-inline mb-0">
-            <li class="list-inline-item"><a href="#">Katen Doe</a></li>
-            <li class="list-inline-item">29 March 2021</li>
-          </ul>
-        </div>
-        <a href="blog-single.html">
-          <div class="thumb rounded">
-            <div
-              class="inner data-bg-image"
-              data-bg-image="images/posts/featured-xl-1.jpg"
-            ></div>
-          </div>
-        </a>
-      </div>
-      <!-- post -->
-      <div class="post featured-post-xl">
-        <div class="details clearfix">
-          <a href="category.html" class="category-badge lg">Culture</a>
-          <h4 class="post-title">
-            <a href="blog-single.html"
-              >Important Thing You Need To Know About Swim</a
-            >
-          </h4>
-          <ul class="meta list-inline mb-0">
-            <li class="list-inline-item"><a href="#">Katen Doe</a></li>
-            <li class="list-inline-item">29 March 2021</li>
-          </ul>
-        </div>
-        <a href="blog-single.html">
-          <div class="thumb rounded">
-            <div
-              class="inner data-bg-image"
-              data-bg-image="images/posts/featured-xl-2.jpg"
-            ></div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+
+<app-profile-article [authorName]="profile?.username"></app-profile-article>

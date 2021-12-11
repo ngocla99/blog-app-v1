@@ -1,7 +1,10 @@
 <nav>
-  <ul class="pagination">
-    <li class="page-item" *ngFor="let page of totalPages">
-      <a class="page-link" (click)="changePage(page - 1)">{{ page }}</a>
+  <ul class="pagination justify-content-center">
+    <li
+      *ngFor="let page of totalPages"
+      class="page-item {{ currentPage === page ? 'active' : '' }}"
+    >
+      <span class="page-link" (click)="changePage(page)">{{ page }}</span>
     </li>
   </ul>
 </nav>

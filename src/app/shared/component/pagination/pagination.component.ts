@@ -8,11 +8,13 @@ import { ArticleService } from 'src/app/service/article.service';
 })
 export class PaginationComponent implements OnInit {
   @Input() totalPages!: number[];
+  @Input() currentPage!: number;
+
   constructor(private articleService: ArticleService) {}
 
   ngOnInit(): void {}
 
   changePage(page: number) {
-    this.articleService.pageIndexSub.next(page);
+    this.articleService.pageIndexSub.next(page - 1);
   }
 }

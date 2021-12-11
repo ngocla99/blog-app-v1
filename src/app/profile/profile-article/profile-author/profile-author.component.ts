@@ -21,6 +21,7 @@ export class ProfileAuthorComponent implements OnInit {
   pageIndexSub$!: Subscription;
   pageIndex!: number;
   isLoading: boolean = false;
+  currentPage: number = 1;
   constructor(
     private homeArticleService: HomeArticleService,
     private articleService: ArticleService,
@@ -57,6 +58,7 @@ export class ProfileAuthorComponent implements OnInit {
       .pipe(
         switchMap((pageIndex) => {
           this.isLoading = true;
+          this.currentPage = pageIndex + 1;
           return this.homeArticleService.getAuthorArticles(
             this.userName,
             pageIndex * this.limit,
