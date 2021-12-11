@@ -44,10 +44,19 @@
                 type="text"
                 class="form-control"
                 placeholder="Your Name"
+                #username="ngModel"
                 name="username"
                 [ngModel]="user?.username"
                 (ngModelChange)="user.username = $event"
+                required
               />
+              <div
+                class="col alert"
+                role="alert"
+                *ngIf="username?.errors?.['required'] && username?.touched"
+              >
+                <i style="color: red">Username is required!!!</i>
+              </div>
             </div>
           </div>
 
@@ -57,10 +66,27 @@
                 type="text"
                 class="form-control"
                 placeholder="Email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                #email="ngModel"
                 name="email"
                 [ngModel]="user?.email"
                 (ngModelChange)="user.email = $event"
+                required
               />
+              <div
+                class="col alert"
+                role="alert"
+                *ngIf="email?.errors?.['required'] && email?.touched"
+              >
+                <i style="color: red">Email is required!!!</i>
+              </div>
+              <div
+                class="col alert"
+                role="alert"
+                *ngIf="email?.errors?.['pattern'] && email?.touched"
+              >
+                <i style="color: red">Email is invalid!!!</i>
+              </div>
             </div>
           </div>
 
@@ -70,23 +96,40 @@
                 class="form-control"
                 rows="8"
                 placeholder="Short bio about you"
+                #bio="ngModel"
                 name="bio"
                 [ngModel]="user?.bio"
                 (ngModelChange)="user.bio = $event"
+                required
               ></textarea>
+              <div
+                class="col alert"
+                role="alert"
+                *ngIf="bio?.errors?.['required'] && bio?.touched"
+              >
+                <i style="color: red">Bio is required!!!</i>
+              </div>
             </div>
           </div>
-
           <div class="column col-md-12">
             <div class="form-group">
               <input
                 type="text"
                 class="form-control"
                 placeholder="URL of profile picture"
+                #image="ngModel"
                 name="image"
                 [ngModel]="user?.image"
                 (ngModelChange)="user.image = $event"
+                required
               />
+              <div
+                class="col alert"
+                role="alert"
+                *ngIf="image?.errors?.['required'] && image?.touched"
+              >
+                <i style="color: red">Image is required!!!</i>
+              </div>
             </div>
           </div>
         </div>
