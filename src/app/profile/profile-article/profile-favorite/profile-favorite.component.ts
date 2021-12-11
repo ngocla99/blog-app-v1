@@ -22,6 +22,7 @@ export class ProfileFavoriteComponent implements OnInit {
   likeSub$!: Subscription;
   pageIndex!: number;
   isLoading: boolean = false;
+  currentPage: number = 1;
   constructor(
     private homeArticleService: HomeArticleService,
     private articleService: ArticleService,

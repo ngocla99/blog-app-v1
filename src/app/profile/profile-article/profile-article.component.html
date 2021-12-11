@@ -1,11 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <div class="posts-toggle">
-        <ul class="nav outline-active">
+    <div class="col-md-8">
+      <div class="col-12 mb-5 bg-white rounded-top tab-head">
+        <ul class="nav nav-tabs outline" id="myTab" role="tablist">
           <li class="nav-item">
             <a
               class="nav-link"
+              data-toggle="tab"
+              role="tab"
               [routerLink]="['/profile', authorName]"
               [routerLinkActiveOptions]="{ exact: true }"
               routerLinkActive="active"
@@ -18,6 +20,8 @@
           <li class="nav-item">
             <a
               class="nav-link"
+              data-toggle="tab"
+              role="tab"
               [routerLink]="['/profile', authorName, 'favorite']"
               routerLinkActive="active"
               >Favorited Posts</a
@@ -25,7 +29,15 @@
           </li>
         </ul>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
       <router-outlet></router-outlet>
+    </div>
+    <div class="col-md-4">
+      <app-widget-about></app-widget-about>
+      <app-newsletter></app-newsletter>
     </div>
   </div>
 </div>

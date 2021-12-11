@@ -11,6 +11,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
+  imageUser!: string;
   // Follow the user
   followUser(username: string) {
     return this.http.post<UserProfile>(
