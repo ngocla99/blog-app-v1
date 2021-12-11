@@ -1,11 +1,12 @@
+<app-preloader></app-preloader>
 <section class="main-content" style="margin-bottom: 100px">
   <div class="container-xl">
     <!-- section header -->
     <div
-      class="section-header"
-      style="width: 80%; margin-left: 10%; padding-bottom: 50px"
+      class="section-header row"
+      style="width: 80%; margin-left: 10%; padding-bottom: 10px"
     >
-      <div class="pull-xs-left">
+      <div class="col-6">
         <h2 class="section-title">Update User</h2>
         <img
           src="https://themeger.shop/html/katen/html/images/wave.svg"
@@ -13,13 +14,15 @@
           alt="wave"
         />
       </div>
-      <button class="btn btn-md btn-danger pull-xs-right" (click)="logout()">
-        Logout
-      </button>
+      <div class="col-6">
+        <button class="btn btn-md btn-danger float-end" (click)="logout()">
+          Logout
+        </button>
+      </div>
     </div>
 
     <div *ngIf="isLoading" class="row" style="width: 80%; margin-left: 10%">
-      <div class="row" style="justify-content: center">
+      <div class="text-center">
         <app-loading-spinner></app-loading-spinner>
       </div>
     </div>
