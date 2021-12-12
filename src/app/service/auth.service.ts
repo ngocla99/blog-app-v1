@@ -9,6 +9,7 @@ import {
   UserSignIn,
   UserSignUp,
 } from '../shared/model/user.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class AuthService {
   private readonly API_URL = 'https://conduit.productionready.io/api';
   private timeLogout = 1000 * 60 * 10;
   private defaultNumPerPage = 6;
-
+  updateUser = new Subject<UserInfo>();
   constructor(private http: HttpClient, private router: Router) {}
 
   // Sign in the account

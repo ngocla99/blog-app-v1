@@ -1,47 +1,7 @@
-/* .navbar-collapse .nav-item {
-  padding-right: 20px;
+.active {
+  color: #fff !important;
+  border-radius: 25px;
+  /* background: #fe4f70; */
+  /* background: -webkit-linear-gradient(left, #fe4f70 0%, #ffa387 100%); */
+  background: linear-gradient(to right, #fe4f70 0%, #ffa387 100%);
 }
-
-.navbar-collapse .nav-item .nav-link {
-  padding: 10px 10px;
-}
-
-.navbar-collapse .nav-item .nav-link.active,
-.navbar-collapse .nav-item .nav-link:focus {
-  background: #ff416c;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
-  color: white;
-  border-radius: 20px;
-}
-
-.navbar-collapse .nav-item .nav-link:hover {
-  color: black;
-}
-
-.vertical-menu .nav-item .nav-link {
-  padding: 5px 10px;
-}
-
-.vertical-menu .nav-item .nav-link.active,
-.vertical-menu .nav-item .nav-link:focus {
-  background: #ff416c;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
-  color: white;
-  border-radius: 20px;
-}
-
-.vertical-menu .nav-item .nav-link:hover {
-  color: black;
-}
-
-.home-icon {
-  color: #ff416c !important;
-  border-radius: 10px;
-  padding: 5px;
-} */
-
-/* b {
-  color: #203656;
-} */

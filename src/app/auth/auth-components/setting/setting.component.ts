@@ -63,6 +63,7 @@ export class SettingComponent implements OnInit {
       (data) => {
         this.isLoading = false;
         this.authService.setUser(data.user);
+        this.authService.updateUser.next(data.user);
         this.router.navigate(['/profile', data.user.username]);
         Swal.fire('My Blog', 'Update user success!!!', 'success');
       },

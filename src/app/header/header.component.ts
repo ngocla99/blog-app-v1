@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../service/user.service';
 import { UserInfo } from '../shared/model/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   user!: UserInfo;
+  userUpdate$!: Subscription;
   constructor(
     private authService: AuthService, // private route: ActivatedRoute, // private router: Router
     private userService: UserService
@@ -19,6 +21,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
       this.getProfile();
+      this.userUpdate$ = this.authService.updateUser.subscribe((user) => {
+        this.user = user;
+      });
     }
   }
 
@@ -39,5 +44,9 @@ export class HeaderComponent implements OnInit {
 
   get currentUser(): string {
     return this.authService.getUserName();
+  }
+
+  ngOnDestroy() {
+    this.userUpdate$.unsubscribe();
   }
 }
