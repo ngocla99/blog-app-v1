@@ -24,7 +24,16 @@ export class SignComponent implements OnInit {
         this.isLoading = false;
         this.authService.setUser(data.user);
         this.router.navigate(['/']);
-        Swal.fire('My Blog', 'Sign-up success!!!', 'success');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sign-up success!!!',
+          showConfirmButton: false,
+          timer: 1500,
+          color: '#ffffff',
+          background:
+            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
+        });
       },
       (err) => {
         this.isLoading = false;
@@ -33,7 +42,16 @@ export class SignComponent implements OnInit {
           .map((errItem) => errItem)
           .join(' & ');
         console.log(swalError);
-        Swal.fire('My Blog', swalError + ' has already been taken', 'error');
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: swalError + ' has already been taken',
+          showConfirmButton: false,
+          timer: 1500,
+          color: '#ffffff',
+          background:
+            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
+        });
         const statusCode = err.status;
         this.router.navigateByUrl('/auth/sign-up');
         if (statusCode === 422) {

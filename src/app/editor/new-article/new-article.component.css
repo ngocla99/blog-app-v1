@@ -1,31 +1,32 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-.formContainer {
-  padding: 20px;
-  width: 60%;
-  margin: 0 auto 0 20%;
+input {
+  border-radius: 20px;
+  height: 50px;
 }
 
-h2 {
+select {
+  border-radius: 20px;
+  height: 50px;
+}
+
+.form-group label {
   color: #ff416c;
-  letter-spacing: 2px;
-  margin-bottom: 12px;
+}
+
+.form-setting {
+  width: 70%;
+  margin-left: 15%;
 }
 
 @media (max-width: 767px) {
-  .formContainer {
-    padding: 10px;
+  .form-setting {
     width: 80%;
-    margin: 0 auto 0 10%;
+    margin-left: 10%;
   }
 }
 
 @media (max-width: 480px) {
-  .formContainer {
-    padding: 10px;
+  .form-setting {
     width: 100%;
-    margin: 0 auto 0;
+    margin-left: 0%;
   }
 }
