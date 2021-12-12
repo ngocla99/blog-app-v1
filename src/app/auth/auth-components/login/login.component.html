@@ -1,8 +1,4 @@
-<div *ngIf="isLoading" class="col-xs-12">
-  <div class="row" style="justify-content: center">
-    <app-preloader></app-preloader>
-  </div>
-</div>
+<app-preloader *ngIf="isLoading"></app-preloader>
 
 <div *ngIf="!isLoading">
   <div class="my-login" style="margin-top: 50px">

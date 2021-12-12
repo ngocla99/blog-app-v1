@@ -3,9 +3,6 @@
     <div class="post post-grid rounded bordered">
       <div class="thumb top-rounded">
         <app-article-tag [item]="tagLists"></app-article-tag>
-        <span class="post-format">
-          <i class="fab fa-readme"></i>
-        </span>
         <a>
           <div class="inner">
             <img
@@ -30,10 +27,12 @@
           <li class="list-inline-item">{{ article.createdAt | date }}</li>
         </ul>
         <h5 class="post-title mb-3 mt-3">
-          <a [routerLink]="['/article', article.slug]">{{ article.title }}</a>
+          <a [routerLink]="['/article', article.slug]">{{
+            article.title | titlecase
+          }}</a>
         </h5>
         <p class="excerpt mb-0" style="height: 48px">
-          {{ article.body | truncate: 80 }}
+          {{ article.body | truncate: 60 }}
         </p>
       </div>
       <div class="post-bottom clearfix d-flex align-items-center">

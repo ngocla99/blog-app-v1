@@ -11,7 +11,6 @@
           <!-- social icons -->
           <div class="col-md-4 text-center">
             <ul class="social-icons list-unstyled list-inline mb-0">
-
               <li class="list-inline-item">
                 <a class="active"><i class="fab fa-facebook-f"></i></a>
               </li>
@@ -34,9 +33,16 @@
           </div>
 
           <!-- go to top button -->
+
           <div class="col-md-4">
-            <a style="text-decoration: none;" class="home-icon float-md-end" [routerLink]="['/']"
-              routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><b>UTOD</b></a>
+            <a
+              aria-pressed="true"
+              style="cursor: pointer"
+              (click)="scrollToTop()"
+              id="return-to-top"
+              class="float-md-end"
+              ><i class="icon-arrow-up"></i>Back to Top</a
+            >
           </div>
         </div>
       </div>

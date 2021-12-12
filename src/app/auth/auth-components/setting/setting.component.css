@@ -30,3 +30,14 @@ select {
     margin-left: 0%;
   }
 }
+
+.alert {
+  padding: 8px;
+  font-weight: bolder;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.alert-danger {
+  color: #c0392b;
+}

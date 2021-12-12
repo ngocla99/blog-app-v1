@@ -17,6 +17,7 @@ import { AlertComponent } from './component/alert/alert.component';
 import { WidgetAboutComponent } from './component/extension/widget-about/widget-about.component';
 import { NewsletterComponent } from './component/extension/newsletter/newsletter.component';
 import { HeroCarouselComponent } from './component/extension/hero-carousel/hero-carousel.component';
+import { PopularPostsComponent } from './component/extension/popular-posts/popular-posts.component';
 @NgModule({
   declarations: [
     ArticlesListComponent,
@@ -34,6 +35,7 @@ import { HeroCarouselComponent } from './component/extension/hero-carousel/hero-
     WidgetAboutComponent,
     NewsletterComponent,
     HeroCarouselComponent,
+    PopularPostsComponent,
   ],
   imports: [CommonModule, SharedRoutingModule],
   exports: [
@@ -49,6 +51,7 @@ import { HeroCarouselComponent } from './component/extension/hero-carousel/hero-
     WidgetAboutComponent,
     NewsletterComponent,
     HeroCarouselComponent,
+    PopularPostsComponent,
   ],
 })
 export class SharedModule {}

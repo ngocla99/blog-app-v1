@@ -19,20 +19,38 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.authService.loginUser({ user: user }).subscribe(
       (data) => {
-        this.isLoading = false;
-        this.authService.setUser(data.user);
-        Swal.fire('My Blog', 'Login success!!!', 'success');
         this.router.navigate(['/']);
+        this.authService.setUser(data.user);
+        this.isLoading = false;
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Login success!!!',
+          showConfirmButton: false,
+          timer: 1500,
+          color: '#ffffff',
+          background:
+            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
+        });
       },
       (err) => {
-        this.isLoading = false;
         this.router.navigateByUrl('/auth/login');
         const errorMsg = err.error.errors;
         const swalError = Object.keys(errorMsg)
           .map((errItem) => errItem)
           .join(' & ');
         console.log(swalError);
-        Swal.fire('My Blog', swalError + ' is invalid', 'error');
+        this.isLoading = false;
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: swalError + ' is invalid',
+          showConfirmButton: false,
+          timer: 2000,
+          color: '#ffffff',
+          background:
+            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
+        });
         const statusCode = err.status;
         if (statusCode === 422) {
           console.log(`422 : `);

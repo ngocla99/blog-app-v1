@@ -1,36 +1,111 @@
 <div *ngIf="errors.length !== 0" class="errorContainer">
-    <h5>Errors</h5>
-    <ul>
-      <li *ngFor="let error of errors">
-        {{ error }}
-      </li>
-    </ul>
-  </div>
-  <form [formGroup]="articleEditorForm" (ngSubmit)="handleForm(articleEditorForm.value)">
-    <label for="">Article Title</label>
-    <input type="text" formControlName="title" placeholder="Enter Article Title ...">
-    <div *ngIf="form?.['title']?.invalid && (form?.['title']?.dirty || form?.['title']?.touched)" [ngClass]="'alert alert-danger'">
-      <div *ngIf="form?.['title']?.errors?.['required']">
-        Article Title is required.
+  <h5>Errors</h5>
+  <ul>
+    <li *ngFor="let error of errors">
+      {{ error }}
+    </li>
+  </ul>
+</div>
+
+<div class="row form-setting">
+  <!-- Contact Form -->
+  <form
+    id="contact-form"
+    class="contact-form"
+    [formGroup]="articleEditorForm"
+    (ngSubmit)="handleForm(articleEditorForm.value)"
+  >
+    <div class="messages"></div>
+
+    <div class="row">
+      <div class="column col-md-12">
+        <div class="form-group">
+          <label>Article Title</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="title"
+            placeholder="Enter Article Title ..."
+          />
+          <div
+            *ngIf="form?.['title']?.invalid && (form?.['title']?.dirty || form?.['title']?.touched)"
+            [ngClass]="'alert alert-danger'"
+          >
+            <div *ngIf="form?.['title']?.errors?.['required']">
+              Article Title is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column col-md-12">
+        <div class="form-group">
+          <label>Article Description</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="description"
+            placeholder="Whats the article about ..."
+          />
+          <div
+            *ngIf="form?.['description']?.invalid && (form?.['description']?.dirty || form?.['description']?.touched)"
+            [ngClass]="'alert alert-danger'"
+          >
+            <div *ngIf="form?.['description']?.errors?.['required']">
+              Article Description is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column col-md-12">
+        <div class="form-group">
+          <label>Article Content</label>
+          <textarea
+            class="form-control"
+            type="text"
+            formControlName="content"
+            rows="8"
+            placeholder="Article's Content (markdown supported)"
+          ></textarea>
+          <div
+            *ngIf="form?.['content']?.invalid && (form?.['content']?.dirty || form?.['content']?.touched)"
+            [ngClass]="'alert alert-danger'"
+          >
+            <div *ngIf="form?.['content']?.errors?.['required']">
+              Article Content is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column col-md-12">
+        <div class="form-group">
+          <label>Article Tags</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="tags"
+            placeholder="Insert tags seperated by comma (,)"
+          />
+        </div>
       </div>
     </div>
-    <label for="">Article Description</label>
-    <input type="text" formControlName="description" placeholder="Whats the article about ...">
-    <div *ngIf="form?.['description']?.invalid && (form?.['description']?.dirty || form?.['description']?.touched)" [ngClass]="'alert alert-danger'">
-      <div *ngIf="form?.['description']?.errors?.['required']">
-        Article Description is required.
-      </div>
-    </div>
-    <label for="">Article Content</label>
-    <textarea type="text" formControlName="content" cols="30" placeholder="Article's Content (markdown supported)"></textarea>
-    <div *ngIf="form?.['content']?.invalid && (form?.['content']?.dirty || form?.['content']?.touched)" [ngClass]="'alert alert-danger'">
-      <div *ngIf="form?.['content']?.errors?.['required']">
-        Article Content is required.
-      </div>
-    </div>
-    <label for="">Article Tags</label>
-    <input type="text" formControlName="tags" placeholder="Insert tags seperated by comma (,)">
-    <input *ngIf="!editFlag" type="submit" value="Publish Article" [disabled]="!articleEditorForm.valid">
-    <input *ngIf="editFlag" type="submit" value="Edit Article" [disabled]="!articleEditorForm.valid">
+
+    <button
+      class="btn btn-default pull-xs-right"
+      *ngIf="!editFlag"
+      type="submit"
+      [disabled]="!articleEditorForm.valid"
+    >
+      Publish Article
+    </button>
+    <button
+      class="btn btn-default pull-xs-right"
+      *ngIf="editFlag"
+      type="submit"
+      [disabled]="!articleEditorForm.valid"
+    >
+      Edit Article
+    </button>
   </form>
-  
+</div>
