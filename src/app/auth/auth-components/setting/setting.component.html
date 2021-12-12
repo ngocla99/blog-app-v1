@@ -23,7 +23,7 @@
         <app-loading-spinner></app-loading-spinner>
       </div>
     </div>
-
+    <div *ngIf="isLoading" style="padding-top: 100%"></div>
     <div *ngIf="!isLoading" class="row form-setting">
       <!-- Contact Form -->
       <form
@@ -49,11 +49,11 @@
                 required
               />
               <div
-                class="col alert"
+                [ngClass]="'alert alert-danger'"
                 role="alert"
                 *ngIf="username?.errors?.['required'] && username?.touched"
               >
-                <i style="color: red">Username is required!!!</i>
+                Username is required!!!
               </div>
             </div>
           </div>
@@ -77,14 +77,14 @@
                 role="alert"
                 *ngIf="email?.errors?.['required'] && email?.touched"
               >
-                <i style="color: red">Email is required!!!</i>
+                Email is required!!!
               </div>
               <div
                 class="col alert"
                 role="alert"
                 *ngIf="email?.errors?.['pattern'] && email?.touched"
               >
-                <i style="color: red">Email is invalid!!!</i>
+                Email is invalid!!!
               </div>
             </div>
           </div>
@@ -107,7 +107,7 @@
                 role="alert"
                 *ngIf="bio?.errors?.['required'] && bio?.touched"
               >
-                <i style="color: red">Bio is required!!!</i>
+                Bio is required!!!
               </div>
             </div>
           </div>
@@ -129,7 +129,7 @@
                 role="alert"
                 *ngIf="image?.errors?.['required'] && image?.touched"
               >
-                <i style="color: red">Image is required!!!</i>
+                Image is required!!!
               </div>
             </div>
           </div>
@@ -152,9 +152,9 @@
         <div class="form-group input-group">
           <select class="form-control" [(ngModel)]="resultsPerPage">
             <option [value]="0" selected>Select number Per Page</option>
-            <option [value]="1">1 Page per Page</option>
-            <option [value]="2">2 Pages per Page</option>
-            <option [value]="3">3 Pages per Page</option>
+            <option [value]="4">4 Items per Page</option>
+            <option [value]="6">6 Items per Page</option>
+            <option [value]="8">8 Items per Page</option>
           </select>
           <button
             class="btn btn-default pull-xs-right"

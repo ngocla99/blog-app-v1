@@ -33,13 +33,14 @@
           </div>
 
           <!-- go to top button -->
+
           <div class="col-md-4">
             <a
-              class="home-icon float-md-end"
-              [routerLink]="['/']"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              ><b>UTOD</b></a
+              style="cursor: pointer"
+              (click)="scrollToTop()"
+              id="return-to-top"
+              class="float-md-end"
+              ><i class="icon-arrow-up"></i>Back to Top</a
             >
           </div>
         </div>

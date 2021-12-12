@@ -17,9 +17,9 @@
   z-index: 100;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
-  background: #ff416c;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background: #ffa387;
+  background: -webkit-linear-gradient(to right, #fe4f70, #ffa387);
+  background: linear-gradient(to right, #fe4f70, #ffa387);
   color: white;
 }
 
