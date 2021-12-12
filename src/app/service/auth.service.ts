@@ -16,7 +16,7 @@ import {
 export class AuthService {
   private readonly API_URL = 'https://conduit.productionready.io/api';
   private timeLogout = 1000 * 60 * 10;
-  private defaultNumPerPage = 3;
+  private defaultNumPerPage = 6;
 
   constructor(private http: HttpClient, private router: Router) {}
 

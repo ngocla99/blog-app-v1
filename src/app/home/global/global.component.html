@@ -4,7 +4,7 @@
 
 <app-articles-list *ngIf="!isLoading" [listArticles]="list"></app-articles-list>
 
-<nav *ngIf="pageNumbers.length > 1 && !isLoading" style="text-align: center">
+<!-- <nav *ngIf="pageNumbers.length > 1 && !isLoading" style="text-align: center">
   <ul class="pagination justify-content-center">
     <li
       class="page-item"
@@ -19,4 +19,7 @@
       >
     </li>
   </ul>
-</nav>
+</nav> -->
+
+<app-pagination *ngIf="pageNumbers.length > 1 && !isLoading" [totalPages]="pageNumbers" [currentPage]="currentPage">
+</app-pagination>

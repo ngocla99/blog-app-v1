@@ -14,16 +14,16 @@ export class HomeComponent implements OnInit {
   ViewMode: 'global' | 'tags' | 'feed' = 'global';
   tags = ['welcome', 'introduction', 'codebaseShow', 'implementations'];
   tagsValue = '';
-  mostLike: any[] = [];
+  mostLikes: any[] = [];
   constructor(
     private auth: AuthService,
     private router: Router,
     private getArticle: HomeArticleService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getArticle.getGlobalFeed().subscribe((data: any) => {
-      this.mostLike = data.articles
+      this.mostLikes = data.articles
         .sort((a: any, b: any) => {
           return a.favoritesCount - b.favoritesCount;
         })

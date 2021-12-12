@@ -10,9 +10,9 @@ export class PaginationComponent implements OnInit {
   @Input() totalPages!: number[];
   @Input() currentPage!: number;
 
-  constructor(private articleService: ArticleService) {}
+  constructor(private articleService: ArticleService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   changePage(page: number) {
     this.articleService.pageIndexSub.next(page - 1);
