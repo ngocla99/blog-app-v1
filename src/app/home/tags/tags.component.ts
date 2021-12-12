@@ -1,3 +1,6 @@
+import { switchMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { ArticleService } from 'src/app/service/article.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { Article } from './../../shared/model/article.model';
 import { HomeArticleService } from './../../service/home-article.service';
@@ -17,13 +20,16 @@ export class TagsComponent implements OnInit {
   list: Article[] = [];
   isLoading: boolean = false;
   pageNumbers: number[] = [];
+  currentPage: number = 1;
+  pageIndexSub$ !: Subscription;
 
   constructor(
     private getArticle: HomeArticleService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private articleService: ArticleService
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngOnChanges(): void {
     this.limit = this.authService.getPage();
@@ -44,24 +50,26 @@ export class TagsComponent implements OnInit {
         }
         this.list = data.articles;
       });
+
+
+    this.pageIndexSub$ = this.articleService.pageIndexSub
+      .pipe(
+        switchMap((pageIndex) => {
+          this.isLoading = true;
+          this.currentPage = pageIndex + 1;
+          return this.getArticle.getTagFeed(
+            this.tags,
+            pageIndex * this.limit,
+            this.limit
+          );
+        })
+      )
+      .subscribe((data) => {
+        this.isLoading = false;
+        this.list = data.articles;
+        console.log(data)
+      });
   }
 
-  changePage(value: number) {
-    this.isLoading = true;
-    if (value === 1) {
-      this.getArticle
-        .getTagFeed(this.tags, this.offset, this.limit)
-        .subscribe((data) => {
-          this.isLoading = false;
-          this.list = data.articles;
-        });
-    } else {
-      this.getArticle
-        .getTagFeed(this.tags, this.limit * (value - 1), this.limit)
-        .subscribe((data) => {
-          this.isLoading = false;
-          this.list = data.articles;
-        });
-    }
-  }
+
 }

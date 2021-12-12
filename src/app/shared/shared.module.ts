@@ -14,6 +14,9 @@ import { ArticleTagComponent } from './component/articles-list/article/article-t
 import { TruncatePipe } from './pipe/truncate.pipe';
 import { PreloaderComponent } from './component/preloader/preloader.component';
 import { AlertComponent } from './component/alert/alert.component';
+import { WidgetAboutComponent } from './component/extension/widget-about/widget-about.component';
+import { NewsletterComponent } from './component/extension/newsletter/newsletter.component';
+import { PopularPostsComponent } from './component/extension/popular-posts/popular-posts.component';
 @NgModule({
   declarations: [
     ArticlesListComponent,
@@ -28,6 +31,9 @@ import { AlertComponent } from './component/alert/alert.component';
     TruncatePipe,
     PreloaderComponent,
     AlertComponent,
+    WidgetAboutComponent,
+    NewsletterComponent,
+    PopularPostsComponent,
   ],
   imports: [CommonModule, SharedRoutingModule],
   exports: [
@@ -40,6 +46,9 @@ import { AlertComponent } from './component/alert/alert.component';
     PaginationComponent,
     PreloaderComponent,
     AlertComponent,
+    WidgetAboutComponent,
+    NewsletterComponent,
+    PopularPostsComponent,
   ],
 })
 export class SharedModule {}

@@ -1,17 +1,10 @@
 <app-preloader></app-preloader>
 <div class="home-page">
-  <div class="banner">
-    <div class="container">
-      <h1 class="logo-font">conduit</h1>
-      <p>A place to share your knowledge.</p>
-    </div>
-  </div>
-
-  <div class="container page">
+  <div class="container-xl page">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-lg-8" style="margin-top: 0">
         <div class="feed-toggle">
-          <ul
+          <!-- <ul
             class="nav nav-pills outline-active"
             style="
               border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -19,34 +12,83 @@
               margin-bottom: 30px;
             "
           >
+            <li class="nav-item nav-hover">
+              <a
+                class="nav-link a-hover {{
+                  ViewMode == 'feed' ? 'active' : ''
+                }}"
+                (click)="changeFeedMode()"
+                >Your Feed</a
+              >
+            </li>
+            <li class="nav-item nav-hover">
+              <a
+                class="nav-link a-hover {{
+                  ViewMode == 'global' ? 'active' : ''
+                }}"
+                (click)="changeViewMode()"
+                >Global Feed</a
+              >
+            </li>
+            <li class="nav-item nav-hover" *ngIf="tagMode == true">
+              <a
+                class="nav-link a-hover {{
+                  ViewMode == 'tags' ? 'active' : ''
+                }}"
+                >Tags Feed</a
+              >
+            </li>
+          </ul> -->
+          <ul
+            class="nav nav-tabs outline mb-5"
+            style="
+              border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+              padding: 1.5rem 0 0 0;
+            "
+            id="myTab"
+            role="tablist"
+          >
             <li class="nav-item">
               <a
                 class="nav-link {{ ViewMode == 'feed' ? 'active' : '' }}"
                 (click)="changeFeedMode()"
+                data-toggle="tab"
+                role="tab"
                 >Your Feed</a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link {{ ViewMode == 'global' ? 'active' : '' }}"
+                data-toggle="tab"
+                role="tab"
                 (click)="changeViewMode()"
                 >Global Feed</a
               >
             </li>
             <li class="nav-item" *ngIf="tagMode == true">
-              <a class="nav-link {{ ViewMode == 'tags' ? 'active' : '' }}"
+              <a
+                class="nav-link {{ ViewMode == 'tags' ? 'active' : '' }}"
+                data-toggle="tab"
+                role="tab"
                 >Tags Feed</a
               >
             </li>
           </ul>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
         <app-feed *ngIf="ViewMode == 'feed'"></app-feed>
         <app-global *ngIf="ViewMode == 'global'"></app-global>
         <app-tags *ngIf="ViewMode == 'tags'" [tags]="tagsValue"></app-tags>
         <!-- <app-test-ui *ngIf="ViewMode == 'global'"></app-test-ui> -->
       </div>
-      <div class="col-md-1"></div>
-      <div class="col-md-3 tag-list">
+      <div class="col-lg-4">
+        <!-- Desciption -->
+        <app-widget-about></app-widget-about>
+        <!-- Tags -->
         <div class="widget rounded">
           <div class="widget-header text-center">
             <h3 class="widget-title">Tags</h3>
@@ -62,101 +104,11 @@
             </a>
           </div>
         </div>
+        <!-- Post popular -->
+        <app-popular-posts [mostLike]="mostLikes"></app-popular-posts>
 
-        <div class="widget rounded">
-          <div class="widget-header text-center">
-            <h3 class="widget-title">Popular Posts</h3>
-            <img
-              src="https://themeger.shop/html/katen/html/images/wave.svg"
-              class="wave"
-              alt="wave"
-            />
-          </div>
-          <div class="widget-content">
-            <!-- post -->
-            <div class="post post-list-sm circle">
-              <div class="thumb circle">
-                <span class="number">1</span>
-                <a>
-                  <div class="inner">
-                    <img
-                      src="{{ mostLike[0]?.author.image }}"
-                      alt="post-title"
-                    />
-                  </div>
-                </a>
-              </div>
-              <div class="details clearfix">
-                <h6 class="post-title my-0">
-                  <a [routerLink]="['/article', mostLike[0]?.slug]"
-                    >{{ mostLike[0]?.author.username }} -
-                    {{ mostLike[0]?.favoritesCount }} Like</a
-                  >
-                </h6>
-                <ul class="meta list-inline mt-1 mb-0">
-                  <li class="list-inline-item">
-                    {{ mostLike[0]?.createdAt | date }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- post -->
-            <div class="post post-list-sm circle">
-              <div class="thumb circle">
-                <span class="number">2</span>
-                <a>
-                  <div class="inner">
-                    <img
-                      src="{{ mostLike[1]?.author.image }}"
-                      alt="post-title"
-                    />
-                  </div>
-                </a>
-              </div>
-              <div class="details clearfix">
-                <h6 class="post-title my-0">
-                  <a [routerLink]="['/article', mostLike[1]?.slug]"
-                    >{{ mostLike[1]?.author.username }} -
-                    {{ mostLike[1]?.favoritesCount }} Like</a
-                  >
-                </h6>
-                <ul class="meta list-inline mt-1 mb-0">
-                  <li class="list-inline-item">
-                    {{ mostLike[1]?.createdAt | date }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- post -->
-            <div class="post post-list-sm circle">
-              <div class="thumb circle">
-                <span class="number">3</span>
-                <a>
-                  <div class="inner">
-                    <img
-                      src="{{ mostLike[2]?.author.image }}"
-                      alt="post-title"
-                      style="height: 60px; width: 60px"
-                    />
-                  </div>
-                </a>
-              </div>
-              <div class="details clearfix">
-                <h6 class="post-title my-0">
-                  <a [routerLink]="['/article', mostLike[2]?.slug]"
-                    >{{ mostLike[2]?.author.username }} -
-                    {{ mostLike[2]?.favoritesCount }} Like</a
-                  >
-                </h6>
-                <ul class="meta list-inline mt-1 mb-0">
-                  <li class="list-inline-item">
-                    {{ mostLike[2]?.createdAt | date }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Subcribe -->
+        <app-newsletter></app-newsletter>
       </div>
     </div>
   </div>

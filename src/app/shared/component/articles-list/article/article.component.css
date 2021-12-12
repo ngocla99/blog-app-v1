@@ -1,4 +1,4 @@
-.bordered {
+/* .bordered {
   border: solid 1px #ebebeb;
 }
 .rounded {
@@ -160,6 +160,9 @@ h5 {
   color: #9faabb;
 }
 
+.float-start span i {
+  color: #fe4f70;
+} */
 .float-start span i {
   color: #fe4f70;
 }
