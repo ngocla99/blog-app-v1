@@ -1,3 +1,7 @@
+label {
+  color: #203656 !important;
+}
+
 input {
   border-radius: 20px;
   height: 50px;
@@ -36,8 +40,13 @@ select {
   font-weight: bolder;
   font-size: 12px;
   letter-spacing: 2px;
+  background: none;
 }
 
 .alert-danger {
-  color: #c0392b;
+  color: red;
+}
+
+.border-error {
+  border: 2px solid red;
 }

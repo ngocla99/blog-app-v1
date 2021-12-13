@@ -17,6 +17,10 @@ export class SignComponent implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Accept formSignup.value as UserSignup => call signUpUser() from AuthService
+   * @param userSignup
+   */
   onSignup(userSignup: UserSignUp) {
     this.isLoading = true;
     this.authService.signUpUser({ user: userSignup }).subscribe(
@@ -24,15 +28,21 @@ export class SignComponent implements OnInit {
         this.router.navigate(['/']);
         this.isLoading = false;
         this.authService.setUser(data.user);
-        Swal.fire({
-          position: 'center',
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
           icon: 'success',
           title: 'Sign-up success!!!',
-          showConfirmButton: false,
-          timer: 1500,
-          color: '#ffffff',
-          background:
-            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
         });
       },
       (err) => {
@@ -42,15 +52,21 @@ export class SignComponent implements OnInit {
           .map((errItem) => errItem)
           .join(' & ');
         console.log(swalError);
-        Swal.fire({
-          position: 'center',
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
           icon: 'error',
           title: swalError + ' has already been taken',
-          showConfirmButton: false,
-          timer: 1500,
-          color: '#ffffff',
-          background:
-            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
         });
         const statusCode = err.status;
         this.router.navigateByUrl('/auth/sign-up');
