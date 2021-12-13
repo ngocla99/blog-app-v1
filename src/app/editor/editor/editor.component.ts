@@ -63,6 +63,7 @@ export class EditorComponent implements OnInit {
   }
 
   handleForm(form: any) {
+    this.change.emit(false);
     const formValue = {
       title: form.title,
       description: form.description,
@@ -70,11 +71,23 @@ export class EditorComponent implements OnInit {
       tagList: form.tags.split(','),
     };
 
-    if (this.editFlag) {
-      this.editArticle(formValue, this.article.slug);
-    } else {
-      this.postArticle(formValue);
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#273043',
+      cancelButtonColor: '#DC3545',
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (this.editFlag) {
+          this.editArticle(formValue, this.article.slug);
+        } else {
+          this.postArticle(formValue);
+        }
+      }
+    });
   }
 
   postArticle(article: ArticlePost) {

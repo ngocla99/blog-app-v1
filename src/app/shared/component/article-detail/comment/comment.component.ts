@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { CommentsService } from 'src/app/service/comments.service';
 import { Comment } from 'src/app/shared/model/comment.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-comment',
@@ -67,6 +68,22 @@ export class CommentComponent implements OnInit {
   deleteComment(commentId: number) {
     this.commentService.deleteArticleComment(this.slug, commentId).subscribe(
       () => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Delete comment successfully',
+        });
         this.comments.splice(this.findComment(commentId), 1);
       },
       (err) => {

@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
         const swalError = Object.keys(errorMsg)
           .map((errItem) => errItem)
           .join(' & ');
-        console.log(swalError);
         this.isLoading = false;
         const Toast = Swal.mixin({
           toast: true,
