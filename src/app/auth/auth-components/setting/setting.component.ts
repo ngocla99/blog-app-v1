@@ -27,6 +27,9 @@ export class SettingComponent implements OnInit {
     this.getProfile();
   }
 
+  /**
+   * Get user information from UserService with getUser()
+   */
   getProfile() {
     this.isLoading = true;
     this.userService.getUser().subscribe(
@@ -40,12 +43,20 @@ export class SettingComponent implements OnInit {
     );
   }
 
+  /**
+   * Accept settingForm.value as UserInfo => userForm have data like userFormValue
+   * Then update confirm alert component appear
+   * @param userFormValue
+   */
   onSubmit(userFormValue: UserInfo) {
     // this.isLoading = true;
     this.updateUser = 'Are you sure update your information?';
     this.userForm = userFormValue;
   }
 
+  /**
+   * Set itemsPerPage with selected item perpage => use localStorage to set itemsPerPage
+   */
   onPageChoose() {
     if (this.resultsPerPage && this.resultsPerPage !== '0') {
       localStorage.setItem('itemsPerPage', this.resultsPerPage);
@@ -53,10 +64,16 @@ export class SettingComponent implements OnInit {
     }
   }
 
+  /**
+   * Logout alert components appear
+   */
   logout() {
     this.logoutUser = 'Are you sure logout?';
   }
 
+  /**
+   * Call editUser() from AuthService with input data this.userForm === userFormValue
+   */
   onHandleUpdate() {
     // this.isLoading = true;
     this.userService.editUser({ user: this.userForm }).subscribe(
@@ -65,11 +82,41 @@ export class SettingComponent implements OnInit {
         this.authService.setUser(data.user);
         this.authService.updateUser.next(data.user);
         this.router.navigate(['/profile', data.user.username]);
-        Swal.fire('My Blog', 'Update user success!!!', 'success');
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Update user success!!!',
+        });
       },
       (err) => {
         const errorMsg = err.error.slice(42, err.error.length - 2);
-        Swal.fire('My Blog', errorMsg + ' has already been taken', 'error');
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: 'error',
+          title: errorMsg + ' has already been taken',
+        });
         const statusCode = err.status;
         if (statusCode === 422) {
           console.log(`422`);
@@ -85,10 +132,16 @@ export class SettingComponent implements OnInit {
     );
   }
 
+  /**
+   * Call logout() from AuthService
+   */
   onHandleLogout() {
     this.authService.logout();
   }
 
+  /**
+   * Set updateUser || logoutUser like null to close alert components
+   */
   onHandleClose() {
     this.updateUser = null;
     this.logoutUser = null;

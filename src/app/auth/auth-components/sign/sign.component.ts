@@ -17,6 +17,10 @@ export class SignComponent implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Accept formSignup.value as UserSignup => call signUpUser() from AuthService
+   * @param userSignup
+   */
   onSignup(userSignup: UserSignUp) {
     this.isLoading = true;
     this.authService.signUpUser({ user: userSignup }).subscribe(
@@ -30,9 +34,9 @@ export class SignComponent implements OnInit {
           title: 'Sign-up success!!!',
           showConfirmButton: false,
           timer: 1500,
-          color: '#ffffff',
-          background:
-            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
+          // color: '#ffffff',
+          // background:
+          //   'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
         });
       },
       (err) => {
@@ -48,9 +52,9 @@ export class SignComponent implements OnInit {
           title: swalError + ' has already been taken',
           showConfirmButton: false,
           timer: 1500,
-          color: '#ffffff',
-          background:
-            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
+          // color: '#ffffff',
+          // background:
+          //   'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
         });
         const statusCode = err.status;
         this.router.navigateByUrl('/auth/sign-up');

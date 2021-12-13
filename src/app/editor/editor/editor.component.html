@@ -20,19 +20,20 @@
     <div class="row">
       <div class="column col-md-12">
         <div class="form-group">
-          <label>Article Title</label>
+          <label>Post Title</label>
           <input
             class="form-control"
+            [class.border-error]="form?.['title']?.errors?.['required'] && form?.['title']?.touched"
             type="text"
             formControlName="title"
-            placeholder="Enter Article Title ..."
+            placeholder="Enter Post Title ..."
           />
           <div
             *ngIf="form?.['title']?.invalid && (form?.['title']?.dirty || form?.['title']?.touched)"
             [ngClass]="'alert alert-danger'"
           >
             <div *ngIf="form?.['title']?.errors?.['required']">
-              Article Title is required.
+              Post Title is required.
             </div>
           </div>
         </div>
@@ -40,12 +41,13 @@
 
       <div class="column col-md-12">
         <div class="form-group">
-          <label>Article Description</label>
+          <label>Post Description</label>
           <input
             class="form-control"
+            [class.border-error]="form?.['description']?.errors?.['required'] && form?.['description']?.touched"
             type="text"
             formControlName="description"
-            placeholder="Whats the article about ..."
+            placeholder="What's the post about ..."
           />
           <div
             *ngIf="form?.['description']?.invalid && (form?.['description']?.dirty || form?.['description']?.touched)"
@@ -60,27 +62,28 @@
 
       <div class="column col-md-12">
         <div class="form-group">
-          <label>Article Content</label>
+          <label>Post Content</label>
           <textarea
             class="form-control"
+            [class.border-error]="form?.['content']?.errors?.['required'] && form?.['content']?.touched"
             type="text"
             formControlName="content"
             rows="8"
-            placeholder="Article's Content (markdown supported)"
+            placeholder="Post's Content..."
           ></textarea>
           <div
             *ngIf="form?.['content']?.invalid && (form?.['content']?.dirty || form?.['content']?.touched)"
             [ngClass]="'alert alert-danger'"
           >
             <div *ngIf="form?.['content']?.errors?.['required']">
-              Article Content is required.
+              Post Content is required.
             </div>
           </div>
         </div>
       </div>
       <div class="column col-md-12">
         <div class="form-group">
-          <label>Article Tags</label>
+          <label>Post Tags</label>
           <input
             class="form-control"
             type="text"
@@ -97,7 +100,7 @@
       type="submit"
       [disabled]="!articleEditorForm.valid"
     >
-      Publish Article
+      Publish Post
     </button>
     <button
       class="btn btn-default pull-xs-right"
@@ -105,7 +108,7 @@
       type="submit"
       [disabled]="!articleEditorForm.valid"
     >
-      Edit Article
+      Edit Post
     </button>
   </form>
 </div>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ArticleService } from 'src/app/service/article.service';
 import { ArticlePost } from 'src/app/shared/model/article.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editor',
@@ -42,7 +43,6 @@ export class EditorComponent implements OnInit {
     });
   }
 
-
   get form() {
     return this.articleEditorForm.controls;
   }
@@ -65,9 +65,41 @@ export class EditorComponent implements OnInit {
   postArticle(article: ArticlePost) {
     this.articleService.postNewArticle({ article: article }).subscribe(
       (data: any) => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Post New Post success!!!',
+        });
         this.router.navigate(['/article', data.article.slug]);
       },
       (err) => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: 'error',
+          title: 'Post New Post fail!!!',
+        });
         console.error(err);
       }
     );
@@ -78,9 +110,41 @@ export class EditorComponent implements OnInit {
       .editArticle({ article: article }, articleSlug)
       .subscribe(
         (data) => {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Edit Post success!!!',
+          });
           this.router.navigate(['/article', data.article.slug]);
         },
         (err) => {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: 'error',
+            title: 'Edit Post fail!!!',
+          });
           console.log(err);
         }
       );

@@ -15,6 +15,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Accept formLogin.value as user.email and user.password => call loginUser() from AuthService
+   * @param user
+   */
   onLogin(user: any) {
     this.isLoading = true;
     this.authService.loginUser({ user: user }).subscribe(
@@ -28,9 +32,9 @@ export class LoginComponent implements OnInit {
           title: 'Login success!!!',
           showConfirmButton: false,
           timer: 1500,
-          color: '#ffffff',
-          background:
-            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
+          // color: '#ffffff',
+          // background:
+          //   'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
         });
       },
       (err) => {
@@ -47,9 +51,9 @@ export class LoginComponent implements OnInit {
           title: swalError + ' is invalid',
           showConfirmButton: false,
           timer: 2000,
-          color: '#ffffff',
-          background:
-            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
+          // color: '#ffffff',
+          // background:
+          //   'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
         });
         const statusCode = err.status;
         if (statusCode === 422) {

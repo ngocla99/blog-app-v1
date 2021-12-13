@@ -12,6 +12,7 @@
         />
       </div>
       <div class="col-6">
+        <!-- logout() run when click logout button -->
         <button class="btn btn-md btn-danger float-end" (click)="logout()">
           Logout
         </button>
@@ -25,7 +26,8 @@
     </div>
     <div *ngIf="isLoading" style="padding-top: 100%"></div>
     <div *ngIf="!isLoading" class="row form-setting">
-      <!-- Contact Form -->
+      <!-- Update user Form -->
+      <!-- onSubmit() run when click submit button -->
       <form
         id="contact-form"
         class="contact-form"
@@ -41,6 +43,7 @@
               <input
                 type="text"
                 class="form-control"
+                [class.border-error]="username?.errors?.['required'] && username?.touched"
                 placeholder="Your Name"
                 #username="ngModel"
                 name="username"
@@ -64,7 +67,8 @@
               <input
                 type="text"
                 class="form-control"
-                placeholder="Email"
+                [class.border-error]="(email?.errors?.['required'] || email?.errors?.['pattern']) && email?.touched"
+                placeholder="Your email"
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                 #email="ngModel"
                 name="email"
@@ -94,6 +98,7 @@
               <label>Short bio about you</label>
               <textarea
                 class="form-control"
+                [class.border-error]="bio?.errors?.['required'] && bio?.touched"
                 rows="8"
                 placeholder="Short bio about you"
                 #bio="ngModel"
@@ -117,6 +122,7 @@
               <input
                 type="text"
                 class="form-control"
+                [class.border-error]="image?.errors?.['required'] && image?.touched"
                 placeholder="URL of profile picture"
                 #image="ngModel"
                 name="image"
@@ -156,7 +162,9 @@
             <option [value]="6">6 Items per Page</option>
             <option [value]="8">8 Items per Page</option>
           </select>
+          <!-- onPageChoose() run when choose resultPerPage then click submit button -->
           <button
+            [disabled]="resultsPerPage === '0'"
             class="btn btn-default pull-xs-right"
             (click)="onPageChoose()"
           >
@@ -167,12 +175,14 @@
     </div>
   </div>
 </section>
+<!-- Appear when click Update User button -->
 <app-alert
   [message]="updateUser"
   *ngIf="updateUser"
   (yes)="onHandleUpdate()"
   (close)="onHandleClose()"
 ></app-alert>
+<!-- Appear when click Logout button -->
 <app-alert
   [message]="logoutUser"
   *ngIf="logoutUser"
