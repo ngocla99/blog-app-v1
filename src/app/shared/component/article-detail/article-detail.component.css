@@ -3,3 +3,21 @@
   border: 0;
   color: white;
 }
+.grayBack {
+  color: #fe4f70;
+  font-size: 13px;
+  border-radius: 25px;
+  display: inline-block;
+  padding: 6px 11px;
+  line-height: 1;
+  left: 20px;
+  top: 20px;
+  border: 1px solid #fe4f70 ;
+  z-index: 1;
+  background: #fff;
+  box-shadow: 0px 0px 2px #fe4f70 inset;
+  background-size: 200% auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
