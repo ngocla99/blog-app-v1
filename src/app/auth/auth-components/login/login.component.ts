@@ -15,6 +15,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Accept formLogin.value as user.email and user.password => call loginUser() from AuthService
+   * @param user
+   */
   onLogin(user: any) {
     this.isLoading = true;
     this.authService.loginUser({ user: user }).subscribe(
@@ -22,15 +26,21 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
         this.authService.setUser(data.user);
         this.isLoading = false;
-        Swal.fire({
-          position: 'center',
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
           icon: 'success',
           title: 'Login success!!!',
-          showConfirmButton: false,
-          timer: 1500,
-          color: '#ffffff',
-          background:
-            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
         });
       },
       (err) => {
@@ -41,15 +51,21 @@ export class LoginComponent implements OnInit {
           .join(' & ');
         console.log(swalError);
         this.isLoading = false;
-        Swal.fire({
-          position: 'center',
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
           icon: 'error',
           title: swalError + ' is invalid',
-          showConfirmButton: false,
-          timer: 2000,
-          color: '#ffffff',
-          background:
-            'linear-gradient(to right, #fe4f70 0%, #ffa387 51%, #fe4f70 100%)',
         });
         const statusCode = err.status;
         if (statusCode === 422) {
