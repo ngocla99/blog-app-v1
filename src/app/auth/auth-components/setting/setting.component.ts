@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate-guard.service';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../service/auth.service';
 import { UserService } from '../../../service/user.service';
@@ -10,13 +13,16 @@ import { User, UserInfo } from '../../../shared/model/user.model';
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.css'],
 })
-export class SettingComponent implements OnInit {
+export class SettingComponent implements OnInit, CanComponentDeactivate {
+  @ViewChild('settingForm') settingForm!: NgForm;
+
   user!: UserInfo;
   resultsPerPage = '0';
   isLoading: boolean = false;
   updateUser!: string | null;
   logoutUser!: string | null;
   userForm: any;
+  changesSave = false;
   constructor(
     private authService: AuthService,
     private userService: UserService,
@@ -31,7 +37,6 @@ export class SettingComponent implements OnInit {
    * Get user information from UserService with getUser()
    */
   getProfile() {
-    this.isLoading = true;
     this.userService.getUser().subscribe(
       (data) => {
         this.isLoading = false;
@@ -49,7 +54,7 @@ export class SettingComponent implements OnInit {
    * @param userFormValue
    */
   onSubmit(userFormValue: UserInfo) {
-    // this.isLoading = true;
+    this.changesSave = true;
     this.updateUser = 'Are you sure update your information?';
     this.userForm = userFormValue;
   }
@@ -75,7 +80,6 @@ export class SettingComponent implements OnInit {
    * Call editUser() from AuthService with input data this.userForm === userFormValue
    */
   onHandleUpdate() {
-    // this.isLoading = true;
     this.userService.editUser({ user: this.userForm }).subscribe(
       (data) => {
         this.isLoading = false;
@@ -145,5 +149,25 @@ export class SettingComponent implements OnInit {
   onHandleClose() {
     this.updateUser = null;
     this.logoutUser = null;
+  }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.settingForm.dirty && !this.changesSave) {
+      return Swal.fire({
+        text: 'Do you want to discard the changes?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#273043',
+        cancelButtonColor: '#DC3545',
+        confirmButtonText: 'Yes',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
+    return true;
   }
 }

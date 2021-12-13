@@ -1,7 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ArticleService } from 'src/app/service/article.service';
+import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate-guard.service';
 import { ArticlePost } from 'src/app/shared/model/article.model';
 import Swal from 'sweetalert2';
 
@@ -19,8 +29,8 @@ export class EditorComponent implements OnInit {
   content!: string;
   tags!: string;
   articleEditorForm!: FormGroup;
-  changesSave = false;
 
+  @Output() change = new EventEmitter<boolean>();
   constructor(
     private fb: FormBuilder,
     private articleService: ArticleService,
@@ -41,6 +51,11 @@ export class EditorComponent implements OnInit {
       content: [this.content, Validators.required],
       tags: [this.tags],
     });
+    this.change.emit(false);
+
+    this.articleEditorForm.valueChanges.subscribe(() => {
+      this.change.emit(true);
+    });
   }
 
   get form() {
@@ -54,7 +69,7 @@ export class EditorComponent implements OnInit {
       body: form.content,
       tagList: form.tags.split(','),
     };
-    this.changesSave = true;
+
     if (this.editFlag) {
       this.editArticle(formValue, this.article.slug);
     } else {
@@ -149,12 +164,4 @@ export class EditorComponent implements OnInit {
         }
       );
   }
-
-  // canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-  //   if (!this.changesSave) {
-  //     return confirm('Do you want to discard the changes?');
-  //   } else {
-  //     return true;
-  //   }
-  // }
 }

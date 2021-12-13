@@ -17,7 +17,10 @@
         </div>
         <div class="col-6"></div>
       </div>
-      <app-editor [article]="article"></app-editor>
+      <app-editor
+        (change)="changesInput = $event"
+        [article]="article"
+      ></app-editor>
     </div>
   </section>
 </ng-template>
