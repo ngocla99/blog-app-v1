@@ -1,7 +1,7 @@
 <app-preloader></app-preloader>
 <app-hero-carousel></app-hero-carousel>
 
-<div class="home-page">
+<div class="home-page mt-5">
   <div class="container-xl page">
     <div class="row">
       <div class="section-header mb-0">
@@ -74,7 +74,12 @@
             />
           </div>
           <div class="widget-content">
-            <a class="tag" (click)="sendTag(tag)" *ngFor="let tag of tags">
+            <a
+              class="tag"
+              style="margin-right: 10px"
+              (click)="sendTag(tag)"
+              *ngFor="let tag of tags"
+            >
               # {{ tag }}
             </a>
           </div>
