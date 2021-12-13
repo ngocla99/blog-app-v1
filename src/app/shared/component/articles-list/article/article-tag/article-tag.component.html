@@ -1,4 +1,8 @@
-<a style="text-decoration: none;" class="category-badge position-absolute {{ z == 1 ? 'move' : '' }} {{
+<a
+  style="text-decoration: none"
+  class="category-badge position-absolute {{ z == 1 ? 'move' : '' }} {{
     i == 'introduction' ? 'move2' : ''
-  }}" *ngFor="let i of item; let z = index">{{ i }}
+  }}"
+  *ngFor="let i of item; let z = index"
+  >{{ i }}
 </a>

@@ -4,6 +4,9 @@
 <ng-template #form>
   <div class="formContainer">
     <h2>Edit Article</h2>
-    <app-editor [article]="article"></app-editor>
+    <app-editor
+      (change)="changesInput = $event"
+      [article]="article"
+    ></app-editor>
   </div>
 </ng-template>
