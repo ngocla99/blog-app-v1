@@ -259,8 +259,8 @@ $(function () {
 //Heart button
 $.fn.boom = function (e) {
   var colors = [
+    "#ff4b2b",
     "#ff416c",
-    "#f77e9a",
     "#ff0000",
     // '#FFD100',
     // '#FF9300',

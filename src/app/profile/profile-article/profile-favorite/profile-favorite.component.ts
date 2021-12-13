@@ -39,6 +39,7 @@ export class ProfileFavoriteComponent implements OnInit {
       .subscribe((data) => {
         this.isLoading = false;
         this.articles = data.articles;
+
         const articlesCount = data.articlesCount;
         this.totalPages = [];
         const numberPages = Math.ceil(articlesCount / this.limit);

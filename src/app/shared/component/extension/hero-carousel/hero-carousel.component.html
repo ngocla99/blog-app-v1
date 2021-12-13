@@ -1,108 +1,147 @@
-<section class="hero-carousel mt-2 mb-5">
+<section
+  class="hero-carousel mt-2 mb-5"
+  id="carouselExampleIndicators"
+  class="carousel slide"
+  data-bs-ride="carousel"
+>
   <div class="container-xl">
     <div
       class="post-carousel-lg slick-initialized slick-slider slick-dotted"
       role="toolbar"
     >
       <button
+        class="slick-prev carousel-control-prev hide"
         type="button"
-        data-role="none"
-        class="slick-prev slick-arrow"
-        aria-label="Previous"
-        role="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev"
       >
-        Previous
+        <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+        <span class="visually-hidden">Previous</span>
       </button>
       <!-- post -->
-      <div aria-live="polite" class="slick-list draggable">
+      <div>
         <div
-          class="slick-track"
+          class="slick-track carousel-inner"
           role="listbox"
-          style="opacity: 1; width: 2232px"
+          style="width: 2232px"
         >
           <div
-            class="post featured-post-xl slick-slide slick-current slick-active"
+            class="post featured-post-xl carousel-item active"
             data-slick-index="0"
             aria-hidden="false"
-            tabindex="-1"
-            role="option"
-            aria-describedby="slick-slide00"
-            style="
-              width: 1116px;
-              position: relative;
-              left: 0px;
-              top: 0px;
-              z-index: 999;
-              opacity: 1;
-            "
+            style="width: 1116px; position: relative"
           >
             <div class="details clearfix">
-              <a href="category.html" class="category-badge lg" tabindex="0"
-                >Lifestyle</a
-              >
+              <a class="category-badge lg" tabindex="0">Lifestyle</a>
               <h4 class="post-title">
-                <a href="blog-single.html" tabindex="0"
-                  >9 Most Awesome Blue Lake With Snow Mountain</a
-                >
+                <a tabindex="0">The only thing really stopping You, is You!</a>
               </h4>
               <ul class="meta list-inline mb-0">
                 <li class="list-inline-item">
-                  <a href="#" tabindex="0">Katen Doe</a>
+                  <a tabindex="0">Ngoc Lias</a>
                 </li>
-                <li class="list-inline-item">29 March 2021</li>
+                <li class="list-inline-item">21 March 2021</li>
               </ul>
             </div>
-            <a href="blog-single.html" tabindex="0">
+            <a tabindex="0">
               <div class="thumb rounded">
                 <div
                   class="inner data-bg-image"
-                  data-bg-image="images/posts/featured-xl-1.jpg"
                   style="
-                    background-image: url('images/posts/featured-xl-1.jpg');
+                    background-image: url('https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fG5hdHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60');
                   "
                 ></div>
               </div>
             </a>
           </div>
           <div
-            class="post featured-post-xl slick-slide"
+            class="post featured-post-xl carousel-item"
             data-slick-index="1"
             aria-hidden="true"
-            tabindex="-1"
-            role="option"
-            aria-describedby="slick-slide01"
-            style="
-              width: 1116px;
-              position: relative;
-              left: -1116px;
-              top: 0px;
-              z-index: 998;
-              opacity: 0;
-            "
+            style="width: 1116px; position: relative"
           >
             <div class="details clearfix">
-              <a href="category.html" class="category-badge lg" tabindex="-1"
-                >Culture</a
-              >
+              <a class="category-badge lg" tabindex="1">Lifestyle</a>
               <h4 class="post-title">
-                <a href="blog-single.html" tabindex="-1"
-                  >Important Thing You Need To Know About Swim</a
+                <a tabindex="1"
+                  >If you're good at something, never do it for free !</a
                 >
               </h4>
               <ul class="meta list-inline mb-0">
                 <li class="list-inline-item">
-                  <a href="#" tabindex="-1">Katen Doe</a>
+                  <a tabindex="1">Fuch Joker</a>
                 </li>
-                <li class="list-inline-item">29 March 2021</li>
+                <li class="list-inline-item">12 December 1999</li>
               </ul>
             </div>
-            <a href="blog-single.html" tabindex="-1">
+            <a tabindex="1">
+              <div class="thumb rounded">
+                <div
+                  class="inner data-bg-image"
+                  style="
+                    background-image: url('https://images.unsplash.com/photo-1604537466158-719b1972feb8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxzZWFyY2h8OHx8bmF0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');
+                  "
+                ></div>
+              </div>
+            </a>
+          </div>
+
+          <div
+            class="post featured-post-xl carousel-item"
+            data-slick-index="2"
+            aria-hidden="true"
+            style="width: 1116px; position: relative"
+          >
+            <div class="details clearfix">
+              <a class="category-badge lg" tabindex="2">Lifestyle</a>
+              <h4 class="post-title">
+                <a tabindex="2">Stop saying "I wish" start saying "I will"</a>
+              </h4>
+              <ul class="meta list-inline mb-0">
+                <li class="list-inline-item">
+                  <a tabindex="2">Tung Thomas</a>
+                </li>
+                <li class="list-inline-item">11 June 2021</li>
+              </ul>
+            </div>
+            <a tabindex="2">
               <div class="thumb rounded">
                 <div
                   class="inner data-bg-image"
                   data-bg-image="images/posts/featured-xl-2.jpg"
                   style="
-                    background-image: url('images/posts/featured-xl-1.jpg');
+                    background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bmF0dXJlfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=500&q=60');
+                  "
+                ></div>
+              </div>
+            </a>
+          </div>
+
+          <div
+            class="post featured-post-xl carousel-item"
+            data-slick-index="3"
+            aria-hidden="true"
+            style="width: 1116px; position: relative"
+          >
+            <div class="details clearfix">
+              <a class="category-badge lg" tabindex="3">Lifestyle</a>
+              <h4 class="post-title">
+                <a tabindex="3">Death is like the wind – always by my side</a>
+              </h4>
+              <ul class="meta list-inline mb-0">
+                <li class="list-inline-item">
+                  <a tabindex="3">Duyuo</a>
+                </li>
+                <li class="list-inline-item">15 January 2021</li>
+              </ul>
+            </div>
+            <a tabindex="3">
+              <div class="thumb rounded">
+                <div
+                  class="inner data-bg-image"
+                  data-bg-image="images/posts/featured-xl-1.jpg"
+                  style="
+                    background-image: url('https://images.unsplash.com/photo-1446329813274-7c9036bd9a1f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fG5hdHVyZXxlbnwwfDB8MHx8&auto=format&fit=crop&w=500&q=60');
                   "
                 ></div>
               </div>
@@ -113,38 +152,42 @@
       <!-- post -->
 
       <button
+        class="slick-next carousel-control-next hide"
         type="button"
-        data-role="none"
-        class="slick-next slick-arrow"
-        aria-label="Next"
-        role="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next"
       >
-        Next
+        <span class="visually-hidden">Next</span>
       </button>
-      <ul class="slick-dots" role="tablist">
-        <li
-          class="slick-active"
-          aria-hidden="false"
-          role="presentation"
-          aria-selected="true"
-          aria-controls="navigation00"
-          id="slick-slide00"
-        >
-          <button type="button" data-role="none" role="button" tabindex="0">
-            1
-          </button>
-        </li>
-        <li
-          aria-hidden="true"
-          role="presentation"
-          aria-selected="false"
-          aria-controls="navigation01"
-          id="slick-slide01"
-        >
-          <button type="button" data-role="none" role="button" tabindex="0">
-            2
-          </button>
-        </li>
+      <ul class="slick-dots carousel-indicators" role="tablist">
+        <button
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="3"
+          aria-label="Slide 4"
+        ></button>
       </ul>
     </div>
   </div>

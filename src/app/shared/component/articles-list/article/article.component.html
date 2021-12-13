@@ -2,7 +2,13 @@
   <div>
     <div class="post post-grid rounded bordered">
       <div class="thumb top-rounded">
-        <app-article-tag [item]="tagLists"></app-article-tag>
+        <div class="tag-list">
+          <app-article-tag
+            [tag]="tag"
+            [index]="i"
+            *ngFor="let tag of tagLists; let i = index"
+          ></app-article-tag>
+        </div>
         <a>
           <div class="inner">
             <img
@@ -28,7 +34,7 @@
         </ul>
         <h5 class="post-title mb-3 mt-3">
           <a [routerLink]="['/article', article.slug]">{{
-            article.title | titlecase
+            article.title | titlecase | truncate: 23
           }}</a>
         </h5>
         <p class="excerpt mb-0" style="height: 48px">

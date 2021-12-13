@@ -6,15 +6,17 @@ import { Comment } from 'src/app/shared/model/comment.model';
 @Component({
   selector: 'app-comment-item',
   templateUrl: './comment-item.component.html',
-  styleUrls: ['./comment-item.component.css']
+  styleUrls: ['./comment-item.component.css'],
 })
 export class CommentItemComponent implements OnInit {
   @Input() comment!: Comment;
 
-  constructor(private auth: AuthService, private commentService: CommentsService) { }
+  constructor(
+    private auth: AuthService,
+    private commentService: CommentsService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   get isLoggedIn() {
     return this.auth.isLoggedIn();
@@ -27,5 +29,4 @@ export class CommentItemComponent implements OnInit {
   deleteComment() {
     this.commentService.deleteEvent.emit(this.comment.id);
   }
-
 }

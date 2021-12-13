@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from 'src/app/service/article.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserService } from 'src/app/service/user.service';
+import Swal from 'sweetalert2';
 import { Article } from '../../model/article.model';
 import { Profile } from '../../model/profile.model';
 
@@ -58,14 +59,33 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   deleteArticle(slug: string) {
-    this.articleService.deleteArticle(slug).subscribe(
-      () => {
-        this.router.navigate(['/profile', this.currentUser]);
-      },
-      (err) => {
-        console.log(err);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#273043',
+      cancelButtonColor: '#DC3545',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.articleService.deleteArticle(slug).subscribe(
+          () => {
+            this.router.navigate(['/profile', this.currentUser]);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your file has been deleted.',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#273043',
+        });
       }
-    );
+    });
   }
 
   favourite() {
