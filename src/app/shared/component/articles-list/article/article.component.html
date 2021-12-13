@@ -44,26 +44,27 @@
       <div class="post-bottom clearfix d-flex align-items-center">
         <div class="social-share me-auto">
           <div class="float-start">
-            <span *ngIf="favorited == false" style="margin-right: 8px">
-              <i
-                class="{{
-                  article.favorited ? 'fas fa-heart' : 'far fa-heart'
-                }}"
-                style="margin-right: 5px"
+            <span
+              *ngIf="favorited == false"
+              style="margin-right: 8px; display: flex; align-items: center"
+            >
+              <div
                 (click)="onLike(article.slug)"
-              ></i
-              >{{ article.favoritesCount }}
+                class="{{ article.favorited ? 'none-heart' : 'heart' }}"
+              ></div>
+              <div style="margin-left: -12px">{{ article.favoritesCount }}</div>
+              <div class="my-btn-particles"></div>
             </span>
 
-            <span *ngIf="favorited == true" style="margin-right: 8px">
-              <i
-                class="{{
-                  article.favorited ? 'fas fa-heart' : 'far fa-heart'
-                }}"
-                style="margin-right: 5px"
+            <span
+              *ngIf="favorited == true"
+              style="margin-right: 8px; display: flex; align-items: center"
+            >
+              <div
+                class="{{ article.favorited ? 'none-heart' : 'heart' }}"
                 (click)="onUnLike(article.slug)"
-              ></i
-              >{{ article.favoritesCount }}
+              ></div>
+              <div style="margin-left: -12px">{{ article.favoritesCount }}</div>
             </span>
             <span style="margin-right: 8px">
               <i class="far fa-eye" style="margin-right: 5px"></i
