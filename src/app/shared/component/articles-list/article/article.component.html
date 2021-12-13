@@ -2,7 +2,13 @@
   <div>
     <div class="post post-grid rounded bordered">
       <div class="thumb top-rounded">
-        <app-article-tag [item]="tagLists"></app-article-tag>
+        <div class="tag-list">
+          <app-article-tag
+            [tag]="tag"
+            [index]="i"
+            *ngFor="let tag of tagLists; let i = index"
+          ></app-article-tag>
+        </div>
         <a>
           <div class="inner">
             <img

@@ -8,7 +8,7 @@
 }
 
 .carousel-indicators [data-bs-target] {
-  background-color: #fe4f70 !important;
+  /* background-color: #fe4f70 !important; */
   width: 10px !important;
   height: 10px !important;
   border-radius: 62% !important;
@@ -40,6 +40,6 @@
 
 @media (min-width: 1075px) {
   .featured-post-xl .details {
-    left: 51% !important;
+    left: 49% !important;
   }
 }

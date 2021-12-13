@@ -1,3 +1,10 @@
 .float-start span i {
   color: #203656;
 }
+
+.tag-list {
+  position: absolute;
+  z-index: 100;
+  top: 20px;
+  left: 20px;
+}

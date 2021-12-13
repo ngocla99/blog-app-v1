@@ -1,16 +1,25 @@
 <div class="widget rounded mb-5">
   <div class="widget-header text-center">
     <h3 class="widget-title">Popular Posts</h3>
-    <img src="https://themeger.shop/html/katen/html/images/wave.svg" class="wave" alt="wave" />
+    <img
+      src="https://themeger.shop/html/katen/html/images/wave.svg"
+      class="wave"
+      alt="wave"
+    />
   </div>
   <div class="widget-content">
     <!-- post -->
     <div class="post post-list-sm circle">
       <div class="thumb circle">
         <span class="number">1</span>
-        <a [routerLink]="['profile',mostLike[0]?.author.username]">
+        <a [routerLink]="['profile', mostLike[0]?.author.username]">
           <div class="inner">
-            <img src="{{ mostLike[0]?.author.image }}" alt="post-title" />
+            <img
+              src="{{
+                mostLike[0]?.author.image || 'assets/images/post/tabs-1.jpg'
+              }}"
+              alt="post-title"
+            />
           </div>
         </a>
       </div>
@@ -31,9 +40,14 @@
     <div class="post post-list-sm circle">
       <div class="thumb circle">
         <span class="number">2</span>
-        <a [routerLink]="['profile',mostLike[1]?.author.username]">
+        <a [routerLink]="['profile', mostLike[1]?.author.username]">
           <div class="inner">
-            <img src="{{ mostLike[1]?.author.image }}" alt="post-title" />
+            <img
+              src="{{
+                mostLike[1]?.author.image || 'assets/images/post/tabs-1.jpg'
+              }}"
+              alt="post-title"
+            />
           </div>
         </a>
       </div>
@@ -54,9 +68,15 @@
     <div class="post post-list-sm circle">
       <div class="thumb circle">
         <span class="number">3</span>
-        <a [routerLink]="['profile',mostLike[2]?.author.username]">
+        <a [routerLink]="['profile', mostLike[2]?.author.username]">
           <div class="inner">
-            <img src="{{ mostLike[2]?.author.image }}" alt="post-title" style="height: 60px; width: 60px" />
+            <img
+              src="{{
+                mostLike[2]?.author.image || 'assets/images/post/tabs-1.jpg'
+              }}"
+              alt="post-title"
+              style="height: 60px; width: 60px"
+            />
           </div>
         </a>
       </div>

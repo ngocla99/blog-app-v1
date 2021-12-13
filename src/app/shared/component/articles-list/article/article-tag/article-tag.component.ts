@@ -6,7 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./article-tag.component.css'],
 })
 export class ArticleTagComponent implements OnInit {
-  @Input() item: string[] = [];
+  @Input() tag!: string;
+  @Input() index!: number;
   constructor() {}
 
   ngOnInit(): void {}
