@@ -19,6 +19,7 @@ import { NewsletterComponent } from './component/extension/newsletter/newsletter
 import { HeroCarouselComponent } from './component/extension/hero-carousel/hero-carousel.component';
 import { PopularPostsComponent } from './component/extension/popular-posts/popular-posts.component';
 import { TagListComponent } from './component/extension/tag-list/tag-list.component';
+import { DebounceClickDirective } from './directive/debounce-click.directive';
 @NgModule({
   declarations: [
     ArticlesListComponent,
@@ -38,6 +39,7 @@ import { TagListComponent } from './component/extension/tag-list/tag-list.compon
     HeroCarouselComponent,
     PopularPostsComponent,
     TagListComponent,
+    DebounceClickDirective,
   ],
   imports: [CommonModule, SharedRoutingModule],
   exports: [
@@ -54,6 +56,7 @@ import { TagListComponent } from './component/extension/tag-list/tag-list.compon
     NewsletterComponent,
     HeroCarouselComponent,
     PopularPostsComponent,
+    DebounceClickDirective,
   ],
 })
 export class SharedModule {}

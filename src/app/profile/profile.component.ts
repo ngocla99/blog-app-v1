@@ -44,7 +44,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onFollow() {
     if (!this.isLoggedIn) {
-      this.router.navigate(['/login']);
+      console.log(1);
+      this.router.navigate(['/auth/login']);
       return;
     }
     if (!this.profile.following) {

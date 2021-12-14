@@ -9,11 +9,7 @@ import { UserInfo } from 'src/app/shared/model/user.model';
 })
 export class WidgetAboutComponent implements OnInit {
   user!: UserInfo;
-  constructor(private userService: UserService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.userService.getUser().subscribe((userData) => {
-      this.user = userData.user;
-    });
-  }
+  ngOnInit(): void {}
 }

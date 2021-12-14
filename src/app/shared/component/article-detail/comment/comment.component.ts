@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./comment.component.css'],
 })
 export class CommentComponent implements OnInit {
-  @Input() slug!: string;
+  @Input() slug!: any;
   comments: Comment[] = [];
   isLoading!: boolean;
 
@@ -57,7 +57,8 @@ export class CommentComponent implements OnInit {
         .subscribe(
           (data) => {
             this.comments.unshift(data.comment);
-            (document.getElementById('InputComment') as HTMLFormElement).value='';
+            (document.getElementById('InputComment') as HTMLFormElement).value =
+              '';
           },
           (err) => {
             console.log(err);
@@ -77,30 +78,32 @@ export class CommentComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.commentService.deleteArticleComment(this.slug, commentId).subscribe(
-          () => {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer);
-                toast.addEventListener('mouseleave', Swal.resumeTimer);
-              },
-            });
-    
-            Toast.fire({
-              icon: 'success',
-              title: 'Delete comment successfully',
-            });
-            this.comments.splice(this.findComment(commentId), 1);
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
+        this.commentService
+          .deleteArticleComment(this.slug, commentId)
+          .subscribe(
+            () => {
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer);
+                  toast.addEventListener('mouseleave', Swal.resumeTimer);
+                },
+              });
+
+              Toast.fire({
+                icon: 'success',
+                title: 'Delete comment successfully',
+              });
+              this.comments.splice(this.findComment(commentId), 1);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
         Swal.fire({
           title: 'Deleted!',
           text: 'Your file has been deleted.',
@@ -110,6 +113,5 @@ export class CommentComponent implements OnInit {
         });
       }
     });
-    
   }
 }
