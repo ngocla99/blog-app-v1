@@ -19,6 +19,8 @@ import { NewsletterComponent } from './component/extension/newsletter/newsletter
 import { HeroCarouselComponent } from './component/extension/hero-carousel/hero-carousel.component';
 import { PopularPostsComponent } from './component/extension/popular-posts/popular-posts.component';
 import { TagListComponent } from './component/extension/tag-list/tag-list.component';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { BreaklinePipe } from './pipe/breakline.pipe';
 @NgModule({
   declarations: [
     ArticlesListComponent,
@@ -38,6 +40,8 @@ import { TagListComponent } from './component/extension/tag-list/tag-list.compon
     HeroCarouselComponent,
     PopularPostsComponent,
     TagListComponent,
+    PageNotFoundComponent,
+    BreaklinePipe,
   ],
   imports: [CommonModule, SharedRoutingModule],
   exports: [
@@ -54,6 +58,8 @@ import { TagListComponent } from './component/extension/tag-list/tag-list.compon
     NewsletterComponent,
     HeroCarouselComponent,
     PopularPostsComponent,
+    PageNotFoundComponent,
+    BreaklinePipe,
   ],
 })
 export class SharedModule {}
