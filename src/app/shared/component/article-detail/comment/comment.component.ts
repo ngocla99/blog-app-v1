@@ -14,6 +14,9 @@ export class CommentComponent implements OnInit {
   comments: Comment[] = [];
   isLoading!: boolean;
 
+  totalLength!: number;
+  page: number = 1;
+
   constructor(
     private commentService: CommentsService,
     private auth: AuthService
@@ -28,9 +31,17 @@ export class CommentComponent implements OnInit {
   }
 
   getArticleComments() {
-    this.commentService.getArticleComments(this.slug).subscribe(
+    this.commentService.getArticle().subscribe(
       (data) => {
-        this.comments = data.comments;
+        let articleBySlug = data.articles.filter((e) => e.slug == this.slug);
+        this.totalLength = articleBySlug[0].comments.length;
+        // console.log(articleBySlug[0].comments);
+
+        if (articleBySlug.length > 0) {
+          this.comments = articleBySlug[0].comments;
+        } else {
+          this.comments = [];
+        }
       },
       (err) => {
         console.log(err);

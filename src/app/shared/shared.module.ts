@@ -20,6 +20,9 @@ import { HeroCarouselComponent } from './component/extension/hero-carousel/hero-
 import { PopularPostsComponent } from './component/extension/popular-posts/popular-posts.component';
 import { TagListComponent } from './component/extension/tag-list/tag-list.component';
 import { DebounceClickDirective } from './directive/debounce-click.directive';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { BreaklinePipe } from './pipe/breakline.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     ArticlesListComponent,
@@ -40,8 +43,10 @@ import { DebounceClickDirective } from './directive/debounce-click.directive';
     PopularPostsComponent,
     TagListComponent,
     DebounceClickDirective,
+    PageNotFoundComponent,
+    BreaklinePipe,
   ],
-  imports: [CommonModule, SharedRoutingModule],
+  imports: [CommonModule, SharedRoutingModule, NgxPaginationModule],
   exports: [
     CommonModule,
     CommentComponent,
@@ -57,6 +62,8 @@ import { DebounceClickDirective } from './directive/debounce-click.directive';
     HeroCarouselComponent,
     PopularPostsComponent,
     DebounceClickDirective,
+    PageNotFoundComponent,
+    BreaklinePipe,
   ],
 })
 export class SharedModule {}

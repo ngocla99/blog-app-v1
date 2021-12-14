@@ -15,11 +15,14 @@ export class HomeComponent implements OnInit {
   tags = ['welcome', 'introduction', 'codebaseShow', 'implementations'];
   tagsValue = '';
   mostLikes: any[] = [];
+  public screenWidth: any;
+  public screenHeight: any;
+
   constructor(
     private auth: AuthService,
     private router: Router,
     private getArticle: HomeArticleService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getArticle.getGlobalFeed().subscribe((data: any) => {
@@ -40,6 +43,11 @@ export class HomeComponent implements OnInit {
     this.tagsValue = value;
     this.tagMode = true;
     this.ViewMode = 'tags';
+    if (window.innerWidth > 767) {
+      window.scrollTo(0, 600);
+    } else if (window.innerWidth <= 767) {
+      window.scrollTo(0, 200);
+    }
   }
 
   changeFeedMode() {

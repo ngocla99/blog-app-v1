@@ -9,6 +9,8 @@ import { Comment } from 'src/app/shared/model/comment.model';
 export class CommentListComponent implements OnInit {
 
   @Input() comments!: Comment[];
+  totalLength!: number;
+  page: number = 1;
 
   constructor() { }
 
