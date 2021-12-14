@@ -1,11 +1,9 @@
 <ul style="width: 700px; margin: 50px auto;  " class="">
-    <li style="list-style-type: none; margin-bottom: 10px;" *ngFor="let comment of comments">
+    <li style="list-style-type: none; margin-bottom: 10px;" *ngFor="let comment of comments
+     | paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalLength }">
       <app-comment-item [comment] = "comment" ></app-comment-item>
     </li>
   </ul>
+  <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls>
 
   
-
-   <!-- <div *ngFor="let comment of comments" class="card">
-    <app-comment-item [comment] = "comment" ></app-comment-item>
-   </div> -->

@@ -21,6 +21,7 @@ import { PopularPostsComponent } from './component/extension/popular-posts/popul
 import { TagListComponent } from './component/extension/tag-list/tag-list.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { BreaklinePipe } from './pipe/breakline.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     ArticlesListComponent,
@@ -43,7 +44,7 @@ import { BreaklinePipe } from './pipe/breakline.pipe';
     PageNotFoundComponent,
     BreaklinePipe,
   ],
-  imports: [CommonModule, SharedRoutingModule],
+  imports: [CommonModule, SharedRoutingModule, NgxPaginationModule],
   exports: [
     CommonModule,
     CommentComponent,

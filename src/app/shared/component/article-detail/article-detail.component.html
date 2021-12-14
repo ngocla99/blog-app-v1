@@ -1,5 +1,5 @@
-<app-preloader></app-preloader>
-<div class="site-wrapper">
+<app-preloader *ngIf="preload"></app-preloader>
+<div *ngIf="!preload" class="site-wrapper">
   <div class="main-overlay"></div>
   <!-- section main content -->
   <section class="main-content mt-3">
@@ -25,7 +25,7 @@
               <h1 class="title mt-0 mb-3">{{ article.title }}</h1>
               <ul class="meta list-inline mb-0">
                 <li class="list-inline-item">
-                  <a href="#"
+                  <a routerLink="/profile/{{ article.author.username }}"
                     ><img
                       style="width: 50px; height: 50px; border-radius: 25px"
                       [src]="article.author.image"
@@ -121,9 +121,7 @@
                 <div class="row d-flex align-items-center">
                   <div class="col-md-6 col-12 text-center text-md-start">
                     <!-- tags -->
-                    <a style="color: grey" href="#" class="tag">#Trending</a>
-                    <a style="color: grey" href="#" class="tag">#Video</a>
-                    <a style="color: grey" href="#" class="tag">#Featured</a>
+                    <a style="color: grey" href="#" class="tag"># {{ article.tagList[0] | titlecase }}</a>
                   </div>
                   <div class="col-md-6 col-12">
                     <!-- social icons -->
@@ -163,11 +161,11 @@
 
             <div class="about-author padding-30 rounded">
               <div class="thumb">
-                <img style="" [src]="article.author.image" />
+               <a routerLink="/profile/{{ article.author.username }}"> <img style="" [src]="article.author.image" /></a>
               </div>
               <div class="details">
                 <h4 class="name">
-                  <a href="#">{{ article.author.username }}</a>
+                  <a routerLink="/profile/{{ article.author.username }}">{{ article.author.username }}</a>
                 </h4>
                 <p>join the community by creating a new implementation</p>
                 <!-- social icons -->

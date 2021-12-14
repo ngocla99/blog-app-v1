@@ -10,6 +10,7 @@ import { AuthInterceptorService } from './service/auth-interceptor.service';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { FooterComponent } from './footer/footer.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent],

@@ -1,4 +1,6 @@
 import { Profile } from './profile.model';
+import { Comment } from './comment.model';
+
 
 export interface ArticlePost {
   title: string;
@@ -14,6 +16,7 @@ export interface Article extends ArticlePost {
   favorited: string;
   favoritesCount: string;
   author: Profile;
+  comments: Comment[];
 }
 
 export interface ArticleObj {
