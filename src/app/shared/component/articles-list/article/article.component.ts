@@ -40,7 +40,7 @@ export class ArticleComponent implements OnInit {
         this.articleService.likeSub.next();
       });
     } else {
-      this.router.navigateByUrl('login');
+      this.router.navigateByUrl('/auth/login');
     }
   }
 

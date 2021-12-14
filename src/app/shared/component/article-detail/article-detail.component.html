@@ -112,7 +112,10 @@
             </ng-template>
             <!-- post content -->
             <div class="post-content clearfix">
-              <p style="font-size: 20px">{{ article.body }}</p>
+              <p
+                style="font-size: 20px"
+                [innerHtml]="article.body | breakline"
+              ></p>
               <!-- post bottom section -->
               <div class="post-bottom">
                 <div class="row d-flex align-items-center">

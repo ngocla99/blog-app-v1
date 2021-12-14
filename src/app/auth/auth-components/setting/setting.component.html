@@ -77,14 +77,14 @@
                 required
               />
               <div
-                class="col alert"
+                [ngClass]="'alert alert-danger'"
                 role="alert"
                 *ngIf="email?.errors?.['required'] && email?.touched"
               >
                 Email is required!!!
               </div>
               <div
-                class="col alert"
+                [ngClass]="'alert alert-danger'"
                 role="alert"
                 *ngIf="email?.errors?.['pattern'] && email?.touched"
               >
@@ -108,7 +108,7 @@
                 required
               ></textarea>
               <div
-                class="col alert"
+                [ngClass]="'alert alert-danger'"
                 role="alert"
                 *ngIf="bio?.errors?.['required'] && bio?.touched"
               >
@@ -131,7 +131,7 @@
                 required
               />
               <div
-                class="col alert"
+                [ngClass]="'alert alert-danger'"
                 role="alert"
                 *ngIf="image?.errors?.['required'] && image?.touched"
               >
