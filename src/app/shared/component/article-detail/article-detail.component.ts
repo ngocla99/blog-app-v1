@@ -49,7 +49,6 @@ export class ArticleDetailComponent implements OnInit {
         this.userService.getUserProfile(this.article.author.username).subscribe((user) => {
           this.article.author
           this.article.author = user.profile;
-          console.log(this.article.author);
         })
         this.isLoading = false;
       }
