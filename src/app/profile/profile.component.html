@@ -50,9 +50,9 @@
           <!-- CASE: another author profile, not user profile -->
           <div *ngIf="!isUser && profile?.following" class="post mt-3">
             <a
-              appDebounceClick
               style="cursor: pointer"
               class="category-badge"
+              appDebounceClick
               (debounceClick)="onFollow()"
             >
               Unfollow {{ profile?.username }}</a
@@ -61,9 +61,9 @@
 
           <div *ngIf="!isUser && !profile?.following" class="post mt-3">
             <a
-              appDebounceClick
               style="cursor: pointer"
               class="category-badge-f"
+              appDebounceClick
               (debounceClick)="onFollow()"
               >Follow {{ profile?.username }}</a
             >

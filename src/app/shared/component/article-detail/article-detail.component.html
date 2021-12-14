@@ -56,7 +56,8 @@
               >
               <a
                 style="cursor: pointer"
-                (click)="deleteArticle(article.slug)"
+                appDebounceClick
+                (debounceClick)="deleteArticle(article.slug)"
                 class="category-badge"
                 ><i class="fas fa-trash-alt"></i>Delete</a
               >
@@ -73,7 +74,8 @@
                   "
                   *ngIf="!article?.favorited"
                   class="grayBack"
-                  (click)="favourite()"
+                  appDebounceClick
+                  (debounceClick)="favourite()"
                 >
                   <i class="fas fa-heart"></i> Favourite({{
                     article?.favoritesCount
@@ -84,7 +86,8 @@
                   style="margin-right: 20px; font-size: 15px"
                   *ngIf="article?.favorited"
                   class="greenBack"
-                  (click)="unfavorite()"
+                  appDebounceClick
+                  (debounceClick)="unfavorite()"
                 >
                   <i class="fas fa-heart-broken"></i> Unfavourite({{
                     article?.favoritesCount
@@ -94,7 +97,8 @@
                   style="font-size: 15px; border-radius: 20px"
                   *ngIf="!article?.author?.following"
                   class="grayBack"
-                  (click)="follow()"
+                  appDebounceClick
+                  (debounceClick)="follow()"
                 >
                   <i class="fas fa-user-plus"></i> Follow
                 </button>
@@ -102,7 +106,8 @@
                   style="font-size: 15px; border-radius: 20px"
                   *ngIf="article?.author?.following"
                   class="greenBack"
-                  (click)="unfollow()"
+                  appDebounceClick
+                  (debounceClick)="unfollow()"
                 >
                   <i class="fas fa-user-minus"></i> Unfollow
                 </button>
