@@ -49,35 +49,35 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-  windowScrolled!: boolean;
+  // windowScrolled!: boolean;
   constructor(@Inject(DOCUMENT) private document: Document) {}
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    if (
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop > 100
-    ) {
-      this.windowScrolled = true;
-    } else if (
-      (this.windowScrolled && window.pageYOffset) ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop < 10
-    ) {
-      this.windowScrolled = false;
-    }
-  }
+  // @HostListener('window:scroll', [])
+  // onWindowScroll() {
+  //   if (
+  //     window.pageYOffset ||
+  //     document.documentElement.scrollTop ||
+  //     document.body.scrollTop > 100
+  //   ) {
+  //     this.windowScrolled = true;
+  //   } else if (
+  //     (this.windowScrolled && window.pageYOffset) ||
+  //     document.documentElement.scrollTop ||
+  //     document.body.scrollTop < 10
+  //   ) {
+  //     this.windowScrolled = false;
+  //   }
+  // }
   scrollToTop() {
-    (function smoothscroll() {
-      let currentScroll =
-        document.documentElement.scrollTop || document.body.scrollTop;
-      if (currentScroll > 0) {
-        // window.requestAnimationFrame(smoothscroll);
-        // window.scrollTo(0, currentScroll - currentScroll / 8);
-        // console.log(currentScroll);
-      }
-      window.scrollTo(0, 0);
-    })();
+    // (function smoothscroll() {
+    //   let currentScroll =
+    //     document.documentElement.scrollTop || document.body.scrollTop;
+    //   if (currentScroll > 0) {
+    // window.requestAnimationFrame(smoothscroll);
+    // window.scrollTo(0, currentScroll - currentScroll / 8);
+    // console.log(currentScroll);
+    // }
+    window.scrollTo(0, 0);
+    // })();
   }
   ngOnInit() {}
 }

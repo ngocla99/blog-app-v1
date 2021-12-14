@@ -29,6 +29,8 @@ export class EditorComponent implements OnInit {
   content!: string;
   tags!: string;
   articleEditorForm!: FormGroup;
+  testTags!: string;
+  listTags: string[] = [];
 
   @Output() change = new EventEmitter<boolean>();
   constructor(
@@ -43,13 +45,13 @@ export class EditorComponent implements OnInit {
       this.title = this.article.title;
       this.description = this.article.description;
       this.content = this.article.body;
-      this.tags = this.article.tagList.join(',');
+      this.listTags = this.article.tagList;
     }
     this.articleEditorForm = this.fb.group({
       title: [this.title, Validators.required],
       description: [this.description, Validators.required],
       content: [this.content, Validators.required],
-      tags: [this.tags],
+      tags: [this.listTags],
     });
     this.change.emit(false);
 
@@ -68,7 +70,7 @@ export class EditorComponent implements OnInit {
       title: form.title,
       description: form.description,
       body: form.content,
-      tagList: form.tags.split(','),
+      tagList: this.listTags,
     };
 
     Swal.fire({
@@ -176,5 +178,20 @@ export class EditorComponent implements OnInit {
           console.log(err);
         }
       );
+  }
+
+  enterTags() {
+    if (!this.testTags) {
+      return;
+    }
+    this.listTags.push(this.testTags);
+    this.testTags = '';
+  }
+
+  delTags(msg: string) {
+    const index: number = this.listTags.indexOf(msg);
+    if (index !== -1) {
+      this.listTags.splice(index, 1);
+    }
   }
 }

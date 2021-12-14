@@ -50,3 +50,17 @@ select {
 .border-error {
   border: 2px solid red;
 }
+
+.tag {
+  color: #8f9bad;
+  border: solid 1px #ebebeb;
+  border-radius: 25px;
+  font-size: 13px;
+  display: inline-block;
+  padding: 3px 14px;
+  margin: 4px 0;
+}
+
+.ion-close-round:before {
+  margin-right: 10px;
+}
