@@ -19,6 +19,8 @@ import { NewsletterComponent } from './component/extension/newsletter/newsletter
 import { HeroCarouselComponent } from './component/extension/hero-carousel/hero-carousel.component';
 import { PopularPostsComponent } from './component/extension/popular-posts/popular-posts.component';
 import { TagListComponent } from './component/extension/tag-list/tag-list.component';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { BreaklinePipe } from './pipe/breakline.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HeroCarouselComponent,
     PopularPostsComponent,
     TagListComponent,
+    PageNotFoundComponent,
+    BreaklinePipe,
   ],
   imports: [CommonModule, SharedRoutingModule, NgxPaginationModule],
   exports: [
@@ -55,6 +59,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NewsletterComponent,
     HeroCarouselComponent,
     PopularPostsComponent,
+    PageNotFoundComponent,
+    BreaklinePipe,
   ],
 })
 export class SharedModule {}
