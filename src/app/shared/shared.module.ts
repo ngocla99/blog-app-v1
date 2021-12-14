@@ -19,6 +19,7 @@ import { NewsletterComponent } from './component/extension/newsletter/newsletter
 import { HeroCarouselComponent } from './component/extension/hero-carousel/hero-carousel.component';
 import { PopularPostsComponent } from './component/extension/popular-posts/popular-posts.component';
 import { TagListComponent } from './component/extension/tag-list/tag-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     ArticlesListComponent,
@@ -39,7 +40,7 @@ import { TagListComponent } from './component/extension/tag-list/tag-list.compon
     PopularPostsComponent,
     TagListComponent,
   ],
-  imports: [CommonModule, SharedRoutingModule],
+  imports: [CommonModule, SharedRoutingModule, NgxPaginationModule],
   exports: [
     CommonModule,
     CommentComponent,

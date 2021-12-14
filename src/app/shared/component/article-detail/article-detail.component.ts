@@ -17,6 +17,7 @@ export class ArticleDetailComponent implements OnInit {
   article!: Article;
   isLoading!: boolean;
 
+  preload: boolean = true;
   constructor(
     private activatedRoute: ActivatedRoute,
     private articleService: ArticleService,
@@ -28,6 +29,10 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.preload = false;
+    }, 1200);
+    
     this.getArticle();
   }
 
@@ -41,6 +46,10 @@ export class ArticleDetailComponent implements OnInit {
         console.log(err);
       },
       () => {
+        this.userService.getUserProfile(this.article.author.username).subscribe((user) => {
+          this.article.author
+          this.article.author = user.profile;
+        })
         this.isLoading = false;
       }
     );
