@@ -85,6 +85,22 @@ export class CommentComponent implements OnInit {
         .postArticleComment(this.slug, { comment: comment })
         .subscribe(
           (data) => {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+              },
+            });
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Add comment success!!!',
+            });
             this.comments.unshift(data.comment);
             (document.getElementById('InputComment') as HTMLFormElement).value =
               '';
