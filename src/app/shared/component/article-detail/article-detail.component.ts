@@ -32,7 +32,7 @@ export class ArticleDetailComponent implements OnInit {
     setTimeout(() => {
       this.preload = false;
     }, 1200);
-    
+
     this.getArticle();
   }
 
@@ -46,10 +46,12 @@ export class ArticleDetailComponent implements OnInit {
         console.log(err);
       },
       () => {
-        this.userService.getUserProfile(this.article.author.username).subscribe((user) => {
-          this.article.author
-          this.article.author = user.profile;
-        })
+        this.userService
+          .getUserProfile(this.article.author.username)
+          .subscribe((user) => {
+            this.article.author;
+            this.article.author = user.profile;
+          });
         this.isLoading = false;
       }
     );

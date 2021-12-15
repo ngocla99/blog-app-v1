@@ -11,7 +11,11 @@
         </div>
         <a>
           <div class="inner">
-            <img src="{{ img }}" alt="post-title" />
+            <img
+              [routerLink]="['/article', article.slug]"
+              src="{{ img }}"
+              alt="post-title"
+            />
           </div>
         </a>
       </div>
@@ -68,7 +72,11 @@
               >{{ article.comments.length * 2 }}
             </span>
             <span>
-              <i class="fas fa-comment" style="margin-right: 5px"></i
+              <i
+                [routerLink]="['/article', article.slug]"
+                class="fas fa-comment"
+                style="margin-right: 5px"
+              ></i
               >{{ article.comments.length }}
             </span>
           </div>
