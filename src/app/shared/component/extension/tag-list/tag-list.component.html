@@ -4,9 +4,17 @@
     <img src="assets/images/wave.svg" class="wave" alt="wave" />
   </div>
   <div class="widget-content">
-    <a class="active" class="tag" style="cursor: pointer"># welcome</a>
+    <a
+      class="active"
+      class="tag"
+      style="cursor: pointer"
+      *ngFor="let tag of tagList"
+    >
+      # {{ tag }}
+    </a>
+    <!-- <a class="active" class="tag" style="cursor: pointer"># welcome</a>
     <a class="active" class="tag" style="cursor: pointer"># introduction</a>
     <a class="active" class="tag" style="cursor: pointer"># codebaseShow</a>
-    <a class="active" class="tag" style="cursor: pointer"># implementations</a>
+    <a class="active" class="tag" style="cursor: pointer"># implementations</a> -->
   </div>
 </div>
