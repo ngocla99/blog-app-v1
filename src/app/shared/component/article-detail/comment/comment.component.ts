@@ -17,6 +17,11 @@ export class CommentComponent implements OnInit {
   totalLength!: number;
   page: number = 1;
 
+  slugArr: string[] = [
+    'Create-a-new-implementation-1',
+    'Explore-implementations-1',
+    'Welcome-to-RealWorld-project-1',
+  ];
   constructor(
     private commentService: CommentsService,
     private auth: AuthService
@@ -27,15 +32,19 @@ export class CommentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getArticleComments();
+    if (this.slugArr.includes(this.slug)) {
+      this.getArticleComments();
+    } else {
+      this.getComments();
+    }
   }
 
   getArticleComments() {
+    this.isLoading = true;
     this.commentService.getArticle().subscribe(
       (data) => {
-        let articleBySlug = data.articles.filter((e) => e.slug == this.slug);
-        this.totalLength = articleBySlug[0].comments.length;
-        // console.log(articleBySlug[0].comments);
+        this.isLoading = false;
+        const articleBySlug = data.articles.filter((e) => e.slug == this.slug);
 
         if (articleBySlug.length > 0) {
           this.comments = articleBySlug[0].comments;
@@ -49,6 +58,14 @@ export class CommentComponent implements OnInit {
     );
   }
 
+  getComments() {
+    this.isLoading = true;
+    this.commentService.getArticleComments(this.slug).subscribe((data) => {
+      this.isLoading = false;
+      this.comments = data.comments;
+    });
+  }
+
   get isLoggedIn() {
     return this.auth.isLoggedIn();
   }
@@ -58,6 +75,7 @@ export class CommentComponent implements OnInit {
   }
 
   addComment(commentValue: string) {
+    window.scrollTo(0, 680);
     commentValue = commentValue.trim();
     if (commentValue.length !== 0) {
       const comment = {

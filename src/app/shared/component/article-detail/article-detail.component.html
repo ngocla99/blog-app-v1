@@ -1,4 +1,4 @@
-<app-preloader *ngIf="preload"></app-preloader>
+<app-preloader [timeLoad]="2000" *ngIf="preload"></app-preloader>
 <div *ngIf="!preload" class="site-wrapper">
   <div class="main-overlay"></div>
   <!-- section main content -->
@@ -21,7 +21,7 @@
       </nav>
 
       <div class="row gy-4">
-        <div class="col-lg-8">
+        <div class="col-md-12 col-lg-8">
           <!-- post single -->
           <div class="post post-single">
             <!-- post header -->
@@ -56,14 +56,14 @@
                 style="cursor: pointer"
                 (click)="editArticle(article.slug)"
                 class="category-badge me-2"
-                ><i class="fas fa-edit"></i>Edit Post</a
+                ><i class="fas fa-edit"></i> Edit Post</a
               >
               <a
                 style="cursor: pointer"
                 appDebounceClick
                 (debounceClick)="deleteArticle(article.slug)"
                 class="category-badge"
-                ><i class="fas fa-trash-alt"></i>Delete</a
+                ><i class="fas fa-trash-alt"></i> Delete</a
               >
             </div>
             <br />
@@ -81,9 +81,8 @@
                   appDebounceClick
                   (debounceClick)="favourite()"
                 >
-                  <i class="fas fa-heart"></i> Favourite({{
-                    article?.favoritesCount
-                  }})
+                  <i class="fas fa-heart"></i> Favourite
+                  {{ article?.favoritesCount }}
                 </button>
 
                 <button
@@ -93,9 +92,8 @@
                   appDebounceClick
                   (debounceClick)="unfavorite()"
                 >
-                  <i class="fas fa-heart-broken"></i> Unfavourite({{
-                    article?.favoritesCount
-                  }})
+                  <i class="fas fa-heart-broken"></i> Unfavourite
+                  {{ article?.favoritesCount }}
                 </button>
                 <button
                   style="font-size: 15px; border-radius: 20px"
@@ -217,10 +215,10 @@
             <app-comment [slug]="article?.slug"></app-comment>
           </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-md-12 col-lg-4">
           <!-- sidebar -->
           <app-widget-about></app-widget-about>
-          <app-tag-list></app-tag-list>
+          <app-tag-list class="hide"></app-tag-list>
           <app-newsletter></app-newsletter>
         </div>
       </div>

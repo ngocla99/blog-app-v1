@@ -4,17 +4,17 @@ import { Comment } from 'src/app/shared/model/comment.model';
 @Component({
   selector: 'app-comment-list',
   templateUrl: './comment-list.component.html',
-  styleUrls: ['./comment-list.component.css']
+  styleUrls: ['./comment-list.component.css'],
 })
 export class CommentListComponent implements OnInit {
-
   @Input() comments!: Comment[];
-  totalLength!: number;
   page: number = 1;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onScroll() {
+    window.scrollTo(0, 680);
   }
-
 }

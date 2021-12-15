@@ -2,8 +2,9 @@
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 </div>
 
+<h5 *ngIf="!isLoading && emptyPage">You have not liked any posts yet...</h5>
 <app-articles-list
-  *ngIf="!isLoading"
+  *ngIf="!isLoading && !emptyPage"
   [listArticles]="articles"
 ></app-articles-list>
 

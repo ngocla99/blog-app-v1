@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Article, ArticleData } from '../shared/model/article.model';
 import {
   CommentPost,
@@ -13,17 +14,17 @@ import {
 export class CommentsService {
   private readonly API_URL = 'https://conduit.productionready.io/api';
 
-  deleteEvent = new EventEmitter<number>();
+  deleteEvent = new Subject<number>();
 
   constructor(private http: HttpClient) {}
 
-
+  // Show all comments of public articles
   getArticle() {
     return this.http.get<ArticleData>(`${this.API_URL}/articles`);
   }
+
   // Get comments from an article
   getArticleComments(slug: string) {
-   
     return this.http.get<CommentsData>(
       `${this.API_URL}/articles/${slug}/comments`
     );
