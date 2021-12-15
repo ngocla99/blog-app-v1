@@ -73,7 +73,7 @@
               alt="wave"
             />
           </div>
-          <div class="widget-content">
+          <div *ngIf="tags.length" class="widget-content">
             <a
               class="tag"
               style="margin-right: 10px; cursor: pointer"
@@ -83,6 +83,7 @@
               # {{ tag }}
             </a>
           </div>
+          <p class="text-center" *ngIf="!tags.length">Nothing tags yet...</p>
         </div>
         <!-- Post popular -->
         <app-popular-posts [mostLike]="mostLikes"></app-popular-posts>

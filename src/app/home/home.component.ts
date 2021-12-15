@@ -13,8 +13,7 @@ import Swal from 'sweetalert2';
 export class HomeComponent implements OnInit {
   tagMode = false;
   ViewMode: 'global' | 'tags' | 'feed' = 'global';
-  // tags = ['welcome', 'introduction', 'codebaseShow', 'implementations'];
-  tags!: string[];
+  tags: string[] = [];
   tagsValue = '';
   mostLikes: any[] = [];
   public screenWidth: any;
@@ -37,6 +36,7 @@ export class HomeComponent implements OnInit {
 
     this.getArticle.getTagList().subscribe((tagData) => {
       this.tags = tagData.tags;
+      console.log(this.tags);
     });
   }
 
