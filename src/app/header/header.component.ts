@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   user!: UserInfo;
   userUpdate$!: Subscription;
+  logoutUserSide!: string | null;
   constructor(
     private authService: AuthService, // private route: ActivatedRoute, // private router: Router
     private userService: UserService
@@ -52,5 +53,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userUpdate$.unsubscribe();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

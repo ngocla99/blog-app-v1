@@ -78,9 +78,7 @@ export class LoginComponent implements OnInit {
             title: swalError + ' is invalid',
           });
           const statusCode = err.status;
-          if (statusCode === 422) {
-            console.log(`422 : `);
-          } else if (statusCode === 404) {
+          if (statusCode === 404) {
             console.log(`404 : Not Found`);
           } else if (statusCode === 401) {
             console.log(`401 : Unauthorized Access`);

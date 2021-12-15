@@ -63,7 +63,6 @@ export class SignComponent implements OnInit {
           const swalError = Object.keys(errorMsg)
             .map((errItem) => errItem)
             .join(' & ');
-          console.log(swalError);
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -82,9 +81,7 @@ export class SignComponent implements OnInit {
           });
           const statusCode = err.status;
           this.router.navigateByUrl('/auth/sign-up');
-          if (statusCode === 422) {
-            console.log(`422 : `);
-          } else if (statusCode === 404) {
+          if (statusCode === 404) {
             console.log(`404 : Not Found`);
           } else if (statusCode === 401) {
             console.log(`401 : Unauthorized Access`);

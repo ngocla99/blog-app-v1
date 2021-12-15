@@ -5,6 +5,7 @@ import { Profile } from '../shared/model/profile.model';
 import { switchMap } from 'rxjs/operators';
 import { UserService } from '../service/user.service';
 import { AuthService } from '../service/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -44,7 +45,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onFollow() {
     if (!this.isLoggedIn) {
-      this.router.navigate(['/auth/login']);
+      // this.router.navigate(['/auth/login']);
+      Swal.fire({
+        title: 'You must login !!!',
+        confirmButtonText: 'Go to login',
+        confirmButtonColor: '#ff416c',
+        timer: 2500,
+        timerProgressBar: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl('/auth/login');
+        }
+      });
       return;
     }
     if (!this.profile.following) {

@@ -2,6 +2,7 @@ import { ArticleService } from './../../../../service/article.service';
 import { AuthService } from './../../../../service/auth.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-article',
@@ -13,11 +14,14 @@ export class ArticleComponent implements OnInit {
   tagLists: string[] = [];
   favorited!: boolean;
   listImg = [
-    'https://1.bp.blogspot.com/-hN0NCoAmEDY/X8z1OcRjXmI/AAAAAAAAlc0/hHqbHzqOPhIABiVomzpYacPeEufV816QQCNcBGAsYHQ/s0/hinh-nen-may-cuc-dep.jpg',
-    'https://cohet.vn/upload/data/images/BACKGROUND-%202-TECK/hinh-nen-one-piece_102505879.jpg',
-    'https://suachualaptop24h.com/upload_images/images/2021/05/02/hinh-nen-laptop-anime-min.jpg',
-    'https://suachualaptop24h.com/upload_images/images/2021/04/21/top-3-trang-web-cung-cap-hinh-nen-dep-cho-may-tinh-chat-luong-full-hd-3.jpg',
-    'http://khanhkhiem.com/wp-content/uploads/2017/12/hinh-nen-vu-tru-galaxy-17.jpg',
+    '../../../../../assets/images/post/post1.webp',
+    '../../../../../assets/images/post/post2.webp',
+    '../../../../../assets/images/post/post3.webp',
+    '../../../../../assets/images/post/post4.webp',
+    '../../../../../assets/images/post/post5.webp',
+    '../../../../../assets/images/post/post6.webp',
+    '../../../../../assets/images/post/post7.webp',
+    '../../../../../assets/images/post/post8.webp',
   ];
   img: string = '';
   constructor(
@@ -40,8 +44,22 @@ export class ArticleComponent implements OnInit {
         this.articleService.likeSub.next();
       });
     } else {
-      this.router.navigateByUrl('/auth/login');
+      Swal.fire({
+        title: 'You must login !!!',
+        confirmButtonText: 'Go to login',
+        confirmButtonColor: '#ff416c',
+        timer: 2500,
+        timerProgressBar: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl('/auth/login');
+        }
+      });
     }
+  }
+
+  get isLogin() {
+    return this.auth.isLoggedIn();
   }
 
   onUnLike(value: any) {
