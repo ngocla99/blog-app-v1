@@ -32,7 +32,9 @@ export class EditorComponent implements OnInit {
   testTags!: string;
   listTags: string[] = [];
 
+  changeFlag = false;
   @Output() change = new EventEmitter<boolean>();
+  isLoading = false;
   constructor(
     private fb: FormBuilder,
     private articleService: ArticleService,
@@ -56,7 +58,10 @@ export class EditorComponent implements OnInit {
     this.change.emit(false);
 
     this.articleEditorForm.valueChanges.subscribe(() => {
-      this.change.emit(true);
+      if (this.changeFlag) {
+        this.change.emit(true);
+      }
+      this.changeFlag = true;
     });
   }
 
@@ -75,7 +80,6 @@ export class EditorComponent implements OnInit {
 
     Swal.fire({
       title: 'Are you sure?',
-      text: "You won't be able to revert this!",
       icon: 'info',
       showCancelButton: true,
       confirmButtonColor: '#273043',
@@ -83,6 +87,7 @@ export class EditorComponent implements OnInit {
       confirmButtonText: 'Yes',
     }).then((result) => {
       if (result.isConfirmed) {
+        this.isLoading = true;
         if (this.editFlag) {
           this.editArticle(formValue, this.article.slug);
         } else {
@@ -95,6 +100,7 @@ export class EditorComponent implements OnInit {
   postArticle(article: ArticlePost) {
     this.articleService.postNewArticle({ article: article }).subscribe(
       (data: any) => {
+        this.isLoading = false;
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -114,6 +120,7 @@ export class EditorComponent implements OnInit {
         this.router.navigate(['/article', data.article.slug]);
       },
       (err) => {
+        this.isLoading = false;
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -130,7 +137,6 @@ export class EditorComponent implements OnInit {
           icon: 'error',
           title: 'Post New Post fail!!!',
         });
-        console.error(err);
       }
     );
   }
@@ -140,6 +146,7 @@ export class EditorComponent implements OnInit {
       .editArticle({ article: article }, articleSlug)
       .subscribe(
         (data) => {
+          this.isLoading = false;
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -159,6 +166,7 @@ export class EditorComponent implements OnInit {
           this.router.navigate(['/article', data.article.slug]);
         },
         (err) => {
+          this.isLoading = false;
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -175,7 +183,6 @@ export class EditorComponent implements OnInit {
             icon: 'error',
             title: 'Edit Post fail!!!',
           });
-          console.log(err);
         }
       );
   }

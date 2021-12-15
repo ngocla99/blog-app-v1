@@ -18,7 +18,8 @@ export class AuthInterceptorService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const isLoggedIn = this.authService.isLoggedIn();
     const reqLast = req.url.split('/').reverse()[0];
-    if (reqLast === 'articles') return next.handle(req);
+
+    if (reqLast === 'articles' && !req.body) return next.handle(req);
     if (!isLoggedIn) return next.handle(req);
     else {
       const token = this.authService.getUserToken();

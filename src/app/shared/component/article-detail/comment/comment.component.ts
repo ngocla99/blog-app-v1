@@ -47,7 +47,7 @@ export class CommentComponent implements OnInit {
         const articleBySlug = data.articles.filter((e) => e.slug == this.slug);
 
         if (articleBySlug.length > 0) {
-          this.comments = articleBySlug[0].comments;
+          this.comments = articleBySlug[0].comments.reverse();
         } else {
           this.comments = [];
         }
@@ -62,7 +62,11 @@ export class CommentComponent implements OnInit {
     this.isLoading = true;
     this.commentService.getArticleComments(this.slug).subscribe((data) => {
       this.isLoading = false;
-      this.comments = data.comments;
+      if (this.comments.length > 0) {
+        this.comments = data.comments;
+      } else {
+        this.comments = [];
+      }
     });
   }
 

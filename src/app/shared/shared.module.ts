@@ -23,6 +23,7 @@ import { DebounceClickDirective } from './directive/debounce-click.directive';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { BreaklinePipe } from './pipe/breakline.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LoadingPostComponent } from './component/loading-post/loading-post.component';
 @NgModule({
   declarations: [
     ArticlesListComponent,
@@ -45,6 +46,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DebounceClickDirective,
     PageNotFoundComponent,
     BreaklinePipe,
+    LoadingPostComponent,
   ],
   imports: [CommonModule, SharedRoutingModule, NgxPaginationModule],
   exports: [
@@ -64,6 +66,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DebounceClickDirective,
     PageNotFoundComponent,
     BreaklinePipe,
+    LoadingPostComponent,
   ],
 })
 export class SharedModule {}
