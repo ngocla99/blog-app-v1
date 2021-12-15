@@ -19,7 +19,7 @@ export class CommentsService {
 
 
   getArticle() {
-    return this.http.get<ArticleData>(`${this.API_URL}/articles`);
+    return this.http.get<ArticleData>( `${this.API_URL}/articles`);
   }
   // Get comments from an article
   getArticleComments(slug: string) {

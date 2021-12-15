@@ -34,9 +34,9 @@ export class CommentComponent implements OnInit {
     this.commentService.getArticle().subscribe(
       (data) => {
         let articleBySlug = data.articles.filter(e => e.slug == this.slug);
-        this.totalLength = articleBySlug[0].comments.length;
-        console.log(articleBySlug[0].comments);
+        console.log(data.articles);
         
+        this.totalLength = articleBySlug[0].comments.length;
         if (articleBySlug.length > 0) {
           this.comments = articleBySlug[0].comments;
         }
