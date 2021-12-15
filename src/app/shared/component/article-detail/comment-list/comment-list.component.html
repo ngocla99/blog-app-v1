@@ -1,9 +1,18 @@
-<ul *ngIf="page" style="width: 700px; margin: 50px auto;  " class="">
-    <li style="list-style-type: none; margin-bottom: 10px;" *ngFor="let comment of comments
-     | paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalLength}">
-      <app-comment-item [comment] = "comment" ></app-comment-item>
-    </li>
-  </ul>
-  <pagination-controls [autoHide]="true" class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls>
-
-  
+<ul style="width: 700px; margin: 50px auto" class="">
+  <li
+    style="list-style-type: none; margin-bottom: 10px"
+    *ngFor="
+      let comment of comments
+        | paginate: { itemsPerPage: 10, currentPage: page }
+    "
+  >
+    <app-comment-item [comment]="comment"></app-comment-item>
+  </li>
+</ul>
+<pagination-controls
+  class="text-center my-pagination"
+  (click)="onScroll()"
+  [autoHide]="true"
+  (pageChange)="page = $event"
+  [responsive]="true"
+></pagination-controls>

@@ -12,7 +12,8 @@
         <a>
           <div class="inner">
             <img
-              src="https://themeger.shop/html/katen/html/images/posts/post-md-1.jpg"
+              [routerLink]="['/article', article.slug]"
+              src="{{ img }}"
               alt="post-title"
             />
           </div>
@@ -50,7 +51,13 @@
             >
               <div
                 (click)="onLike(article.slug)"
-                class="{{ article.favorited ? 'none-heart' : 'heart' }}"
+                class="{{
+                  article.favorited
+                    ? 'none-heart'
+                    : isLogin
+                    ? 'heart'
+                    : 'none-login-heart'
+                }}"
               ></div>
               <div style="margin-left: -12px">{{ article.favoritesCount }}</div>
               <div class="my-btn-particles"></div>
@@ -71,7 +78,11 @@
               >{{ article.comments.length * 2 }}
             </span>
             <span>
-              <i class="fas fa-comment" style="margin-right: 5px"></i
+              <i
+                [routerLink]="['/article', article.slug]"
+                class="fas fa-comment"
+                style="margin-right: 5px"
+              ></i
               >{{ article.comments.length }}
             </span>
           </div>

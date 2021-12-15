@@ -10,13 +10,18 @@ import Swal from 'sweetalert2';
   styleUrls: ['./comment.component.css'],
 })
 export class CommentComponent implements OnInit {
-  @Input() slug!: string;
+  @Input() slug!: any;
   comments: Comment[] = [];
   isLoading!: boolean;
 
   totalLength!: number;
   page: number = 1;
 
+  slugArr: string[] = [
+    'Create-a-new-implementation-1',
+    'Explore-implementations-1',
+    'Welcome-to-RealWorld-project-1',
+  ];
   constructor(
     private commentService: CommentsService,
     private auth: AuthService
@@ -27,20 +32,23 @@ export class CommentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getArticleComments();
+    if (this.slugArr.includes(this.slug)) {
+      this.getArticleComments();
+    } else {
+      this.getComments();
+    }
   }
 
   getArticleComments() {
+    this.isLoading = true;
     this.commentService.getArticle().subscribe(
       (data) => {
-        let articleBySlug = data.articles.filter(e => e.slug == this.slug);
-        console.log(data.articles);
-        
-        this.totalLength = articleBySlug[0].comments.length;
+        this.isLoading = false;
+        const articleBySlug = data.articles.filter((e) => e.slug == this.slug);
+
         if (articleBySlug.length > 0) {
           this.comments = articleBySlug[0].comments;
-        }
-        else {
+        } else {
           this.comments = [];
         }
       },
@@ -48,6 +56,14 @@ export class CommentComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  getComments() {
+    this.isLoading = true;
+    this.commentService.getArticleComments(this.slug).subscribe((data) => {
+      this.isLoading = false;
+      this.comments = data.comments;
+    });
   }
 
   get isLoggedIn() {
@@ -59,6 +75,7 @@ export class CommentComponent implements OnInit {
   }
 
   addComment(commentValue: string) {
+    window.scrollTo(0, 680);
     commentValue = commentValue.trim();
     if (commentValue.length !== 0) {
       const comment = {
@@ -69,7 +86,8 @@ export class CommentComponent implements OnInit {
         .subscribe(
           (data) => {
             this.comments.unshift(data.comment);
-            (document.getElementById('InputComment') as HTMLFormElement).value = '';
+            (document.getElementById('InputComment') as HTMLFormElement).value =
+              '';
           },
           (err) => {
             console.log(err);
@@ -89,30 +107,32 @@ export class CommentComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.commentService.deleteArticleComment(this.slug, commentId).subscribe(
-          () => {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer);
-                toast.addEventListener('mouseleave', Swal.resumeTimer);
-              },
-            });
+        this.commentService
+          .deleteArticleComment(this.slug, commentId)
+          .subscribe(
+            () => {
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer);
+                  toast.addEventListener('mouseleave', Swal.resumeTimer);
+                },
+              });
 
-            Toast.fire({
-              icon: 'success',
-              title: 'Delete comment successfully',
-            });
-            this.comments.splice(this.findComment(commentId), 1);
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
+              Toast.fire({
+                icon: 'success',
+                title: 'Delete comment successfully',
+              });
+              this.comments.splice(this.findComment(commentId), 1);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
         Swal.fire({
           title: 'Deleted!',
           text: 'Your file has been deleted.',
@@ -122,6 +142,5 @@ export class CommentComponent implements OnInit {
         });
       }
     });
-
   }
 }

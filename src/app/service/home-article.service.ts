@@ -52,4 +52,9 @@ export class HomeArticleService {
       `${this.API_URL}/articles/?tag=${tag}&limit=${limit}&offset=${offset}`
     );
   }
+
+  // Get tag list
+  getTagList() {
+    return this.http.get<any>(`${this.API_URL}/tags`);
+  }
 }

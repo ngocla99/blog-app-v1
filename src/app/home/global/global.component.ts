@@ -26,7 +26,7 @@ export class GlobalComponent implements OnInit {
     private getArticle: HomeArticleService,
     private authService: AuthService,
     private articleService: ArticleService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.limit = this.authService.getPage();
@@ -63,10 +63,7 @@ export class GlobalComponent implements OnInit {
       .subscribe((data) => {
         this.isLoading = false;
         this.list = data.articles;
-        console.log(data)
       });
-
-
   }
 
   ngOnDestroy(): void {

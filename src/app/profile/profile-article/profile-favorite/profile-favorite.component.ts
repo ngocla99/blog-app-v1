@@ -23,6 +23,8 @@ export class ProfileFavoriteComponent implements OnInit {
   pageIndex!: number;
   isLoading: boolean = false;
   currentPage: number = 1;
+
+  emptyPage: boolean = false;
   constructor(
     private homeArticleService: HomeArticleService,
     private articleService: ArticleService,
@@ -39,8 +41,8 @@ export class ProfileFavoriteComponent implements OnInit {
       .subscribe((data) => {
         this.isLoading = false;
         this.articles = data.articles;
-
         const articlesCount = data.articlesCount;
+        this.emptyPage = articlesCount === 0 ? true : false;
         this.totalPages = [];
         const numberPages = Math.ceil(articlesCount / this.limit);
         for (let i = 1; i <= numberPages; i++) {

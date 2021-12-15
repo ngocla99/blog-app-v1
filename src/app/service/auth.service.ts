@@ -9,7 +9,7 @@ import {
   UserSignIn,
   UserSignUp,
 } from '../shared/model/user.model';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,9 @@ export class AuthService {
   private readonly API_URL = 'https://conduit.productionready.io/api';
   private timeLogout = 1000 * 60 * 10;
   private defaultNumPerPage = 6;
+  private autoLog!: any;
   updateUser = new Subject<UserInfo>();
+  currentUser = new BehaviorSubject<UserInfo | null>(null);
   constructor(private http: HttpClient, private router: Router) {}
 
   // Sign in the account
@@ -43,9 +45,9 @@ export class AuthService {
 
   // Set auto Logout after 10 minutes when user is logged in.
   autoLogout() {
-    setTimeout(() => {
+    this.autoLog = setTimeout(() => {
       this.logout();
-      Swal.fire('My Blog', 'The login session has expired', 'warning');
+      Swal.fire('UTOD', 'The login session has expired', 'warning');
     }, this.timeLogout);
   }
 
@@ -64,6 +66,7 @@ export class AuthService {
       const user = JSON.parse(localStorage.getItem('user') || '');
       this.autoLogout();
     } else {
+      clearTimeout(this.autoLog);
     }
     return;
   }
@@ -73,6 +76,7 @@ export class AuthService {
     this.removeUser();
     this.router.navigateByUrl('/auth/login');
     window.localStorage.removeItem('itemsPerPage');
+    clearTimeout(this.autoLog);
   }
 
   // Delete user data from local storage
@@ -107,5 +111,10 @@ export class AuthService {
   // Get the number of articles per page from local storage
   getPage() {
     return JSON.parse(localStorage.getItem('itemsPerPage') || '{}');
+  }
+
+  //Set information of current User when login
+  setCurrentUser(obj: UserInfo) {
+    this.currentUser.next(obj);
   }
 }

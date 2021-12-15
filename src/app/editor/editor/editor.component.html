@@ -9,12 +9,7 @@
 
 <div class="row form-setting">
   <!-- Contact Form -->
-  <form
-    id="contact-form"
-    class="contact-form"
-    [formGroup]="articleEditorForm"
-    (ngSubmit)="handleForm(articleEditorForm.value)"
-  >
+  <form id="contact-form" class="contact-form" [formGroup]="articleEditorForm">
     <div class="messages"></div>
 
     <div class="row">
@@ -89,7 +84,23 @@
             type="text"
             formControlName="tags"
             placeholder="Insert tags seperated by comma (,)"
+            (keyup.enter)="enterTags()"
+            [(ngModel)]="testTags"
           />
+        </div>
+      </div>
+      <div class="d-flex column col-md-12">
+        <div class="form-group">
+          <span
+            class="editTags"
+            style="margin-right: 10px"
+            *ngFor="let item of listTags; let i = index"
+            ><a class="tag"
+              ><i class="ion-close-round" (click)="delTags(item)">{{
+                item
+              }}</i></a
+            ></span
+          >
         </div>
       </div>
     </div>
@@ -97,7 +108,8 @@
     <button
       class="btn btn-default pull-xs-right"
       *ngIf="!editFlag"
-      type="submit"
+      type="button"
+      (click)="handleForm(articleEditorForm.value)"
       [disabled]="!articleEditorForm.valid"
     >
       Publish Post
@@ -105,7 +117,8 @@
     <button
       class="btn btn-default pull-xs-right"
       *ngIf="editFlag"
-      type="submit"
+      type="button"
+      (click)="handleForm(articleEditorForm.value)"
       [disabled]="!articleEditorForm.valid"
     >
       Edit Post

@@ -21,15 +21,15 @@ export class TagsComponent implements OnInit {
   isLoading: boolean = false;
   pageNumbers: number[] = [];
   currentPage: number = 1;
-  pageIndexSub$ !: Subscription;
+  pageIndexSub$!: Subscription;
 
   constructor(
     private getArticle: HomeArticleService,
     private authService: AuthService,
     private articleService: ArticleService
-  ) { }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   ngOnChanges(): void {
     this.limit = this.authService.getPage();
@@ -51,7 +51,6 @@ export class TagsComponent implements OnInit {
         this.list = data.articles;
       });
 
-
     this.pageIndexSub$ = this.articleService.pageIndexSub
       .pipe(
         switchMap((pageIndex) => {
@@ -67,9 +66,6 @@ export class TagsComponent implements OnInit {
       .subscribe((data) => {
         this.isLoading = false;
         this.list = data.articles;
-        console.log(data)
       });
   }
-
-
 }
