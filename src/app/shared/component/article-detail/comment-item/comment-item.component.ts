@@ -27,6 +27,6 @@ export class CommentItemComponent implements OnInit {
   }
 
   deleteComment() {
-    this.commentService.deleteEvent.emit(this.comment.id);
+    this.commentService.deleteEvent.next(this.comment.id);
   }
 }

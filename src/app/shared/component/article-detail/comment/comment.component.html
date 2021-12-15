@@ -1,6 +1,8 @@
-<div class="section-header"></div>
-
 <app-comment-list [comments]="comments"></app-comment-list>
+
+<div class="row text-center">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</div>
 
 <div *ngIf="!isLoading" class="comment-form rounded bordered padding-30">
   <div

@@ -47,7 +47,7 @@ export class AuthService {
   autoLogout() {
     this.autoLog = setTimeout(() => {
       this.logout();
-      Swal.fire('My Blog', 'The login session has expired', 'warning');
+      Swal.fire('UTOD', 'The login session has expired', 'warning');
     }, this.timeLogout);
   }
 

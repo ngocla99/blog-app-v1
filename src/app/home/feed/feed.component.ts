@@ -16,6 +16,8 @@ export class FeedComponent implements OnInit {
   pages!: number;
   pageNumbers: number[] = [];
   isLoading: boolean = false;
+
+  emptyPage: boolean = false;
   constructor(
     private getArticle: HomeArticleService,
     private authService: AuthService
@@ -27,6 +29,7 @@ export class FeedComponent implements OnInit {
 
     this.getArticle.getUserFeed().subscribe((data: any) => {
       this.totalPages = data.articlesCount;
+      this.emptyPage = this.totalPages === 0 ? true : false;
       if (this.totalPages <= 1) {
         this.pages = 0;
       } else {
