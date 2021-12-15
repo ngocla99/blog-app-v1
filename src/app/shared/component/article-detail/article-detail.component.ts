@@ -101,12 +101,42 @@ export class ArticleDetailComponent implements OnInit {
 
   favourite() {
     if (!this.auth.isLoggedIn()) {
-      this.router.navigate(['/login']);
+      Swal.fire({
+        title: 'You must login !!!',
+        confirmButtonText: 'Go to login',
+        confirmButtonColor: '#ff416c',
+        timer: 2500,
+        timerProgressBar: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl('/auth/login');
+        }
+      });
       return;
     }
     this.articleService.favoriteArticle(this.article.slug).subscribe(
       (data) => {
         this.article = data.article;
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          iconHtml:
+            '<img src="../../../../assets/images/post/heart.png" width="25px" height="25px">',
+          title: 'Favourite !!!',
+          customClass: {
+            icon: 'no-border',
+          },
+        });
       },
       (err) => {
         console.log(err);
@@ -116,12 +146,42 @@ export class ArticleDetailComponent implements OnInit {
 
   unfavorite() {
     if (!this.auth.isLoggedIn()) {
-      this.router.navigate(['/login']);
+      Swal.fire({
+        title: 'You must login !!!',
+        confirmButtonText: 'Go to login',
+        confirmButtonColor: '#ff416c',
+        timer: 2500,
+        timerProgressBar: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl('/auth/login');
+        }
+      });
       return;
     }
     this.articleService.unfavoriteArticle(this.article.slug).subscribe(
       (data) => {
         this.article = data.article;
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          iconHtml:
+            '<img src="../../../../assets/images/post/broken-heart.png" width="25px" height="25px">',
+          title: 'UnFavourite !!!',
+          customClass: {
+            icon: 'no-border',
+          },
+        });
       },
       (err) => {
         console.log(err);
@@ -131,12 +191,42 @@ export class ArticleDetailComponent implements OnInit {
 
   follow() {
     if (!this.auth.isLoggedIn()) {
-      this.router.navigate(['/login']);
+      Swal.fire({
+        title: 'You must login !!!',
+        confirmButtonText: 'Go to login',
+        confirmButtonColor: '#ff416c',
+        timer: 2500,
+        timerProgressBar: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl('/auth/login');
+        }
+      });
       return;
     }
     this.userService.followUser(this.article.author.username).subscribe(
       (data: { profile?: Profile }) => {
         this.article.author = data.profile!;
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          iconHtml:
+            '<img src="../../../../assets/images/post/follow.png" width="50px" height="50px">',
+          title: 'Followed !!!',
+          customClass: {
+            icon: 'no-border',
+          },
+        });
       },
       (err) => {
         console.log(err);
@@ -147,12 +237,42 @@ export class ArticleDetailComponent implements OnInit {
 
   unfollow() {
     if (!this.auth.isLoggedIn()) {
-      this.router.navigate(['/login']);
+      Swal.fire({
+        title: 'You must login !!!',
+        confirmButtonText: 'Go to login',
+        confirmButtonColor: '#ff416c',
+        timer: 2500,
+        timerProgressBar: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl('/auth/login');
+        }
+      });
       return;
     }
     this.userService.unFollowUser(this.article.author.username).subscribe(
       (data) => {
         this.article.author = data.profile;
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          iconHtml:
+            '<img src="../../../../assets/images/post/unfollow.png" width="50px" height="50px">',
+          title: 'UnFollowed !!!',
+          customClass: {
+            icon: 'no-border',
+          },
+        });
       },
       (err) => {
         console.log(err);
