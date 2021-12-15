@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
 
     this.getArticle.getTagList().subscribe((tagData) => {
       this.tags = tagData.tags;
-      console.log(this.tags);
     });
   }
 
