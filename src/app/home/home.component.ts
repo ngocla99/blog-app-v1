@@ -46,13 +46,17 @@ export class HomeComponent implements OnInit {
   }
 
   sendTag(value: string): void {
-    this.tagsValue = value;
-    this.tagMode = true;
-    this.ViewMode = 'tags';
-    if (window.innerWidth > 767) {
-      window.scrollTo(0, 600);
-    } else if (window.innerWidth <= 767) {
-      window.scrollTo(0, 200);
+    if (this.auth.isLoggedIn()) {
+      this.tagsValue = value;
+      this.tagMode = true;
+      this.ViewMode = 'tags';
+      if (window.innerWidth > 767) {
+        window.scrollTo(0, 600);
+      } else if (window.innerWidth <= 767) {
+        window.scrollTo(0, 200);
+      }
+    } else {
+      return;
     }
   }
 

@@ -47,7 +47,12 @@ export class AuthService {
   autoLogout() {
     this.autoLog = setTimeout(() => {
       this.logout();
-      Swal.fire('UTOD', 'The login session has expired', 'warning');
+      Swal.fire({
+        title: 'UTOD',
+        text: 'The login session has expired!',
+        icon: 'warning',
+        confirmButtonColor: '#fe4f70',
+      });
     }, this.timeLogout);
   }
 

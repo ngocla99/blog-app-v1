@@ -1,12 +1,12 @@
-<div *ngIf="errors.length !== 0" class="errorContainer">
+<!-- <div *ngIf="errors.length !== 0" class="errorContainer">
   <h5>Errors</h5>
   <ul>
     <li *ngFor="let error of errors">
       {{ error }}
     </li>
   </ul>
-</div>
-
+</div> -->
+<app-loading-post *ngIf="isLoading"></app-loading-post>
 <div class="row form-setting">
   <!-- Contact Form -->
   <form id="contact-form" class="contact-form" [formGroup]="articleEditorForm">
@@ -83,7 +83,7 @@
             class="form-control"
             type="text"
             formControlName="tags"
-            placeholder="Insert tags seperated by comma (,)"
+            placeholder="Insert tags and press 'Enter' to confirm"
             (keyup.enter)="enterTags()"
             [(ngModel)]="testTags"
           />
@@ -95,10 +95,9 @@
             class="editTags"
             style="margin-right: 10px"
             *ngFor="let item of listTags; let i = index"
-            ><a class="tag"
-              ><i class="ion-close-round" (click)="delTags(item)">{{
-                item
-              }}</i></a
+            ><a class="tag" style="cursor: pointer"
+              ><i class="ion-close-round" (click)="delTags(item)"></i
+              >{{ item }}</a
             ></span
           >
         </div>
