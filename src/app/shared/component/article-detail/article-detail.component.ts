@@ -131,7 +131,7 @@ export class ArticleDetailComponent implements OnInit {
 
         Toast.fire({
           iconHtml:
-            '<img src="../../../../assets/images/post/heart.png" width="25px" height="25px">',
+            '<i class="fas fa-heart" style="font-size: 15px; color:#fe4f70"></i>',
           title: 'Favourite !!!',
           customClass: {
             icon: 'no-border',
@@ -176,7 +176,7 @@ export class ArticleDetailComponent implements OnInit {
 
         Toast.fire({
           iconHtml:
-            '<img src="../../../../assets/images/post/broken-heart.png" width="25px" height="25px">',
+            '<i class="fas fa-heart-broken" style="font-size: 15px; color:#fe4f70"></i>',
           title: 'UnFavourite !!!',
           customClass: {
             icon: 'no-border',
@@ -221,7 +221,7 @@ export class ArticleDetailComponent implements OnInit {
 
         Toast.fire({
           iconHtml:
-            '<img src="../../../../assets/images/post/follow.png" width="50px" height="50px">',
+            '<i class="fas fa-user-plus" style="font-size: 15px; color:#fe4f70"></i>',
           title: 'Followed !!!',
           customClass: {
             icon: 'no-border',
@@ -267,7 +267,7 @@ export class ArticleDetailComponent implements OnInit {
 
         Toast.fire({
           iconHtml:
-            '<img src="../../../../assets/images/post/unfollow.png" width="50px" height="50px">',
+            '<i class="fas fa-user-minus" style="font-size: 15px; color:#fe4f70"></i>',
           title: 'UnFollowed !!!',
           customClass: {
             icon: 'no-border',

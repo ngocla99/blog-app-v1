@@ -62,7 +62,8 @@ export class CommentComponent implements OnInit {
     this.isLoading = true;
     this.commentService.getArticleComments(this.slug).subscribe((data) => {
       this.isLoading = false;
-      if (this.comments.length > 0) {
+
+      if (data.comments.length > 0) {
         this.comments = data.comments;
       } else {
         this.comments = [];
