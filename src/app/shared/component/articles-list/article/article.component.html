@@ -34,9 +34,12 @@
           <li class="list-inline-item">{{ article.createdAt | date }}</li>
         </ul>
         <h5 class="post-title mb-3 mt-3">
-          <a [routerLink]="['/article', article.slug]">{{
-            article.title | titlecase | truncate: 23
-          }}</a>
+          <a
+            [routerLink]="['/article', article.slug]"
+            [title]="article.title"
+            style="cursor: pointer"
+            >{{ article.title | titlecase | truncate: 23 }}</a
+          >
         </h5>
         <p class="excerpt mb-0" style="height: 48px">
           {{ article.body | truncate: 60 }}
