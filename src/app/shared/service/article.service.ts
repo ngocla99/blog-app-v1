@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ArticleObj, ArticlePost } from '../shared/model/article.model';
+import { ArticleObj, ArticlePost } from '../model/article.model';
 
 @Injectable({
   providedIn: 'root',

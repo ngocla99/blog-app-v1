@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeArticleService } from '../../../../service/home-article.service';
+import { HomeArticleService } from 'src/app/shared/service/home-article.service';
 
 @Component({
   selector: 'app-tag-list',

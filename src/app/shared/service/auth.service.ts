@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+
+import { BehaviorSubject, Subject } from 'rxjs';
 import {
-  UserData,
   UserInfo,
   UserSignIn,
+  UserData,
   UserSignUp,
-} from '../shared/model/user.model';
-import { BehaviorSubject, Subject } from 'rxjs';
+} from '../model/user.model';
 
 @Injectable({
   providedIn: 'root',

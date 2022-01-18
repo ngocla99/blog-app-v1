@@ -2,10 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { ArticleService } from 'src/app/service/article.service';
-import { AuthService } from 'src/app/service/auth.service';
-import { HomeArticleService } from 'src/app/service/home-article.service';
+
 import { Article } from 'src/app/shared/model/article.model';
+import { ArticleService } from 'src/app/shared/service/article.service';
+import { AuthService } from 'src/app/shared/service/auth.service';
+import { HomeArticleService } from 'src/app/shared/service/home-article.service';
 
 @Component({
   selector: 'app-profile-author',

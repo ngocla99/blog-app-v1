@@ -1,10 +1,11 @@
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { ArticleService } from 'src/app/service/article.service';
-import { AuthService } from 'src/app/service/auth.service';
+
 import { Article } from './../../shared/model/article.model';
-import { HomeArticleService } from './../../service/home-article.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { ArticleService } from 'src/app/shared/service/article.service';
+import { AuthService } from 'src/app/shared/service/auth.service';
+import { HomeArticleService } from 'src/app/shared/service/home-article.service';
 
 @Component({
   selector: 'app-tags',

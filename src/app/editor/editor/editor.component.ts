@@ -1,18 +1,8 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { ArticleService } from 'src/app/service/article.service';
-import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate-guard.service';
 import { ArticlePost } from 'src/app/shared/model/article.model';
+import { ArticleService } from 'src/app/shared/service/article.service';
 import Swal from 'sweetalert2';
 
 @Component({

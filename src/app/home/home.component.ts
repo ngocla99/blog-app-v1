@@ -1,9 +1,8 @@
-import { AuthService } from './../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HomeArticleService } from '../service/home-article.service';
-import { Article, ArticleData } from '../shared/model/article.model';
 import Swal from 'sweetalert2';
+import { AuthService } from '../shared/service/auth.service';
+import { HomeArticleService } from '../shared/service/home-article.service';
 
 @Component({
   selector: 'app-home',

@@ -1,7 +1,7 @@
-import { AuthService } from 'src/app/service/auth.service';
-import { HomeArticleService } from './../../service/home-article.service';
 import { Article } from './../../shared/model/article.model';
 import { Component, OnInit } from '@angular/core';
+import { HomeArticleService } from 'src/app/shared/service/home-article.service';
+import { AuthService } from 'src/app/shared/service/auth.service';
 
 @Component({
   selector: 'app-feed',

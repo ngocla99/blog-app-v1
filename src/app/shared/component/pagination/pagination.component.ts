@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ArticleService } from 'src/app/service/article.service';
+import { ArticleService } from '../../service/article.service';
 
 @Component({
   selector: 'app-pagination',

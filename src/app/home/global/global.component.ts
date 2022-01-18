@@ -1,10 +1,10 @@
 import { switchMap } from 'rxjs/operators';
-import { ArticleService } from './../../service/article.service';
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { HomeArticleService } from 'src/app/service/home-article.service';
 import { Article, ArticleData } from 'src/app/shared/model/article.model';
-import { AuthService } from '../../service/auth.service';
+import { HomeArticleService } from 'src/app/shared/service/home-article.service';
+import { ArticleService } from 'src/app/shared/service/article.service';
+import { AuthService } from 'src/app/shared/service/auth.service';
 
 @Component({
   selector: 'app-global',

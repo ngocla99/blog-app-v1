@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../service/auth.service';
-import { User } from '../../../shared/model/user.model';
-import { Router } from '@angular/router';
+
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { UserService } from '../../../service/user.service';
+
 import { catchError, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { AuthService } from 'src/app/shared/service/auth.service';
+import { UserService } from 'src/app/shared/service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private userService: UserService
   ) {}
 
@@ -32,7 +34,8 @@ export class LoginComponent implements OnInit {
       .loginUser({ user: user })
       .pipe(
         switchMap((data) => {
-          this.router.navigate(['/']);
+          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+          this.router.navigate([returnUrl || '/']);
           this.authService.setUser(data.user);
           this.isLoading = false;
           const Toast = Swal.mixin({

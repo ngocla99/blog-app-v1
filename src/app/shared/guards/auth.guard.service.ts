@@ -7,7 +7,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../service/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,10 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/auth/login']);
+      console.log(state);
+      this.router.navigate(['/auth/login'], {
+        queryParams: { returnUrl: state.url },
+      });
       return false;
     }
     return true;

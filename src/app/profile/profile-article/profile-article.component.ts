@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/service/auth.service';
-import { UserService } from 'src/app/service/user.service';
+
 import { Article } from 'src/app/shared/model/article.model';
+import { AuthService } from 'src/app/shared/service/auth.service';
 
 @Component({
   selector: 'app-profile-article',

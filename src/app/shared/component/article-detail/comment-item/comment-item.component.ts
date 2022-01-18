@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/service/auth.service';
-import { CommentsService } from 'src/app/service/comments.service';
 import { Comment } from 'src/app/shared/model/comment.model';
+import { AuthService } from 'src/app/shared/service/auth.service';
+import { CommentsService } from 'src/app/shared/service/comments.service';
 
 @Component({
   selector: 'app-comment-item',

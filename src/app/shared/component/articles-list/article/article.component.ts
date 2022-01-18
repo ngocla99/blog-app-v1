@@ -1,7 +1,7 @@
-import { ArticleService } from './../../../../service/article.service';
-import { AuthService } from './../../../../service/auth.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ArticleService } from 'src/app/shared/service/article.service';
+import { AuthService } from 'src/app/shared/service/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({

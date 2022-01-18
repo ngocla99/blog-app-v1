@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../service/auth.service';
-import { User, UserSignUp } from '../../../shared/model/user.model';
+
+import { UserSignUp } from '../../../shared/model/user.model';
 import Swal from 'sweetalert2';
-import { UserService } from '../../../service/user.service';
+
 import { switchMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { AuthService } from 'src/app/shared/service/auth.service';
+import { UserService } from 'src/app/shared/service/user.service';
 
 @Component({
   selector: 'app-sign',

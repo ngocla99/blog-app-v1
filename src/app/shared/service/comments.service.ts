@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Article, ArticleData } from '../shared/model/article.model';
+import { ArticleData } from '../model/article.model';
 import {
   CommentPost,
   CommentsData,
   CommentSingle,
-} from '../shared/model/comment.model';
+} from '../model/comment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,7 @@ export class CommentsService {
 
   // Show all comments of public articles
   getArticle() {
-    return this.http.get<ArticleData>( `${this.API_URL}/articles`);
+    return this.http.get<ArticleData>(`${this.API_URL}/articles`);
   }
 
   // Get comments from an article

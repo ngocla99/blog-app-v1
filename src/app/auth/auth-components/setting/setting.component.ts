@@ -3,10 +3,11 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate-guard.service';
+import { AuthService } from 'src/app/shared/service/auth.service';
+import { UserService } from 'src/app/shared/service/user.service';
 import Swal from 'sweetalert2';
-import { AuthService } from '../../../service/auth.service';
-import { UserService } from '../../../service/user.service';
-import { User, UserInfo } from '../../../shared/model/user.model';
+
+import { UserInfo } from '../../../shared/model/user.model';
 
 @Component({
   selector: 'app-setting',

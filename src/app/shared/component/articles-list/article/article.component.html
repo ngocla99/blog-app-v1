@@ -22,13 +22,13 @@
       <div class="details">
         <ul class="meta list-inline mb-0">
           <li class="list-inline-item">
-            <a routerLink="/profile/{{ article.author.username }}"
+            <a routerLink="/profile/{{ article.author?.username }}"
               ><img
                 style="width: 50px; height: 50px; border-radius: 50%"
-                src="{{ article.author.image }}"
+                src="{{ article.author?.image }}"
                 class="author"
                 alt="author"
-              />{{ article.author.username }}</a
+              />{{ article.author?.username }}</a
             >
           </li>
           <li class="list-inline-item">{{ article.createdAt | date }}</li>
@@ -78,7 +78,7 @@
             </span>
             <span style="margin-right: 8px">
               <i class="far fa-eye" style="margin-right: 5px"></i
-              >{{ article.comments.length * 2 }}
+              >{{ article.comments?.length * 2 }}
             </span>
             <span>
               <i
@@ -86,7 +86,7 @@
                 class="fas fa-comment"
                 style="margin-right: 5px"
               ></i
-              >{{ article.comments.length }}
+              >{{ article.comments?.length }}
             </span>
           </div>
         </div>

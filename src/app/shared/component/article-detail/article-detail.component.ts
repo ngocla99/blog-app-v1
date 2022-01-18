@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ArticleService } from 'src/app/service/article.service';
-import { AuthService } from 'src/app/service/auth.service';
-import { UserService } from 'src/app/service/user.service';
 import Swal from 'sweetalert2';
 import { Article } from '../../model/article.model';
 import { Profile } from '../../model/profile.model';
+import { ArticleService } from '../../service/article.service';
+import { AuthService } from '../../service/auth.service';
+import { SwalService } from '../../service/swal.service';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-article-detail',
@@ -23,7 +24,8 @@ export class ArticleDetailComponent implements OnInit {
     private articleService: ArticleService,
     private auth: AuthService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private swalService: SwalService
   ) {
     this.articleSlug = this.activatedRoute.snapshot.params?.['slug'];
   }
@@ -70,15 +72,7 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   deleteArticle(slug: string) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#273043',
-      cancelButtonColor: '#DC3545',
-      confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
+    this.swalService.delete().then((result) => {
       if (result.isConfirmed) {
         this.articleService.deleteArticle(slug).subscribe(
           () => {
@@ -88,55 +82,22 @@ export class ArticleDetailComponent implements OnInit {
             console.log(err);
           }
         );
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
-          showCancelButton: false,
-          confirmButtonColor: '#273043',
-        });
+
+        this.swalService.deleteSucceeded();
       }
     });
   }
 
   favourite() {
     if (!this.auth.isLoggedIn()) {
-      Swal.fire({
-        title: 'You must login !!!',
-        confirmButtonText: 'Go to login',
-        confirmButtonColor: '#ff416c',
-        timer: 2500,
-        timerProgressBar: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigateByUrl('/auth/login');
-        }
-      });
+      this.swalService.goToLogin();
       return;
     }
     this.articleService.favoriteArticle(this.article.slug).subscribe(
       (data) => {
         this.article = data.article;
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          },
-        });
 
-        Toast.fire({
-          iconHtml:
-            '<i class="fas fa-heart" style="font-size: 15px; color:#fe4f70"></i>',
-          title: 'Favourite !!!',
-          customClass: {
-            icon: 'no-border',
-          },
-        });
+        this.swalService.interact('fa-heart', 'Favourited', true);
       },
       (err) => {
         console.log(err);
@@ -146,42 +107,14 @@ export class ArticleDetailComponent implements OnInit {
 
   unfavorite() {
     if (!this.auth.isLoggedIn()) {
-      Swal.fire({
-        title: 'You must login !!!',
-        confirmButtonText: 'Go to login',
-        confirmButtonColor: '#ff416c',
-        timer: 2500,
-        timerProgressBar: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigateByUrl('/auth/login');
-        }
-      });
+      this.swalService.goToLogin();
       return;
     }
     this.articleService.unfavoriteArticle(this.article.slug).subscribe(
       (data) => {
         this.article = data.article;
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          },
-        });
 
-        Toast.fire({
-          iconHtml:
-            '<i class="fas fa-heart-broken" style="font-size: 15px; color:#fe4f70"></i>',
-          title: 'UnFavourite !!!',
-          customClass: {
-            icon: 'no-border',
-          },
-        });
+        this.swalService.interact('fa-heart-broken', 'UnFavourite', true);
       },
       (err) => {
         console.log(err);
@@ -191,42 +124,14 @@ export class ArticleDetailComponent implements OnInit {
 
   follow() {
     if (!this.auth.isLoggedIn()) {
-      Swal.fire({
-        title: 'You must login !!!',
-        confirmButtonText: 'Go to login',
-        confirmButtonColor: '#ff416c',
-        timer: 2500,
-        timerProgressBar: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigateByUrl('/auth/login');
-        }
-      });
+      this.swalService.goToLogin();
       return;
     }
     this.userService.followUser(this.article.author.username).subscribe(
       (data: { profile?: Profile }) => {
         this.article.author = data.profile!;
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          },
-        });
 
-        Toast.fire({
-          iconHtml:
-            '<i class="fas fa-user-plus" style="font-size: 15px; color:#fe4f70"></i>',
-          title: 'Followed !!!',
-          customClass: {
-            icon: 'no-border',
-          },
-        });
+        this.swalService.interact('fa-user-plus', 'Followed', true);
       },
       (err) => {
         console.log(err);
@@ -237,42 +142,14 @@ export class ArticleDetailComponent implements OnInit {
 
   unfollow() {
     if (!this.auth.isLoggedIn()) {
-      Swal.fire({
-        title: 'You must login !!!',
-        confirmButtonText: 'Go to login',
-        confirmButtonColor: '#ff416c',
-        timer: 2500,
-        timerProgressBar: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigateByUrl('/auth/login');
-        }
-      });
+      this.swalService.goToLogin();
       return;
     }
     this.userService.unFollowUser(this.article.author.username).subscribe(
       (data) => {
         this.article.author = data.profile;
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          },
-        });
 
-        Toast.fire({
-          iconHtml:
-            '<i class="fas fa-user-minus" style="font-size: 15px; color:#fe4f70"></i>',
-          title: 'UnFollowed !!!',
-          customClass: {
-            icon: 'no-border',
-          },
-        });
+        this.swalService.interact('fa-user-minus', 'UnFollowed', true);
       },
       (err) => {
         console.log(err);

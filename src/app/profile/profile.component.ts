@@ -3,9 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Profile } from '../shared/model/profile.model';
 import { switchMap } from 'rxjs/operators';
-import { UserService } from '../service/user.service';
-import { AuthService } from '../service/auth.service';
+
 import Swal from 'sweetalert2';
+import { UserService } from '../shared/service/user.service';
+import { AuthService } from '../shared/service/auth.service';
 
 @Component({
   selector: 'app-profile',

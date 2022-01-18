@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ArticleService } from 'src/app/service/article.service';
 import { Article } from 'src/app/shared/model/article.model';
+import { ArticleService } from 'src/app/shared/service/article.service';
 import Swal from 'sweetalert2';
 
 @Component({
