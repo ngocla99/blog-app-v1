@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { ArticleObj, ArticlePost } from '../model/article.model';
 
 @Injectable({
@@ -49,4 +50,6 @@ export class ArticleService {
       `${this.API_URL}/articles/${slug}/favorite`
     );
   }
+
+  /*-----------MANAGE STATE-----------*/
 }

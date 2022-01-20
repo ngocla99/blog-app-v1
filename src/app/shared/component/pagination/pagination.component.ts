@@ -8,7 +8,7 @@ import { ArticleService } from '../../service/article.service';
 })
 export class PaginationComponent implements OnInit {
   @Input() totalPages!: number[];
-  @Input() currentPage!: number;
+  @Input() currentPage!: number | null;
 
   constructor(private articleService: ArticleService) {}
 

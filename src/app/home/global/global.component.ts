@@ -1,10 +1,13 @@
+import { getIsLoading } from './../../app.reducer';
 import { switchMap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Article, ArticleData } from 'src/app/shared/model/article.model';
 import { HomeArticleService } from 'src/app/shared/service/home-article.service';
 import { ArticleService } from 'src/app/shared/service/article.service';
 import { AuthService } from 'src/app/shared/service/auth.service';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../app.reducer';
 
 @Component({
   selector: 'app-global',
@@ -12,61 +15,30 @@ import { AuthService } from 'src/app/shared/service/auth.service';
   styleUrls: ['./global.component.css'],
 })
 export class GlobalComponent implements OnInit {
-  list: Article[] = [];
-  limit: number = 3;
-  offset: number = 0;
-  totalPages: any;
-  pages!: number;
+  articles$!: Observable<Article[]>;
+  isLoading$!: Observable<boolean>;
   pageNumbers: number[] = [];
-  isLoading: boolean = false;
-  actived: boolean = false;
-  currentPage: number = 1;
-  pageIndexSub$!: Subscription;
+  currentPage$!: Observable<number>;
+
+  subscription!: Subscription;
+
   constructor(
-    private getArticle: HomeArticleService,
-    private authService: AuthService,
-    private articleService: ArticleService
+    private homeArticleService: HomeArticleService,
+    private store: Store<fromRoot.State>
   ) {}
 
   ngOnInit(): void {
-    this.limit = this.authService.getPage();
+    this.homeArticleService.initialGlobalFeed();
 
-    this.isLoading = true;
-
-    this.getArticle
-      .getGlobalFeed(this.offset, this.limit)
-      .subscribe((data: ArticleData) => {
-        this.totalPages = data.articlesCount;
-        if (this.totalPages <= 1) {
-          this.pages = 0;
-        } else {
-          this.pages = Math.ceil(this.totalPages / this.limit);
-          for (let i = 1; i <= this.pages; i++) {
-            this.pageNumbers.push(i);
-          }
-        }
-        this.isLoading = false;
-        this.list = data.articles;
-      });
-
-    this.pageIndexSub$ = this.articleService.pageIndexSub
-      .pipe(
-        switchMap((pageIndex) => {
-          this.isLoading = true;
-          this.currentPage = pageIndex + 1;
-          return this.getArticle.getGlobalFeed(
-            pageIndex * this.limit,
-            this.limit
-          );
-        })
-      )
-      .subscribe((data) => {
-        this.isLoading = false;
-        this.list = data.articles;
-      });
+    this.articles$ = this.store.select(fromRoot.getArticles);
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+    this.currentPage$ = this.store.select(fromRoot.getCurrentPage);
+    this.subscription = this.store
+      .select(fromRoot.getNumberPages)
+      .subscribe((pageNumbers) => (this.pageNumbers = pageNumbers));
   }
 
   ngOnDestroy(): void {
-    this.pageIndexSub$.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

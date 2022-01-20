@@ -4,14 +4,11 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-articles-list',
   templateUrl: './articles-list.component.html',
-  styleUrls: ['./articles-list.component.css']
+  styleUrls: ['./articles-list.component.css'],
 })
 export class ArticlesListComponent implements OnInit {
-  @Input() listArticles : Article[] = []
-  constructor() { }
+  @Input() listArticles: Article[] | null = [];
+  constructor() {}
 
-  ngOnInit(): void {
-
-  }
-
+  ngOnInit(): void {}
 }
