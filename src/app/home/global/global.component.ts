@@ -1,11 +1,8 @@
-import { getIsLoading } from './../../app.reducer';
-import { switchMap } from 'rxjs/operators';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Article, ArticleData } from 'src/app/shared/model/article.model';
+import { Article } from 'src/app/shared/model/article.model';
 import { HomeArticleService } from 'src/app/shared/service/home-article.service';
-import { ArticleService } from 'src/app/shared/service/article.service';
-import { AuthService } from 'src/app/shared/service/auth.service';
+
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../app.reducer';
 

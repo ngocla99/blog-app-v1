@@ -2,6 +2,8 @@ import { Article } from './../../shared/model/article.model';
 import { Component, OnInit } from '@angular/core';
 import { HomeArticleService } from 'src/app/shared/service/home-article.service';
 import { AuthService } from 'src/app/shared/service/auth.service';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../app.reducer';
 
 @Component({
   selector: 'app-feed',
@@ -20,7 +22,8 @@ export class FeedComponent implements OnInit {
   emptyPage: boolean = false;
   constructor(
     private getArticle: HomeArticleService,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store<fromRoot.State>
   ) {}
 
   ngOnInit(): void {
