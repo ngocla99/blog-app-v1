@@ -7,3 +7,10 @@
   *ngIf="!isLoading && !emptyPage"
   [listArticles]="list"
 ></app-articles-list>
+
+<!-- <app-pagination
+  *ngIf="pageNumbers.length > 1 && !(isLoading$ | async)"
+  [totalPages]="pageNumbers"
+  [currentPage]="currentPage$ | async"
+>
+</app-pagination> -->
