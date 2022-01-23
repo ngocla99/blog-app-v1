@@ -126,4 +126,32 @@ export class HomeArticleService {
         this.store.dispatch(new Home.GetArticles(data.articles));
       });
   }
+
+  initialUserFeed() {
+    this.limit = this.authService.getPage();
+
+    this.store.dispatch(new UI.StartLoading());
+
+    this.getUserFeed().subscribe((data: any) => {
+      const totalPages = data.articlesCount;
+      let pages;
+      const pageNumbers = [];
+
+      this.emptyPage = totalPages === 0 ? true : false;
+      if (totalPages <= 1) {
+        pages = 0;
+      } else {
+        pages = Math.ceil(totalPages / this.limit);
+        for (let i = 1; i <= pages; i++) {
+          pageNumbers.push(i);
+        }
+      }
+    });
+
+    this.getUserFeed(this.offset, this.limit).subscribe((data: any) => {
+      this.store.dispatch(new UI.StopLoading());
+
+      this.list = data.articles;
+    });
+  }
 }

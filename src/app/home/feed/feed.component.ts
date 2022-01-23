@@ -14,9 +14,7 @@ export class FeedComponent implements OnInit {
   list: Article[] = [];
   limit: number = 1;
   offset: number = 0;
-  totalPages: any;
-  pages!: number;
-  pageNumbers: number[] = [];
+
   isLoading: boolean = false;
 
   emptyPage: boolean = false;
@@ -31,14 +29,16 @@ export class FeedComponent implements OnInit {
     this.isLoading = true;
 
     this.getArticle.getUserFeed().subscribe((data: any) => {
-      this.totalPages = data.articlesCount;
-      this.emptyPage = this.totalPages === 0 ? true : false;
-      if (this.totalPages <= 1) {
-        this.pages = 0;
+      const totalPages = data.articlesCount;
+      let pages;
+      const pageNumbers = [];
+      this.emptyPage = totalPages === 0 ? true : false;
+      if (totalPages <= 1) {
+        pages = 0;
       } else {
-        this.pages = Math.ceil(this.totalPages / this.limit);
-        for (let i = 1; i <= this.pages; i++) {
-          this.pageNumbers.push(i);
+        pages = Math.ceil(totalPages / this.limit);
+        for (let i = 1; i <= pages; i++) {
+          pageNumbers.push(i);
         }
       }
     });
