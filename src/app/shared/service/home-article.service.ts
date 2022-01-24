@@ -137,7 +137,7 @@ export class HomeArticleService {
       let pages;
       const pageNumbers = [];
 
-      this.emptyPage = totalPages === 0 ? true : false;
+      // this.emptyPage = totalPages === 0 ? true : false;
       if (totalPages <= 1) {
         pages = 0;
       } else {
@@ -151,7 +151,7 @@ export class HomeArticleService {
     this.getUserFeed(this.offset, this.limit).subscribe((data: any) => {
       this.store.dispatch(new UI.StopLoading());
 
-      this.list = data.articles;
+      // this.list = data.articles;
     });
   }
 }
