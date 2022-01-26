@@ -26,30 +26,30 @@ export class FeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.homeArticleService.initialUserFeed();
-    this.limit = this.authService.getPage();
-    this.isLoading = true;
+    // this.limit = this.authService.getPage();
+    // this.isLoading = true;
 
-    this.homeArticleService.getUserFeed().subscribe((data: any) => {
-      const totalPages = data.articlesCount;
-      let pages;
-      const pageNumbers = [];
-      this.emptyPage = totalPages === 0 ? true : false;
-      if (totalPages <= 1) {
-        pages = 0;
-      } else {
-        pages = Math.ceil(totalPages / this.limit);
-        for (let i = 1; i <= pages; i++) {
-          pageNumbers.push(i);
-        }
-      }
-    });
+    // this.homeArticleService.getUserFeed().subscribe((data: any) => {
+    //   const totalPages = data.articlesCount;
+    //   let pages;
+    //   const pageNumbers = [];
+    //   this.emptyPage = totalPages === 0 ? true : false;
+    //   if (totalPages <= 1) {
+    //     pages = 0;
+    //   } else {
+    //     pages = Math.ceil(totalPages / this.limit);
+    //     for (let i = 1; i <= pages; i++) {
+    //       pageNumbers.push(i);
+    //     }
+    //   }
+    // });
 
-    this.homeArticleService
-      .getUserFeed(this.offset, this.limit)
-      .subscribe((data: any) => {
-        this.isLoading = false;
-        this.list = data.articles;
-      });
+    // this.homeArticleService
+    //   .getUserFeed(this.offset, this.limit)
+    //   .subscribe((data: any) => {
+    //     this.isLoading = false;
+    //     this.list = data.articles;
+    //   });
   }
 
   changePage(value: number) {
