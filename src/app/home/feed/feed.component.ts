@@ -52,22 +52,22 @@ export class FeedComponent implements OnInit {
     //   });
   }
 
-  changePage(value: number) {
-    this.isLoading = true;
-    if (value === 1) {
-      this.homeArticleService
-        .getUserFeed(this.offset, this.limit)
-        .subscribe((data: any) => {
-          this.isLoading = false;
-          this.list = data.articles;
-        });
-    } else {
-      this.homeArticleService
-        .getUserFeed(this.limit * (value - 1), this.limit)
-        .subscribe((data: any) => {
-          this.isLoading = false;
-          this.list = data.articles;
-        });
-    }
-  }
+  // changePage(value: number) {
+  //   this.isLoading = true;
+  //   if (value === 1) {
+  //     this.homeArticleService
+  //       .getUserFeed(this.offset, this.limit)
+  //       .subscribe((data: any) => {
+  //         this.isLoading = false;
+  //         this.list = data.articles;
+  //       });
+  //   } else {
+  //     this.homeArticleService
+  //       .getUserFeed(this.limit * (value - 1), this.limit)
+  //       .subscribe((data: any) => {
+  //         this.isLoading = false;
+  //         this.list = data.articles;
+  //       });
+  //   }
+  // }
 }
