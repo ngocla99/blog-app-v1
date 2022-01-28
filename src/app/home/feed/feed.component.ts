@@ -69,5 +69,6 @@ export class FeedComponent implements OnInit {
   //         this.list = data.articles;
   //       });
   //   }
+
   // }
 }

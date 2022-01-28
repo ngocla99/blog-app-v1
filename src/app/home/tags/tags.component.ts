@@ -33,24 +33,24 @@ export class TagsComponent implements OnInit {
   ngOnInit(): void {}
 
   ngOnChanges(): void {
-    this.limit = this.authService.getPage();
-    this.isLoading = true;
-    this.getArticle
-      .getTagFeed(this.tags, this.offset, this.limit)
-      .subscribe((data) => {
-        this.isLoading = false;
-        this.totalPages = data.articlesCount;
-        if (this.totalPages <= 1) {
-          this.pages = 0;
-        } else {
-          this.pageNumbers = [];
-          this.pages = Math.ceil(this.totalPages / this.limit);
-          for (let i = 1; i <= this.pages; i++) {
-            this.pageNumbers.push(i);
-          }
-        }
-        this.list = data.articles;
-      });
+    // this.limit = this.authService.getPage();
+    // this.isLoading = true;
+    // this.getArticle
+    //   .getTagFeed(this.tags, this.offset, this.limit)
+    //   .subscribe((data) => {
+    //     this.isLoading = false;
+    //     this.totalPages = data.articlesCount;
+    //     if (this.totalPages <= 1) {
+    //       this.pages = 0;
+    //     } else {
+    //       this.pageNumbers = [];
+    //       this.pages = Math.ceil(this.totalPages / this.limit);
+    //       for (let i = 1; i <= this.pages; i++) {
+    //         this.pageNumbers.push(i);
+    //       }
+    //     }
+    //     this.list = data.articles;
+    //   });
 
     this.pageIndexSub$ = this.articleService.pageIndexSub
       .pipe(
