@@ -52,21 +52,21 @@ export class TagsComponent implements OnInit {
     //     this.list = data.articles;
     //   });
 
-    this.pageIndexSub$ = this.articleService.pageIndexSub
-      .pipe(
-        switchMap((pageIndex) => {
-          this.isLoading = true;
-          this.currentPage = pageIndex + 1;
-          return this.getArticle.getTagFeed(
-            this.tags,
-            pageIndex * this.limit,
-            this.limit
-          );
-        })
-      )
-      .subscribe((data) => {
-        this.isLoading = false;
-        this.list = data.articles;
-      });
-  }
+  //   this.pageIndexSub$ = this.articleService.pageIndexSub
+  //     .pipe(
+  //       switchMap((pageIndex) => {
+  //         this.isLoading = true;
+  //         this.currentPage = pageIndex + 1;
+  //         return this.getArticle.getTagFeed(
+  //           this.tags,
+  //           pageIndex * this.limit,
+  //           this.limit
+  //         );
+  //       })
+  //     )
+  //     .subscribe((data) => {
+  //       this.isLoading = false;
+  //       this.list = data.articles;
+  //     });
+  // }
 }
