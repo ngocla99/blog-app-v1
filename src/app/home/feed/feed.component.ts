@@ -12,8 +12,8 @@ import * as fromRoot from '../../app.reducer';
 })
 export class FeedComponent implements OnInit {
   list: Article[] = [];
-  limit: number = 1;
-  offset: number = 0;
+  // limit: number = 1;
+  // offset: number = 0;
 
   isLoading: boolean = false;
 
