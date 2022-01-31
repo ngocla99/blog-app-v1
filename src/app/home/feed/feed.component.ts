@@ -15,7 +15,7 @@ export class FeedComponent implements OnInit {
   // limit: number = 1;
   // offset: number = 0;
 
-  isLoading: boolean = false;
+  // isLoading: boolean = false;
 
   emptyPage: boolean = false;
   constructor(
