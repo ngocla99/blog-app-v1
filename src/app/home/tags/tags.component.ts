@@ -14,12 +14,12 @@ import { HomeArticleService } from 'src/app/shared/service/home-article.service'
 })
 export class TagsComponent implements OnInit {
   @Input() tags: any;
-  limit: number = 1;
-  offset: number = 0;
-  totalPages: any;
-  pages!: number;
+  // limit: number = 1;
+  // offset: number = 0;
+  // totalPages: any;
+  // pages!: number;
   list: Article[] = [];
-  isLoading: boolean = false;
+  // isLoading: boolean = false;
   pageNumbers: number[] = [];
   currentPage: number = 1;
   pageIndexSub$!: Subscription;
