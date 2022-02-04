@@ -21,7 +21,7 @@ export class TagsComponent implements OnInit {
   list: Article[] = [];
   // isLoading: boolean = false;
   // pageNumbers: number[] = [];
-  currentPage: number = 1;
+  // currentPage: number = 1;
   pageIndexSub$!: Subscription;
 
   constructor(
