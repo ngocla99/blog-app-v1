@@ -22,7 +22,7 @@ export class TagsComponent implements OnInit {
   // isLoading: boolean = false;
   // pageNumbers: number[] = [];
   // currentPage: number = 1;
-  pageIndexSub$!: Subscription;
+  // pageIndexSub$!: Subscription;
 
   constructor(
     private getArticle: HomeArticleService,
