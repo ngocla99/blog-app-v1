@@ -27,7 +27,8 @@ export class TagsComponent implements OnInit {
   constructor(
     private getArticle: HomeArticleService,
     private authService: AuthService,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private store: Store<fromRoot.State>
   ) {}
 
   ngOnInit(): void {}
