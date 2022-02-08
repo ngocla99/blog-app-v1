@@ -2,6 +2,10 @@
   <app-loading-spinner *ngIf="isLoading$ | async"></app-loading-spinner>
 </div>
 
+<h5 *ngIf="!(isLoading$ | async) && emptyPage">
+  You haven't followed anyone yet...
+</h5>
+
 <app-articles-list
   *ngIf="!(isLoading$ | async)"
   [listArticles]="articles$ | async"

@@ -81,10 +81,9 @@ export class HomeArticleService {
     this.limit = this.authService.getPage();
 
     this.store.dispatch(new UI.StartLoading());
+    this.store.dispatch(new Home.GetCurrentPage(1));
 
-    this.getArticlesByPage();
-
-    return this.getGlobalFeed(this.offset, this.limit)
+    this.getGlobalFeed(this.offset, this.limit)
       .pipe(
         map((data: ArticleData) => {
           const totalPages = data.articlesCount;
@@ -108,10 +107,11 @@ export class HomeArticleService {
       .subscribe((articles) =>
         this.store.dispatch(new Home.GetArticles(articles))
       );
+    return this.getArticlesByPage();
   }
 
   private getArticlesByPage() {
-    this.articleService.pageIndexSub
+    return this.articleService.pageIndexSub
       .pipe(
         switchMap((pageIndex) => {
           const currentPage = pageIndex + 1;
@@ -127,31 +127,53 @@ export class HomeArticleService {
       });
   }
 
+  // User Feed
   initialUserFeed() {
     this.limit = this.authService.getPage();
-
     this.store.dispatch(new UI.StartLoading());
+    this.store.dispatch(new Home.GetCurrentPage(1));
 
-    this.getUserFeed().subscribe((data: any) => {
-      const totalPages = data.articlesCount;
-      let pages;
-      const pageNumbers = [];
+    this.getUserFeed(this.offset, this.limit)
+      .pipe(
+        map((data) => {
+          this.store.dispatch(new UI.StopLoading());
+          const totalPages = data.articlesCount;
+          let pages;
+          const pageNumbers = [];
 
-      // this.emptyPage = totalPages === 0 ? true : false;
-      if (totalPages <= 1) {
-        pages = 0;
-      } else {
-        pages = Math.ceil(totalPages / this.limit);
-        for (let i = 1; i <= pages; i++) {
-          pageNumbers.push(i);
-        }
-      }
-    });
+          if (totalPages <= 1) {
+            pages = 0;
+          } else {
+            pages = Math.ceil(totalPages / this.limit);
+            for (let i = 1; i <= pages; i++) {
+              pageNumbers.push(i);
+            }
+          }
+          return data.articles;
+        })
+      )
+      .subscribe((articles) => {
+        this.store.dispatch(new Home.GetArticles(articles));
+      });
 
-    this.getUserFeed(this.offset, this.limit).subscribe((data: any) => {
-      this.store.dispatch(new UI.StopLoading());
+    return this.getArticlesUserByPage();
+  }
 
-      // this.list = data.articles;
-    });
+  getArticlesUserByPage() {
+    return this.articleService.pageIndexSub
+      .pipe(
+        switchMap((pageIndex) => {
+          const currentPage = pageIndex + 1;
+
+          this.store.dispatch(new UI.StartLoading());
+          this.store.dispatch(new Home.GetCurrentPage(currentPage));
+
+          return this.getUserFeed(pageIndex * this.limit, this.limit);
+        })
+      )
+      .subscribe((data: any) => {
+        this.store.dispatch(new UI.StopLoading());
+        this.store.dispatch(new Home.GetArticles(data.articles));
+      });
   }
 }

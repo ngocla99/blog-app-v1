@@ -14,25 +14,31 @@ import * as fromRoot from '../../app.reducer';
 export class GlobalComponent implements OnInit {
   articles$!: Observable<Article[]>;
   isLoading$!: Observable<boolean>;
-  pageNumbers: number[] = [];
   currentPage$!: Observable<number>;
 
+  pageNumbers: number[] = [];
+  emptyPage: boolean = false;
   subscription!: Subscription;
-
   constructor(
     private homeArticleService: HomeArticleService,
     private store: Store<fromRoot.State>
   ) {}
 
   ngOnInit(): void {
-    this.homeArticleService.initialGlobalFeed();
+    this.subscription = this.homeArticleService.initialGlobalFeed();
 
     this.articles$ = this.store.select(fromRoot.getArticles);
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.currentPage$ = this.store.select(fromRoot.getCurrentPage);
-    this.subscription = this.store
+
+    const subscription1$ = this.store
       .select(fromRoot.getNumberPages)
-      .subscribe((pageNumbers) => (this.pageNumbers = pageNumbers));
+      .subscribe((pageNumbers) => {
+        this.emptyPage = pageNumbers.length === 0 ? true : false;
+        this.pageNumbers = pageNumbers;
+      });
+
+    this.subscription.add(subscription1$);
   }
 
   ngOnDestroy(): void {

@@ -1,16 +1,19 @@
 <div class="row text-center">
-  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <app-loading-spinner *ngIf="isLoading$ | async"></app-loading-spinner>
 </div>
 
-<h5 *ngIf="!isLoading && emptyPage">You haven't followed anyone yet...</h5>
+<h5 *ngIf="!(isLoading$ | async) && emptyPage">
+  You haven't followed anyone yet...
+</h5>
+
 <app-articles-list
-  *ngIf="!isLoading && !emptyPage"
-  [listArticles]="list"
+  *ngIf="!(isLoading$ | async) && !emptyPage"
+  [listArticles]="articles$ | async"
 ></app-articles-list>
 
-<!-- <app-pagination
+<app-pagination
   *ngIf="pageNumbers.length > 1 && !(isLoading$ | async)"
   [totalPages]="pageNumbers"
   [currentPage]="currentPage$ | async"
 >
-</app-pagination> -->
+</app-pagination>

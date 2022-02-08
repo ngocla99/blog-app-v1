@@ -1,74 +1,46 @@
-import { Article } from './../../shared/model/article.model';
-import { Component, OnInit } from '@angular/core';
-import { HomeArticleService } from 'src/app/shared/service/home-article.service';
-import { AuthService } from 'src/app/shared/service/auth.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { HomeArticleService } from 'src/app/shared/service/home-article.service';
 import * as fromRoot from '../../app.reducer';
+import { Article } from './../../shared/model/article.model';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css'],
 })
-export class FeedComponent implements OnInit {
-  list: Article[] = [];
-  // limit: number = 1;
-  // offset: number = 0;
+export class FeedComponent implements OnInit, OnDestroy {
+  articles$!: Observable<Article[]>;
+  isLoading$!: Observable<boolean>;
+  currentPage$!: Observable<number>;
 
-  // isLoading: boolean = false;
-
+  pageNumbers: number[] = [];
   emptyPage: boolean = false;
+  subscription!: Subscription;
   constructor(
     private homeArticleService: HomeArticleService,
-    private authService: AuthService,
     private store: Store<fromRoot.State>
   ) {}
 
   ngOnInit(): void {
-    this.homeArticleService.initialUserFeed();
-    // this.limit = this.authService.getPage();
-    // this.isLoading = true;
+    this.subscription = this.homeArticleService.initialUserFeed();
 
-    // this.homeArticleService.getUserFeed().subscribe((data: any) => {
-    //   const totalPages = data.articlesCount;
-    //   let pages;
-    //   const pageNumbers = [];
-    //   this.emptyPage = totalPages === 0 ? true : false;
-    //   if (totalPages <= 1) {
-    //     pages = 0;
-    //   } else {
-    //     pages = Math.ceil(totalPages / this.limit);
-    //     for (let i = 1; i <= pages; i++) {
-    //       pageNumbers.push(i);
-    //     }
-    //   }
-    // });
+    this.articles$ = this.store.select(fromRoot.getArticles);
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+    this.currentPage$ = this.store.select(fromRoot.getCurrentPage);
 
-    // this.homeArticleService
-    //   .getUserFeed(this.offset, this.limit)
-    //   .subscribe((data: any) => {
-    //     this.isLoading = false;
-    //     this.list = data.articles;
-    //   });
+    const subscription1$ = this.store
+      .select(fromRoot.getNumberPages)
+      .subscribe((pageNumbers) => {
+        this.emptyPage = pageNumbers.length === 0 ? true : false;
+        this.pageNumbers = pageNumbers;
+      });
+
+    this.subscription.add(subscription1$);
   }
 
-  // changePage(value: number) {
-  //   this.isLoading = true;
-  //   if (value === 1) {
-  //     this.homeArticleService
-  //       .getUserFeed(this.offset, this.limit)
-  //       .subscribe((data: any) => {
-  //         this.isLoading = false;
-  //         this.list = data.articles;
-  //       });
-  //   } else {
-  //     this.homeArticleService
-  //       .getUserFeed(this.limit * (value - 1), this.limit)
-  //       .subscribe((data: any) => {
-  //         this.isLoading = false;
-  //         this.list = data.articles;
-  //       });
-  //   }
-
-  // }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

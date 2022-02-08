@@ -16,15 +16,15 @@ import * as fromRoot from '../../app.reducer';
 })
 export class TagsComponent implements OnInit {
   @Input() tags: any;
-  // limit: number = 1;
-  // offset: number = 0;
-  // totalPages: any;
-  // pages!: number;
+  limit: number = 1;
+  offset: number = 0;
+  totalPages: any;
+  pages!: number;
   list: Article[] = [];
-  // isLoading: boolean = false;
-  // pageNumbers: number[] = [];
-  // currentPage: number = 1;
-  // pageIndexSub$!: Subscription;
+  isLoading: boolean = false;
+  pageNumbers: number[] = [];
+  currentPage: number = 1;
+  pageIndexSub$!: Subscription;
 
   constructor(
     private getArticle: HomeArticleService,
@@ -36,40 +36,39 @@ export class TagsComponent implements OnInit {
   ngOnInit(): void {}
 
   ngOnChanges(): void {
-    // this.limit = this.authService.getPage();
-    // this.isLoading = true;
-    // this.getArticle
-    //   .getTagFeed(this.tags, this.offset, this.limit)
-    //   .subscribe((data) => {
-    //     this.isLoading = false;
-    //     this.totalPages = data.articlesCount;
-    //     if (this.totalPages <= 1) {
-    //       this.pages = 0;
-    //     } else {
-    //       this.pageNumbers = [];
-    //       this.pages = Math.ceil(this.totalPages / this.limit);
-    //       for (let i = 1; i <= this.pages; i++) {
-    //         this.pageNumbers.push(i);
-    //       }
-    //     }
-    //     this.list = data.articles;
-    //   });
-
-  //   this.pageIndexSub$ = this.articleService.pageIndexSub
-  //     .pipe(
-  //       switchMap((pageIndex) => {
-  //         this.isLoading = true;
-  //         this.currentPage = pageIndex + 1;
-  //         return this.getArticle.getTagFeed(
-  //           this.tags,
-  //           pageIndex * this.limit,
-  //           this.limit
-  //         );
-  //       })
-  //     )
-  //     .subscribe((data) => {
-  //       this.isLoading = false;
-  //       this.list = data.articles;
-  //     });
-  // }
+    this.limit = this.authService.getPage();
+    this.isLoading = true;
+    this.getArticle
+      .getTagFeed(this.tags, this.offset, this.limit)
+      .subscribe((data) => {
+        this.isLoading = false;
+        this.totalPages = data.articlesCount;
+        if (this.totalPages <= 1) {
+          this.pages = 0;
+        } else {
+          this.pageNumbers = [];
+          this.pages = Math.ceil(this.totalPages / this.limit);
+          for (let i = 1; i <= this.pages; i++) {
+            this.pageNumbers.push(i);
+          }
+        }
+        this.list = data.articles;
+      });
+    this.pageIndexSub$ = this.articleService.pageIndexSub
+      .pipe(
+        switchMap((pageIndex) => {
+          this.isLoading = true;
+          this.currentPage = pageIndex + 1;
+          return this.getArticle.getTagFeed(
+            this.tags,
+            pageIndex * this.limit,
+            this.limit
+          );
+        })
+      )
+      .subscribe((data) => {
+        this.isLoading = false;
+        this.list = data.articles;
+      });
+  }
 }
