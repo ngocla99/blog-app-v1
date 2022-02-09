@@ -136,7 +136,6 @@ export class HomeArticleService {
     this.getUserFeed(this.offset, this.limit)
       .pipe(
         map((data) => {
-          this.store.dispatch(new UI.StopLoading());
           const totalPages = data.articlesCount;
           let pages;
           const pageNumbers = [];
@@ -149,6 +148,10 @@ export class HomeArticleService {
               pageNumbers.push(i);
             }
           }
+
+          this.store.dispatch(new Home.GetNumberPages(pageNumbers));
+          this.store.dispatch(new UI.StopLoading());
+
           return data.articles;
         })
       )
@@ -169,6 +172,59 @@ export class HomeArticleService {
           this.store.dispatch(new Home.GetCurrentPage(currentPage));
 
           return this.getUserFeed(pageIndex * this.limit, this.limit);
+        })
+      )
+      .subscribe((data: any) => {
+        this.store.dispatch(new UI.StopLoading());
+        this.store.dispatch(new Home.GetArticles(data.articles));
+      });
+  }
+
+  // Tag Feed
+  initialTagFeed(tag: string) {
+    this.limit = this.authService.getPage();
+    this.store.dispatch(new UI.StartLoading());
+    this.store.dispatch(new Home.GetCurrentPage(1));
+
+    this.getTagFeed(tag, this.offset, this.limit)
+      .pipe(
+        map((data) => {
+          const totalPages = data.articlesCount;
+          let pages;
+          const pageNumbers = [];
+
+          if (totalPages <= 1) {
+            pages = 0;
+          } else {
+            pages = Math.ceil(totalPages / this.limit);
+            for (let i = 1; i <= pages; i++) {
+              pageNumbers.push(i);
+            }
+          }
+
+          this.store.dispatch(new Home.GetNumberPages(pageNumbers));
+          this.store.dispatch(new UI.StopLoading());
+
+          return data.articles;
+        })
+      )
+      .subscribe((articles) => {
+        this.store.dispatch(new Home.GetArticles(articles));
+      });
+
+    return this.getArticlesTagByPage(tag);
+  }
+
+  getArticlesTagByPage(tag: string) {
+    return this.articleService.pageIndexSub
+      .pipe(
+        switchMap((pageIndex) => {
+          const currentPage = pageIndex + 1;
+
+          this.store.dispatch(new UI.StartLoading());
+          this.store.dispatch(new Home.GetCurrentPage(currentPage));
+
+          return this.getTagFeed(tag, pageIndex * this.limit, this.limit);
         })
       )
       .subscribe((data: any) => {

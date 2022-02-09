@@ -1,11 +1,14 @@
 <div class="row text-center">
-  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <app-loading-spinner *ngIf="isLoading$ | async"></app-loading-spinner>
 </div>
 
-<app-articles-list *ngIf="!isLoading" [listArticles]="list"></app-articles-list>
+<app-articles-list
+  *ngIf="!(isLoading$ | async)"
+  [listArticles]="articles$ | async"
+></app-articles-list>
 
 <app-pagination
-  *ngIf="pageNumbers.length > 1 && !isLoading"
+  *ngIf="pageNumbers.length > 1 && !(isLoading$ | async)"
   [totalPages]="pageNumbers"
-  [currentPage]="currentPage"
+  [currentPage]="currentPage$ | async"
 ></app-pagination>
