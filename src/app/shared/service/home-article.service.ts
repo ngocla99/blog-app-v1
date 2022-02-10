@@ -107,6 +107,7 @@ export class HomeArticleService {
       .subscribe((articles) =>
         this.store.dispatch(new Home.GetArticles(articles))
       );
+
     return this.getArticlesByPage();
   }
 

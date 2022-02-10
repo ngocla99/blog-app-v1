@@ -1,8 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { ArticleService } from 'src/app/shared/service/article.service';
-import { AuthService } from 'src/app/shared/service/auth.service';
 import { HomeArticleService } from 'src/app/shared/service/home-article.service';
 import * as fromRoot from '../../app.reducer';
 import { Article } from './../../shared/model/article.model';
